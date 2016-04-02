@@ -1,11 +1,13 @@
 /*
-	Author: Richard McKenna
+	RebelleKeyEventHandler.cpp
+	edit: team Lawless
+	
+	>Based on: BugsKeyEventHandler.cpp
+	>Author: Richard McKenna
 			Stony Brook University
 			Computer Science Department
 
-	BugsKeyEventHandler.cpp
-
-	See BugsKeyEventHandler.h for a class description.
+	See RebelleKeyEventHandler.h for a class description.
 */
 
 #include "rebelle_VS\stdafx.h"

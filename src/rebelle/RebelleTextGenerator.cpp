@@ -1,11 +1,14 @@
 /*
-	Author: Richard McKenna
+	RebelleTextGenerator.cpp
+	edit: team Lawless
+
+	>based on: BugsTextGenerator.cpp
+	>Author: Richard McKenna
 			Stony Brook University
 			Computer Science Department
 
-	BugsTextGenerator.cpp
-
-	See BugsTextGenerator.h for a class description.
+	
+	See RebelleTextGenerator.h for a class description.
 */
 
 #include "rebelle_VS\stdafx.h"

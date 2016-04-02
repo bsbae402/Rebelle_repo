@@ -1,9 +1,11 @@
 /*	
-	Author: Richard McKenna
+	RebelleTextGenerator.cpp
+	edit: team Lawless
+
+	>based on: BugsTextGenerator.cpp
+	>Author: Richard McKenna
 			Stony Brook University
 			Computer Science Department
-
-	BugsTextGenerator.h
 
 	This class is a custom text generator for the EmptyGame
 	application. Basically, by defining the initText and updateText
@@ -37,7 +39,6 @@ public:
 	RebelleTextGenerator()		{}
 	~RebelleTextGenerator()	{}
 
-	// DEFINED IN BugsTextGenerator.cpp
 	void startUp();
 	void update();
 };

@@ -2,9 +2,9 @@
 #include "rebelle_VS\stdafx.h"
 
 /*
-	BugsApp.h
+	RebelleApp.h
 
-	This file contains setup data for making the Bugs game. Note that nearly
+	This file contains setup data for making the game. Note that nearly
 	all of this data would better serve us if loaded from files.
 */
 
@@ -19,15 +19,12 @@ static const wstring	RED_CURSOR_PATH = L"data/gui/cursors/red_cursor.png";
 
 static const wstring	SPLASH_SCREEN_PATH	= L"data/gui/overlays/rebelle_splash_screen_overlay.png";
 static const wstring	MAIN_MENU_PATH		= L"data/gui/overlays/rebelle_main_menu_overlay.png";
-//// static const wstring	IN_GAME_TOOLBAR_PATH = L"data/gui/overlays/bugs_in_game_toolbar.png";
 static const wstring	LOADING_LEVEL_PATH = L"data/gui/overlays/rebelle_loading_level_overlay.png";
 
 static const wstring	START_IMAGE_PATH	= L"data/gui/buttons/start_game.png";
 static const wstring	START_IMAGE_MO_PATH	= L"data/gui/buttons/start_game_mo.png";
 static const wstring	EXIT_IMAGE_PATH		= L"data/gui/buttons/exit_game.png";
 static const wstring	EXIT_IMAGE_MO_PATH	= L"data/gui/buttons/exit_game_mo.png";
-//// static const wstring	QUIT_IMAGE_PATH		= L"data/gui/buttons/quit.png";
-//// static const wstring	QUIT_IMAGE_MO_PATH	= L"data/gui/buttons/quit_mo.png";
 static const wstring	CONTROLS_IMAGE_PATH = L"data/gui/buttons/display_controls.png";
 static const wstring	CONTROLS_IMAGE_MO_PATH = L"data/gui/buttons/display_controls_mo.png";
 

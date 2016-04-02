@@ -1,9 +1,13 @@
 /*	
-	Author: Richard McKenna
+	RebelleButtonEventHandler.h
+	edit: team Lawless
+
+	>Based on: BugsButtonEventHandler.h
+	>Author: Richard McKenna
 			Stony Brook University
 			Computer Science Department
 
-	BugsButtonEventHandler.h
+	
 
 	This is a custom button event handler. Each game can choose
 	to use different buttons and respond differently to when
@@ -20,7 +24,6 @@ class Game;
 const wstring	GO_TO_MM_COMMAND = L"Go To Main Menu";
 const wstring	START_COMMAND = L"Start";
 const wstring	EXIT_COMMAND = L"Exit";
-////const wstring	QUIT_COMMAND = L"Quit";
 const wstring	CONTROLS_COMMAND = L"Controls";
 
 class RebelleButtonEventHandler: public ButtonEventHandler
@@ -31,6 +34,5 @@ public:
 	RebelleButtonEventHandler()	{}
 	~RebelleButtonEventHandler()	{}
 
-	// DEFINED INSIDE BugsButtonEventHandler.cpp
 	void handleButtonEvents(wstring command);
 };

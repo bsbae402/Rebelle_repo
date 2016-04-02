@@ -1,9 +1,16 @@
-/*
-	Author: Richard McKenna
-			Stony Brook University
-			Computer Science Department
+/////// branch branch
 
-	BugsApp.cpp
+
+
+/*
+	RebelleApp.cpp
+	edit: team Lawless 
+
+	> Based on: BugsApp.cpp
+	> Author: Richard McKenna
+	>		Stony Brook University
+	>		Computer Science Department
+	
 
 	This is a test game application, a game that demonstrates use of the 
 	SideScrollerFramework to make a little scrolling, interactive demo. It
@@ -119,12 +126,10 @@ void initCursor()
 	int imageID;
 
 	// - LOAD THE RED ANT CURSOR IMAGE
-	//// imageID = guiTextureManager->loadTexture(RED_ANT_CURSOR_PATH);
 	imageID = guiTextureManager->loadTexture(RED_CURSOR_PATH);
 	imageIDs->push_back(imageID);
 
 	// - LOAD THE BLACK ANT CURSOR IMAGE
-	//// imageID = guiTextureManager->loadTexture(BLACK_ANT_CURSOR_PATH);
 	imageID = guiTextureManager->loadTexture(YELLOW_CURSOR_PATH);
 	imageIDs->push_back(imageID);
 
@@ -187,8 +192,8 @@ void initInGameGUI()
 	*/
 
 	// AND LET'S ADD OUR SCREENS
-	//GameGUI *gui = game->getGUI();
-	//gui->addScreenGUI(GS_GAME_IN_PROGRESS, inGameGUI);
+	GameGUI *gui = game->getGUI();
+	gui->addScreenGUI(GS_GAME_IN_PROGRESS, inGameGUI);
 }
 
 /*
@@ -221,7 +226,6 @@ void initMainMenu()
 	int mouseOverTextureID = guiTextureManager->loadTexture(EXIT_IMAGE_MO_PATH);
 	int buttonWidth = 200;
 	int buttonHeight = 100;
-	//// int buttonY = (graphics->getScreenHeight() * 70 / 100);
 	int buttonPadding = 15;
 
 	int exitNstartButtonY = (graphics->getScreenHeight() * 70 / 100);

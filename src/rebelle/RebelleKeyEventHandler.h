@@ -1,9 +1,11 @@
 /*	
-	Author: Richard McKenna
+	RebelleKeyEventHandler.h
+	edit: team Lawless
+	
+	>Based on: BugsKeyEventHandler.cpp
+	>Author: Richard McKenna
 			Stony Brook University
 			Computer Science Department
-
-	BugsKeyEventHandler.h
 
 	This is a custom key event handler. Each game can choose
 	to use different keyboard keys and respond differently to when

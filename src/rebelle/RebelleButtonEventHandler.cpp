@@ -1,11 +1,13 @@
 /*
-	Author: Richard McKenna
+	RebelleButtonEventHandler.cpp
+	edit: team Lawless
+
+	>Based on: BugsButtonEventHandler.cpp
+	>Author: Richard McKenna
 			Stony Brook University
 			Computer Science Department
 
-	BugsButtonEventHandler.cpp
-
-	See BugsButtonEventHandler.h for a class description.
+	See RebelleButtonEventHandler.h for a class description.
 */
 
 #include "rebelle_VS\stdafx.h"
@@ -14,7 +16,7 @@
 #include "mg\game\Game.h"
 #include "mg\gsm\state\GameStateManager.h"
 
-void RebelleButtonEventHandler::handleButtonEvents(	wstring command)
+void RebelleButtonEventHandler::handleButtonEvents(wstring command)
 {
 	Game *game = Game::getSingleton();
 
@@ -35,8 +37,7 @@ void RebelleButtonEventHandler::handleButtonEvents(	wstring command)
 	// SO LET'S START THE GAME FROM THE FIRST LEVEL
 	else if (command.compare(START_COMMAND) == 0)
 	{
-		//// game start is disabled currently
-		//// game->startGame();
+		game->startGame();
 	}
 	// THE USER PRESSED THE Quit BUTTON ON THE IN-GAME MENU,
 	// SO LET'S UNLOAD THE LEVEL AND RETURN TO THE MAIN MENU
