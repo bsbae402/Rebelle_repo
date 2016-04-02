@@ -13,10 +13,12 @@ void RebelleStateMachine::update()
 	if (gsm->isGameInProgress())
 	{
 		// ARE ALL THE BUGS DEAD?
+		/*
 		if (spriteManager->getNumberOfBots() == 0)
 		{
 			gsm->goToLoadLevel();
 		}
+		*/
 	}
 	else if (gsm->isPreGame())
 	{
