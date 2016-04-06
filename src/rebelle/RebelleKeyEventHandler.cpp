@@ -56,12 +56,36 @@ void RebelleKeyEventHandler::handleKeyEvents()
 		{
 			gsm->getPhysics()->activateForSingleUpdate();
 		}
-		if (input->isKeyDownForFirstTime(D_KEY))
+		if (input->isKeyDownForFirstTime(F_KEY))
 		{
 			viewport->toggleDebugView();
 			game->getGraphics()->toggleDebugTextShouldBeRendered();
 		}
 
+
+		//PLAYER MOVEMENTS
+		//LEFT
+		if (input->isKeyDown(A_KEY))
+		{
+			pp->setX(pp->getX() - 2);
+		}
+		//DOWN
+		if (input->isKeyDown(S_KEY))
+		{
+			pp->setY(pp->getY() + 2);
+		}
+		//RIGHT
+		if (input->isKeyDown(D_KEY))
+		{
+			pp->setX(pp->getX() + 2);
+		}
+		//LEFT
+		if (input->isKeyDown(W_KEY))
+		{
+			pp->setY(pp->getY() - 2);
+		}
+
+		
 		bool viewportMoved = false;
 		float viewportVx = 0.0f;
 		float viewportVy = 0.0f;
