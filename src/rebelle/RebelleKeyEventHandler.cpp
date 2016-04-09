@@ -62,7 +62,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			game->getGraphics()->toggleDebugTextShouldBeRendered();
 		}
 
-
+		/*
 		//PLAYER MOVEMENTS
 		//LEFT
 		if (input->isKeyDown(A_KEY))
@@ -84,7 +84,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 		{
 			pp->setY(pp->getY() - 2);
 		}
-
+		*/
 		
 		bool viewportMoved = false;
 		float viewportVx = 0.0f;

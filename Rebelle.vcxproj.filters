@@ -30,6 +30,12 @@
     <Filter Include="data\sprite_types">
       <UniqueIdentifier>{ac6a4129-610a-48ec-abe0-b93bca8ffe26}</UniqueIdentifier>
     </Filter>
+    <Filter Include="data\sprite_types\money">
+      <UniqueIdentifier>{409dce63-4ca5-4eac-ba9b-ee5667f22277}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\sprite_types\Rebelle">
+      <UniqueIdentifier>{57c52bfa-1e07-44eb-a8f3-b2d4218d40cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\rebelle_VS\stdafx.cpp">
@@ -87,10 +93,25 @@
     <None Include="..\..\Apps\Rebelle\data\mg_engine.config">
       <Filter>data</Filter>
     </None>
+    <None Include="..\..\Apps\Rebelle\data\maps\LibraryLevel\Library.tmx">
+      <Filter>data\maps</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\..\Apps\Rebelle\data\gui\rebelle_gui.xml">
       <Filter>data\gui</Filter>
+    </Xml>
+    <Xml Include="..\..\Apps\Rebelle\data\levels\Level1.xml">
+      <Filter>data\levels</Filter>
+    </Xml>
+    <Xml Include="..\..\Apps\Rebelle\data\sprite_types\RebelleSpriteTypes.xml">
+      <Filter>data\sprite_types</Filter>
+    </Xml>
+    <Xml Include="..\..\Apps\Rebelle\data\sprite_types\money\money.xml">
+      <Filter>data\sprite_types\money</Filter>
+    </Xml>
+    <Xml Include="..\..\Apps\Rebelle\data\sprite_types\Rebelle\Rebelle.xml">
+      <Filter>data\sprite_types\Rebelle</Filter>
     </Xml>
   </ItemGroup>
 </Project>

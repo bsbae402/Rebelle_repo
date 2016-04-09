@@ -34,10 +34,23 @@
     <ClInclude Include="src\rebelle_VS\targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Apps\Rebelle\data\maps\LibraryLevel\Library.tmx" />
     <None Include="..\..\Apps\Rebelle\data\mg_engine.config" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\..\Apps\Rebelle\data\gui\rebelle_gui.xml" />
+    <Xml Include="..\..\Apps\Rebelle\data\levels\Level1.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="..\..\Apps\Rebelle\data\sprite_types\money\money.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="..\..\Apps\Rebelle\data\sprite_types\RebelleSpriteTypes.xml">
+      <SubType>Designer</SubType>
+    </Xml>
+    <Xml Include="..\..\Apps\Rebelle\data\sprite_types\Rebelle\Rebelle.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BA25DE62-784B-4A2C-9FC0-115872D53819}</ProjectGuid>
@@ -72,11 +85,13 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Apps\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)Temp\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(ProjectDir)src\;$(SolutionDir)McKillasGorilla\src\;$(SolutionDir)Plugins\tinyxml\src\;$(SolutionDir)Plugins\XMLFileImporter\src\;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(SolutionDir)Common\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(DXSDK_DIR)Include;C:\group_project\Rebelle_solution\Plugins\Box2D-master\Box2D-master\Box2D\;C:\group_project\Rebelle_solution\Plugins\XMLFileImporter\src\;C:\group_project\Rebelle_solution\Plugins\tinyxml\src\;C:\group_project\Rebelle_solution\McKillasGorilla\src\;C:\group_project\Rebelle_solution\Games\Rebelle\src\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;C:\group_project\Rebelle_solution\Plugins\Box2D-master\Box2D-master\Box2D\Build\vs2013\bin\x32\Debug;C:\group_project\Rebelle_solution\Common;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(DXSDK_DIR)Include;C:\group_project\Rebelle_solution\Plugins\Box2D-master\Box2D-master\Box2D\;C:\group_project\Rebelle_solution\Plugins\XMLFileImporter\src\;C:\group_project\Rebelle_solution\Plugins\tinyxml\src\;C:\group_project\Rebelle_solution\McKillasGorilla\src\;C:\group_project\Rebelle_solution\Games\Rebelle\src\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x86;C:\group_project\Rebelle_solution\Plugins\Box2D-master\Box2D-master\Box2D\Build\vs2013\bin\x32\Debug;C:\group_project\Rebelle_solution\Common;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
