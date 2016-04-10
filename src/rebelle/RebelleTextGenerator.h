@@ -20,19 +20,25 @@ class RebelleTextGenerator : public TextGenerator
 {
 private:
 	// THIS IS THE TEXT THIS OBJECT WILL UPDATE EACH FRAME
-	wstring leftTextToGenerate;
-	wstring rightTextToGenerate;
+	wstring scorelabel;
+	wstring moneylabel;
+	wstring healthlabel;
+	wstring safetywarning;
+	wstring safetykey;
+
+	wstring additional;
 
 	// THESE ARE HELPER METHODS FOR GENERATING THE TEXT, CALLED
 	// EACH FRAME BY updateText
 
-	// FOR THE LEFT COLUMN
-	void appendMouseCoords();
-	void appendClock();
-	void appendBotCount();
+	
 
-	// AND THE RIGHT COLUMN
-	void appendBotRecycler();
+	void printTime();
+	void printSafety();
+	void printHealth();
+	void printScore();
+	void printMoney();
+	
 
 public:
 	// NOTHING TO INITIALIZE OR DESTROY
@@ -41,4 +47,7 @@ public:
 
 	void startUp();
 	void update();
+	void setdebug(wstring newdebug);
+	void setTime(int time);
+
 };

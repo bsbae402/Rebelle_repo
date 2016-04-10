@@ -92,5 +92,8 @@
     <Xml Include="..\..\Apps\Rebelle\data\gui\rebelle_gui.xml">
       <Filter>data\gui</Filter>
     </Xml>
+    <Xml Include="..\..\Apps\Rebelle\data\levels\Level1.xml">
+      <Filter>data\levels</Filter>
+    </Xml>
   </ItemGroup>
 </Project>
