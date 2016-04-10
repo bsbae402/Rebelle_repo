@@ -11,7 +11,7 @@
 	See RebelleTextGenerator.h for a class description.
 */
 
-#include "rebelle_VS\stdafx.h"
+#include "mg_VS\stdafx.h"
 #include "rebelle\RebelleApp.h"
 #include "rebelle\RebelleTextGenerator.h"
 #include "mg\clock\GameClock.h"

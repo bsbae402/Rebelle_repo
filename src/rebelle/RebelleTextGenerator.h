@@ -13,7 +13,6 @@
 */
 
 #pragma once
-#include "rebelle_VS\stdafx.h"
 #include "mg\text\TextGenerator.h"
 
 class RebelleTextGenerator : public TextGenerator
@@ -41,4 +40,9 @@ public:
 
 	void startUp();
 	void update();
+
+	//// following methods are defined virtual in the TextGenerator (parent) class
+	//// so we need to define them anyway. If not, there will be compile error.
+	void setdebug(wstring newdebug) {}
+	void setTime(int time) {}
 };

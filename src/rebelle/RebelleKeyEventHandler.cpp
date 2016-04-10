@@ -26,6 +26,8 @@
 #include "mg\gui\GameGUI.h"
 #include "mg\input\GameInput.h"
 
+#include "mg\gsm\sprite\PlayerSprite.h"
+
 /*
 	handleKeyEvent - this method handles all keyboard interactions. Note that every frame this method
 	gets called and it can respond to key interactions in any custom way. Ask the GameInput class for
@@ -41,8 +43,8 @@ void RebelleKeyEventHandler::handleKeyEvents()
 
 	// LET'S GET THE PLAYER'S PHYSICAL PROPERTIES, IN CASE WE WANT TO CHANGE THEM
 	GameStateManager *gsm = game->getGSM();
-	AnimatedSprite *player = gsm->getSpriteManager()->getPlayer();
-	PhysicalProperties *pp = player->getPhysicalProperties();
+	PlayerSprite *player = gsm->getSpriteManager()->getPlayer();
+	///// PhysicalProperties *pp = player->getPhysicalProperties();
 	Viewport *viewport = game->getGUI()->getViewport();
 	
 	// IF THE GAME IS IN PROGRESS
@@ -62,30 +64,46 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			game->getGraphics()->toggleDebugTextShouldBeRendered();
 		}
 
-		/*
-		//PLAYER MOVEMENTS
-		//LEFT
-		if (input->isKeyDown(A_KEY))
+		//// --- PLAYER MOVEMENTS
+		//// set player sprite's state according to the key input types
+		// up key
+		if (input->isKeyDown(VK_UP))
 		{
-			pp->setX(pp->getX() - 2);
+			wstring wStrState(MG_PLAYER_ANIMATION_STATE_WALK_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_FRONT.end());
+			player->setCurrentState(wStrState);
+			player->setPlayerState(ENUM_PLAYER_MOVING);
+			player->setPlayerDirection(ENUM_PLAYER_DIRECTION_UP);
+			player->setPlayerInputStorage(VK_UP);
 		}
-		//DOWN
-		if (input->isKeyDown(S_KEY))
+		// down key
+		if (input->isKeyDown(VK_DOWN))
 		{
-			pp->setY(pp->getY() + 2);
+			wstring wStrState(MG_PLAYER_ANIMATION_STATE_WALK_BACK.begin(), MG_PLAYER_ANIMATION_STATE_WALK_BACK.end());
+			player->setCurrentState(wStrState);
+			player->setPlayerState(ENUM_PLAYER_MOVING);
+			player->setPlayerDirection(ENUM_PLAYER_DIRECTION_DOWN);
+			player->setPlayerInputStorage(VK_DOWN);
 		}
-		//RIGHT
-		if (input->isKeyDown(D_KEY))
+		// left key
+		if (input->isKeyDown(VK_LEFT))
 		{
-			pp->setX(pp->getX() + 2);
+			wstring wStrState(MG_PLAYER_ANIMATION_STATE_WALK_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_LEFT.end());
+			player->setCurrentState(wStrState);
+			player->setPlayerState(ENUM_PLAYER_MOVING);
+			player->setPlayerDirection(ENUM_PLAYER_DIRECTION_LEFT);
+			player->setPlayerInputStorage(VK_LEFT);
 		}
-		//LEFT
-		if (input->isKeyDown(W_KEY))
+		// right key
+		if (input->isKeyDown(VK_RIGHT))
 		{
-			pp->setY(pp->getY() - 2);
+			wstring wStrState(MG_PLAYER_ANIMATION_STATE_WALK_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_RIGHT.end());
+			player->setCurrentState(wStrState);
+			player->setPlayerState(ENUM_PLAYER_MOVING);
+			player->setPlayerDirection(ENUM_PLAYER_DIRECTION_RIGHT);
+			player->setPlayerInputStorage(VK_RIGHT);
 		}
-		*/
-		
+		//// --- end ---
+
 		bool viewportMoved = false;
 		float viewportVx = 0.0f;
 		float viewportVy = 0.0f;

@@ -12,4 +12,3 @@
 #include "mg_VS\stdafx.h"
 #include "tinyxml_VS\stdafx.h"
 #include "xmlfi_VS\stdafx.h"
-#include "Box2D\Box2D.h"
