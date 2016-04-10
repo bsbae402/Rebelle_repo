@@ -377,10 +377,11 @@ void initViewport()
 	// THAT TOOLBAR HAS A HEIGHT OF 64 PIXELS, SO WE'LL MAKE THAT THE OFFSET FOR
 	// THE VIEWPORT IN THE Y AXIS
 	Viewport *viewport = gui->getViewport();
-
+	viewport->setViewportOffsetY(100);
 	int viewportWidth = graphics->getScreenWidth() - VIEWPORT_OFFSET_X;
 	int viewportHeight = graphics->getScreenHeight() - VIEWPORT_OFFSET_Y;
 	viewport->setViewportWidth(viewportWidth);
 	viewport->setViewportHeight(viewportHeight);
 	viewport->setToggleOffsetY(TOGGLE_OFFSET_Y);
+	
 }

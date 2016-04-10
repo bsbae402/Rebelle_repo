@@ -26,6 +26,8 @@
 #include "mg\gui\GameGUI.h"
 #include "mg\input\GameInput.h"
 
+
+#include "rebelle\RebelleTextGenerator.h"
 #include "mg\gsm\sprite\PlayerSprite.h"
 
 /*
@@ -46,24 +48,11 @@ void RebelleKeyEventHandler::handleKeyEvents()
 	PlayerSprite *player = gsm->getSpriteManager()->getPlayer();
 	///// PhysicalProperties *pp = player->getPhysicalProperties();
 	Viewport *viewport = game->getGUI()->getViewport();
+	TextGenerator *generator = game->getText()->getTextGenerator();
 	
 	// IF THE GAME IS IN PROGRESS
 	if (gsm->isGameInProgress())
 	{
-		if (input->isKeyDownForFirstTime(P_KEY))
-		{
-			gsm->getPhysics()->togglePhysics();
-		}
-		if (input->isKeyDownForFirstTime(T_KEY))
-		{
-			gsm->getPhysics()->activateForSingleUpdate();
-		}
-		if (input->isKeyDownForFirstTime(F_KEY))
-		{
-			viewport->toggleDebugView();
-			game->getGraphics()->toggleDebugTextShouldBeRendered();
-		}
-
 		//// --- PLAYER MOVEMENTS
 		//// set player sprite's state according to the key input types
 		// up key
@@ -104,31 +93,89 @@ void RebelleKeyEventHandler::handleKeyEvents()
 		}
 		//// --- end ---
 
-		bool viewportMoved = false;
-		float viewportVx = 0.0f;
-		float viewportVy = 0.0f;
-		if (input->isKeyDown(UP_KEY))
+		if (input->isKeyDownForFirstTime(P_KEY))
 		{
-			viewportVy -= MAX_VIEWPORT_AXIS_VELOCITY;
-			viewportMoved = true;
+			gsm->getPhysics()->togglePhysics();
 		}
-		if (input->isKeyDown(DOWN_KEY))
+		if (input->isKeyDownForFirstTime(T_KEY))
 		{
-			viewportVy += MAX_VIEWPORT_AXIS_VELOCITY;
-			viewportMoved = true;
+			gsm->getPhysics()->activateForSingleUpdate();
 		}
-		if (input->isKeyDown(LEFT_KEY))
+		
+		if (moveviewport)
 		{
-			viewportVx -= MAX_VIEWPORT_AXIS_VELOCITY;
-			viewportMoved = true;
+
+			bool viewportMoved = false;
+			float viewportVx = 0.0f;
+			float viewportVy = 0.0f;
+			if (input->isKeyDown(UP_KEY))
+			{
+				viewportVy -= MAX_VIEWPORT_AXIS_VELOCITY;
+				viewportMoved = true;
+			}
+			if (input->isKeyDown(DOWN_KEY))
+			{
+				viewportVy += MAX_VIEWPORT_AXIS_VELOCITY;
+				viewportMoved = true;
+			}
+			if (input->isKeyDown(LEFT_KEY))
+			{
+				viewportVx -= MAX_VIEWPORT_AXIS_VELOCITY;
+				viewportMoved = true;
+			}
+			if (input->isKeyDown(RIGHT_KEY))
+			{
+				viewportVx += MAX_VIEWPORT_AXIS_VELOCITY;
+				viewportMoved = true;
+			}
+			if (viewportMoved)
+				viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
+			
 		}
-		if (input->isKeyDown(RIGHT_KEY))
+
+		else
 		{
-			viewportVx += MAX_VIEWPORT_AXIS_VELOCITY;
-			viewportMoved = true;
+			/*
+			if (input->isKeyDown(LEFT_KEY))
+			{
+			pp->setX(pp->getX() - 2);
+
+			}
+			//DOWN
+			if (input->isKeyDown(DOWN_KEY))
+			{
+			pp->setY(pp->getY() + 2);
+			}
+			//RIGHT
+			if (input->isKeyDown(RIGHT_KEY))
+			{
+			pp->setX(pp->getX() + 2);
+
+			}
+			//LEFT
+			if (input->isKeyDown(UP_KEY))
+			{
+			pp->setY(pp->getY() - 2);
+			}
+			*/
 		}
-		if (viewportMoved)
-			viewport->moveViewport((int)floor(viewportVx+0.5f), (int)floor(viewportVy+0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
+		if (input->isKeyDownForFirstTime(U_KEY))
+		{
+			moveviewport = !moveviewport;
+		}
+		//viewport->toggleDebugView();
+		//game->getGraphics()->toggleDebugTextShouldBeRendered();
+		if (game->getGSM()->getSafety() != NULL)
+		{
+			if (input->isKeyDown(game->getGSM()->getIntKey()))
+			{
+				//generator->setdebug(L"sdfsfdssd");
+			}
+			else
+			{
+				//generator->setdebug(L"");
+			}
+		}
 		
 	}
 
