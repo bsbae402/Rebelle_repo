@@ -29,6 +29,7 @@
 
 #include "rebelle\RebelleTextGenerator.h"
 #include "mg\gsm\sprite\PlayerSprite.h"
+#include "mg\gsm\world\World.h"
 
 /*
 	handleKeyEvent - this method handles all keyboard interactions. Note that every frame this method
@@ -104,7 +105,9 @@ void RebelleKeyEventHandler::handleKeyEvents()
 		
 		if (moveviewport)
 		{
-
+			//// I'm changing this code because I want that the viewport location is
+			//// decided depending on the player sprite's location
+			/*
 			bool viewportMoved = false;
 			float viewportVx = 0.0f;
 			float viewportVy = 0.0f;
@@ -130,35 +133,49 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			}
 			if (viewportMoved)
 				viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
-			
-		}
-
-		else
-		{
-			/*
-			if (input->isKeyDown(LEFT_KEY))
-			{
-			pp->setX(pp->getX() - 2);
-
-			}
-			//DOWN
-			if (input->isKeyDown(DOWN_KEY))
-			{
-			pp->setY(pp->getY() + 2);
-			}
-			//RIGHT
-			if (input->isKeyDown(RIGHT_KEY))
-			{
-			pp->setX(pp->getX() + 2);
-
-			}
-			//LEFT
-			if (input->isKeyDown(UP_KEY))
-			{
-			pp->setY(pp->getY() - 2);
-			}
 			*/
+
+			//// ----the problem of this implementation is that the viewport only moves 
+			//// when there is keyboard input.
+			PhysicalProperties *playerPP = player->getPhysicalProperties();
+			int playerSpriteWidth = player->getSpriteType()->getTextureWidth();
+			int playerSpriteHeight = player->getSpriteType()->getTextureHeight();
+			int playerCenterX = playerPP->getX() + playerSpriteWidth / 2;
+			int playerCenterY = playerPP->getY() + playerSpriteHeight / 2;
+
+			int futureViewportLeft = playerCenterX - viewport->getViewportWidth() / 2;
+			int futureViewportTop = playerCenterY - viewport->getViewportHeight() / 2;
+			
+			int futureViewportRight = playerCenterX + viewport->getViewportWidth() / 2;
+			int futureViewportBottom = playerCenterY + viewport->getViewportHeight() / 2;
+
+			World *world = game->getGSM()->getWorld();
+
+			//// viewport x axis reached world edge
+			if (futureViewportLeft <= 0 || futureViewportRight >= world->getWorldWidth())
+			{
+				//// no viewport move on x axis
+			}
+			//// if x axis is okay to move
+			else
+			{
+				//// move viewport x,y = future x,y to the center location 
+				viewport->setViewportX(futureViewportLeft);
+			}
+
+			//// viewport y axis reached world edge
+			if (futureViewportTop <= 0 || futureViewportBottom >= world->getWorldHeight())
+			{
+				//// no viewport move on x axis
+			}
+			//// if y axis is okay to move
+			else
+			{
+				//// move viewport x,y = future x,y to the center location 
+				viewport->setViewportY(futureViewportTop);
+			}
 		}
+
 		if (input->isKeyDownForFirstTime(U_KEY))
 		{
 			moveviewport = !moveviewport;
