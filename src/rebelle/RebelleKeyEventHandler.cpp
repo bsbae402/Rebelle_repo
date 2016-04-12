@@ -136,7 +136,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			*/
 
 			//// ----the problem of this implementation is that the viewport only moves 
-			//// when there is keyboard input.
+			//// when there is keyboard input. => solution is that makes a key input storage in the player sprite class.
 			PhysicalProperties *playerPP = player->getPhysicalProperties();
 			int playerSpriteWidth = player->getSpriteType()->getTextureWidth();
 			int playerSpriteHeight = player->getSpriteType()->getTextureHeight();
@@ -174,6 +174,16 @@ void RebelleKeyEventHandler::handleKeyEvents()
 				//// move viewport x,y = future x,y to the center location 
 				viewport->setViewportY(futureViewportTop);
 			}
+		}
+
+		if (input->isKeyDownForFirstTime(K_KEY))
+		{
+			gsm->getPhysics()->toggleBotPhysics();
+		}
+
+		if (input->isKeyDownForFirstTime(L_KEY))
+		{
+			gsm->getPhysics()->togglePlayerPhysics();
 		}
 
 		if (input->isKeyDownForFirstTime(U_KEY))

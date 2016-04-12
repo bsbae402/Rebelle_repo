@@ -29,6 +29,9 @@ const unsigned int T_KEY = (unsigned int)'T';
 const unsigned int L_KEY = (unsigned int)'L';
 const unsigned int F_KEY = (unsigned int)'F';
 const unsigned int U_KEY = (unsigned int)'U';
+//// -- for partial physics activation
+const unsigned int K_KEY = (unsigned int)'K';
+//// -------- 
 const unsigned int UP_KEY = VK_UP;
 const unsigned int DOWN_KEY = VK_DOWN;
 const unsigned int LEFT_KEY = VK_LEFT;
