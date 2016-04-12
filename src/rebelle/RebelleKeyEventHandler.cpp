@@ -50,6 +50,8 @@ void RebelleKeyEventHandler::handleKeyEvents()
 	///// PhysicalProperties *pp = player->getPhysicalProperties();
 	Viewport *viewport = game->getGUI()->getViewport();
 	TextGenerator *generator = game->getText()->getTextGenerator();
+
+	
 	
 	// IF THE GAME IS IN PROGRESS
 	if (gsm->isGameInProgress())
@@ -57,40 +59,85 @@ void RebelleKeyEventHandler::handleKeyEvents()
 		//// --- PLAYER MOVEMENTS
 		//// set player sprite's state according to the key input types
 		// up key
-		if (input->isKeyDown(VK_UP))
+		bool viewportMoved = false;
+		float viewportVx = 0.0f;
+		float viewportVy = 0.0f;
+		PhysicalProperties *playerPP = player->getPhysicalProperties();
+		//if (!moveviewport)
 		{
-			wstring wStrState(MG_PLAYER_ANIMATION_STATE_WALK_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_FRONT.end());
-			player->setCurrentState(wStrState);
-			player->setPlayerState(ENUM_PLAYER_MOVING);
-			player->setPlayerDirection(ENUM_PLAYER_DIRECTION_UP);
-			player->setPlayerInputStorage(VK_UP);
-		}
-		// down key
-		if (input->isKeyDown(VK_DOWN))
-		{
-			wstring wStrState(MG_PLAYER_ANIMATION_STATE_WALK_BACK.begin(), MG_PLAYER_ANIMATION_STATE_WALK_BACK.end());
-			player->setCurrentState(wStrState);
-			player->setPlayerState(ENUM_PLAYER_MOVING);
-			player->setPlayerDirection(ENUM_PLAYER_DIRECTION_DOWN);
-			player->setPlayerInputStorage(VK_DOWN);
-		}
-		// left key
-		if (input->isKeyDown(VK_LEFT))
-		{
-			wstring wStrState(MG_PLAYER_ANIMATION_STATE_WALK_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_LEFT.end());
-			player->setCurrentState(wStrState);
-			player->setPlayerState(ENUM_PLAYER_MOVING);
-			player->setPlayerDirection(ENUM_PLAYER_DIRECTION_LEFT);
-			player->setPlayerInputStorage(VK_LEFT);
-		}
-		// right key
-		if (input->isKeyDown(VK_RIGHT))
-		{
-			wstring wStrState(MG_PLAYER_ANIMATION_STATE_WALK_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_RIGHT.end());
-			player->setCurrentState(wStrState);
-			player->setPlayerState(ENUM_PLAYER_MOVING);
-			player->setPlayerDirection(ENUM_PLAYER_DIRECTION_RIGHT);
-			player->setPlayerInputStorage(VK_RIGHT);
+			if (input->isKeyDown(VK_UP))
+			{
+				wstring wStrState(MG_PLAYER_ANIMATION_STATE_WALK_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_FRONT.end());
+				player->setCurrentState(wStrState);
+				player->setPlayerState(ENUM_PLAYER_MOVING);
+				player->setPlayerDirection(ENUM_PLAYER_DIRECTION_UP);
+				player->setPlayerInputStorage(VK_UP);
+
+				if (playerPP->getY() >= viewport->getViewportY() + viewport->getViewportHeight() / 2 - 50 && playerPP->getY() <= viewport->getViewportY() + viewport->getViewportHeight() / 2 + 5)
+				{
+					viewportVy -= playerPP->getVelocityY();
+					viewportMoved = true;
+				}
+					//playerPP->setY(playerPP->getY() - playerPP->getVelocityY());
+				
+
+			}
+			// down key
+			if (input->isKeyDown(VK_DOWN))
+			{
+				wstring wStrState(MG_PLAYER_ANIMATION_STATE_WALK_BACK.begin(), MG_PLAYER_ANIMATION_STATE_WALK_BACK.end());
+				player->setCurrentState(wStrState);
+				player->setPlayerState(ENUM_PLAYER_MOVING);
+				player->setPlayerDirection(ENUM_PLAYER_DIRECTION_DOWN);
+				player->setPlayerInputStorage(VK_DOWN);
+
+				if (playerPP->getY() >= viewport->getViewportY() + viewport->getViewportHeight() / 2 - 50 && playerPP->getY() <= viewport->getViewportY() + viewport->getViewportHeight() / 2 + 5)
+				{
+					
+					viewportVy += playerPP->getVelocityY();
+					viewportMoved = true;
+				}
+				
+				//playerPP->setY(playerPP->getY() + playerPP->getVelocityY());
+				
+			}
+			// left key
+			if (input->isKeyDown(VK_LEFT))
+			{
+				wstring wStrState(MG_PLAYER_ANIMATION_STATE_WALK_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_LEFT.end());
+				player->setCurrentState(wStrState);
+				player->setPlayerState(ENUM_PLAYER_MOVING);
+				player->setPlayerDirection(ENUM_PLAYER_DIRECTION_LEFT);
+				player->setPlayerInputStorage(VK_LEFT);
+
+				if (playerPP->getX() >= viewport->getViewportX() + viewport->getViewportWidth() / 2 - 5 && playerPP->getX() <= viewport->getViewportX() + viewport->getViewportWidth() / 2 + 5)
+				{
+					viewportVx -= playerPP->getVelocityX();
+					viewportMoved = true;
+					
+				}
+				//playerPP->setX(playerPP->getX() - playerPP->getVelocityX());
+			}
+			// right key
+			if (input->isKeyDown(VK_RIGHT))
+			{
+				wstring wStrState(MG_PLAYER_ANIMATION_STATE_WALK_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_RIGHT.end());
+				player->setCurrentState(wStrState);
+				player->setPlayerState(ENUM_PLAYER_MOVING);
+				player->setPlayerDirection(ENUM_PLAYER_DIRECTION_RIGHT);
+				player->setPlayerInputStorage(VK_RIGHT);
+
+				if (playerPP->getX() >= viewport->getViewportX() + viewport->getViewportWidth() / 2 - 5 && playerPP->getX() <= viewport->getViewportX() + viewport->getViewportWidth() / 2 + 5)
+				{
+					viewportVx += playerPP->getVelocityX();
+					viewportMoved = true;
+					
+				}
+				//playerPP->setX(playerPP->getX() + playerPP->getVelocityX());
+			}
+			//if (viewportMoved)
+			//	viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
+
 		}
 		//// --- end ---
 
@@ -107,11 +154,9 @@ void RebelleKeyEventHandler::handleKeyEvents()
 		{
 			//// I'm changing this code because I want that the viewport location is
 			//// decided depending on the player sprite's location
-			/*
-			bool viewportMoved = false;
-			float viewportVx = 0.0f;
-			float viewportVy = 0.0f;
-			if (input->isKeyDown(UP_KEY))
+			
+			
+			/*if (input->isKeyDown(UP_KEY))
 			{
 				viewportVy -= MAX_VIEWPORT_AXIS_VELOCITY;
 				viewportMoved = true;
@@ -137,7 +182,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 
 			//// ----the problem of this implementation is that the viewport only moves 
 			//// when there is keyboard input. => solution is that makes a key input storage in the player sprite class.
-			PhysicalProperties *playerPP = player->getPhysicalProperties();
+			
 			int playerSpriteWidth = player->getSpriteType()->getTextureWidth();
 			int playerSpriteHeight = player->getSpriteType()->getTextureHeight();
 			int playerCenterX = playerPP->getX() + playerSpriteWidth / 2;
