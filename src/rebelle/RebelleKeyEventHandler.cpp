@@ -54,7 +54,6 @@ void RebelleKeyEventHandler::handleKeyEvents()
 	TextGenerator *generator = game->getText()->getTextGenerator();
 
 	
-	
 	// IF THE GAME IS IN PROGRESS
 	if (gsm->isGameInProgress())
 	{
@@ -74,154 +73,109 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			facing = 3;
 		if (player->getCurrentState().compare(L"IDLE_RIGHT") == 0 || player->getCurrentState().compare(L"WALK_RIGHT") == 0)
 			facing = 4;
+	
+		if (input->isKeyDown(VK_UP))
+		{
+			wstring wStrState;
 
-		
-			if (input->isKeyDown(VK_UP))
+			if (gsm->getPhysics()->isStrafing())
 			{
-				wstring wStrState;
-
-				if (gsm->getPhysics()->isStrafing())
-				{
-					if(facing == 1)
-						wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.end());
-					else if (facing == 2)
-						wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.end());
-					else if (facing == 3)
-						wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.end());
-					else if (facing == 4)
-						wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.end());
-
-				}
-				else
-					wStrState.assign(MG_PLAYER_ANIMATION_STATE_WALK_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_FRONT.end());
-				if (player->getCurrentState().compare(L"PUNCH_FRONT") != 0)
-					player->setCurrentState(wStrState);
-				player->setPlayerState(ENUM_PLAYER_MOVING);
-				player->setPlayerDirection(ENUM_PLAYER_DIRECTION_UP);
-				player->setPlayerInputStorage(VK_UP);
-
-				if (playerPP->getY() >= viewport->getViewportY() + viewport->getViewportHeight() / 2 - 50 && playerPP->getY() <= viewport->getViewportY() + viewport->getViewportHeight() / 2 + 5)
-				{
-					viewportVy -= playerPP->getVelocityY();
-					viewportMoved = true;
-				}
-					//playerPP->setY(playerPP->getY() - playerPP->getVelocityY());
-				
+				if(facing == 1)
+					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.end());
+				else if (facing == 2)
+					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.end());
+				else if (facing == 3)
+					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.end());
+				else if (facing == 4)
+					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.end());
 
 			}
-			// down key
-			if (input->isKeyDown(VK_DOWN))
+			else
+				wStrState.assign(MG_PLAYER_ANIMATION_STATE_WALK_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_FRONT.end());
+			if (player->getCurrentState().compare(L"PUNCH_FRONT") != 0)
+				player->setCurrentState(wStrState);
+			player->setPlayerState(ENUM_PLAYER_MOVING);
+			player->setPlayerDirection(ENUM_PLAYER_DIRECTION_UP);
+			player->setPlayerInputStorage(VK_UP);
+		}
+
+		// down key
+		if (input->isKeyDown(VK_DOWN))
+		{
+			wstring wStrState;
+
+			if (gsm->getPhysics()->isStrafing())
 			{
-				wstring wStrState;
+				if (facing == 1)
+					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.end());
+				else if (facing == 2)
+					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.end());
+				else if (facing == 3)
+					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.end());
+				else if (facing == 4)
+					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.end());
 
-				if (gsm->getPhysics()->isStrafing())
-				{
-					if (facing == 1)
-						wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.end());
-					else if (facing == 2)
-						wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.end());
-					else if (facing == 3)
-						wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.end());
-					else if (facing == 4)
-						wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.end());
-
-				}
-				else
-					wStrState.assign(MG_PLAYER_ANIMATION_STATE_WALK_BACK.begin(), MG_PLAYER_ANIMATION_STATE_WALK_BACK.end());
-				if (player->getCurrentState().compare(L"PUNCH_BACK") != 0)
-					player->setCurrentState(wStrState);
-				player->setPlayerState(ENUM_PLAYER_MOVING);
-				player->setPlayerDirection(ENUM_PLAYER_DIRECTION_DOWN);
-				player->setPlayerInputStorage(VK_DOWN);
-
-				if (playerPP->getY() >= viewport->getViewportY() + viewport->getViewportHeight() / 2 - 50 && playerPP->getY() <= viewport->getViewportY() + viewport->getViewportHeight() / 2 + 5)
-				{
-					
-					viewportVy += playerPP->getVelocityY();
-					viewportMoved = true;
-				}
-				
-				//playerPP->setY(playerPP->getY() + playerPP->getVelocityY());
-				
 			}
-			// left key
-			if (input->isKeyDown(VK_LEFT))
+			else
+				wStrState.assign(MG_PLAYER_ANIMATION_STATE_WALK_BACK.begin(), MG_PLAYER_ANIMATION_STATE_WALK_BACK.end());
+			if (player->getCurrentState().compare(L"PUNCH_BACK") != 0)
+				player->setCurrentState(wStrState);
+			player->setPlayerState(ENUM_PLAYER_MOVING);
+			player->setPlayerDirection(ENUM_PLAYER_DIRECTION_DOWN);
+			player->setPlayerInputStorage(VK_DOWN);
+		}
+
+		// left key
+		if (input->isKeyDown(VK_LEFT))
+		{
+			wstring wStrState;
+
+			if (gsm->getPhysics()->isStrafing())
 			{
-				wstring wStrState;
+				if (facing == 1)
+					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.end());
+				else if (facing == 2)
+					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.end());
+				else if (facing == 3)
+					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.end());
+				else if (facing == 4)
+					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.end());
 
-				if (gsm->getPhysics()->isStrafing())
-				{
-					if (facing == 1)
-						wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.end());
-					else if (facing == 2)
-						wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.end());
-					else if (facing == 3)
-						wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.end());
-					else if (facing == 4)
-						wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.end());
-
-				}
-				else
-					wStrState.assign(MG_PLAYER_ANIMATION_STATE_WALK_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_LEFT.end());
-				if (player->getCurrentState().compare(L"PUNCH_LEFT") != 0)
-					player->setCurrentState(wStrState);
-				player->setPlayerState(ENUM_PLAYER_MOVING);
-				player->setPlayerDirection(ENUM_PLAYER_DIRECTION_LEFT);
-				player->setPlayerInputStorage(VK_LEFT);
-
-				if (playerPP->getX() >= viewport->getViewportX() + viewport->getViewportWidth() / 2 - 5 && playerPP->getX() <= viewport->getViewportX() + viewport->getViewportWidth() / 2 + 5)
-				{
-					viewportVx -= playerPP->getVelocityX();
-					viewportMoved = true;
-					
-				}
-				//playerPP->setX(playerPP->getX() - playerPP->getVelocityX());
 			}
-			// right key
-			if (input->isKeyDown(VK_RIGHT))
+			else
+				wStrState.assign(MG_PLAYER_ANIMATION_STATE_WALK_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_LEFT.end());
+			if (player->getCurrentState().compare(L"PUNCH_LEFT") != 0)
+				player->setCurrentState(wStrState);
+			player->setPlayerState(ENUM_PLAYER_MOVING);
+			player->setPlayerDirection(ENUM_PLAYER_DIRECTION_LEFT);
+			player->setPlayerInputStorage(VK_LEFT);
+		}
+
+		// right key
+		if (input->isKeyDown(VK_RIGHT))
+		{
+			wstring wStrState;
+
+			if (gsm->getPhysics()->isStrafing())
 			{
-				wstring wStrState;
+				if (facing == 1)
+					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.end());
+				else if (facing == 2)
+					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.end());
+				else if (facing == 3)
+					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.end());
+				else if (facing == 4)
+					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.end());
 
-				if (gsm->getPhysics()->isStrafing())
-				{
-					if (facing == 1)
-						wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.end());
-					else if (facing == 2)
-						wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.end());
-					else if (facing == 3)
-						wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.end());
-					else if (facing == 4)
-						wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.end());
-
-				}
-				else
-					wStrState.assign(MG_PLAYER_ANIMATION_STATE_WALK_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_RIGHT.end());
-				if(player->getCurrentState().compare(L"PUNCH_RIGHT") != 0)
-					player->setCurrentState(wStrState);
-				player->setPlayerState(ENUM_PLAYER_MOVING);
-				player->setPlayerDirection(ENUM_PLAYER_DIRECTION_RIGHT);
-				player->setPlayerInputStorage(VK_RIGHT);
-
-				if (playerPP->getX() >= viewport->getViewportX() + viewport->getViewportWidth() / 2 - 5 && playerPP->getX() <= viewport->getViewportX() + viewport->getViewportWidth() / 2 + 5)
-				{
-					viewportVx += playerPP->getVelocityX();
-					viewportMoved = true;
-					
-				}
-				//playerPP->setX(playerPP->getX() + playerPP->getVelocityX());
 			}
-			//if (viewportMoved)
-			//	viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
-
-		
-		
-			
-				//playerPP->setX(playerPP->getX() + playerPP->getVelocityX());
-			
-			//if (viewportMoved)
-			//	viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
-
-		
+			else
+				wStrState.assign(MG_PLAYER_ANIMATION_STATE_WALK_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_RIGHT.end());
+			if(player->getCurrentState().compare(L"PUNCH_RIGHT") != 0)
+				player->setCurrentState(wStrState);
+			player->setPlayerState(ENUM_PLAYER_MOVING);
+			player->setPlayerDirection(ENUM_PLAYER_DIRECTION_RIGHT);
+			player->setPlayerInputStorage(VK_RIGHT);
+		}
 		//// --- end ---
 
 		if (input->isKeyDownForFirstTime(P_KEY))
@@ -235,34 +189,6 @@ void RebelleKeyEventHandler::handleKeyEvents()
 		
 		if (moveviewport)
 		{
-			//// I'm changing this code because I want that the viewport location is
-			//// decided depending on the player sprite's location
-			
-			
-			/*if (input->isKeyDown(UP_KEY))
-			{
-				viewportVy -= MAX_VIEWPORT_AXIS_VELOCITY;
-				viewportMoved = true;
-			}
-			if (input->isKeyDown(DOWN_KEY))
-			{
-				viewportVy += MAX_VIEWPORT_AXIS_VELOCITY;
-				viewportMoved = true;
-			}
-			if (input->isKeyDown(LEFT_KEY))
-			{
-				viewportVx -= MAX_VIEWPORT_AXIS_VELOCITY;
-				viewportMoved = true;
-			}
-			if (input->isKeyDown(RIGHT_KEY))
-			{
-				viewportVx += MAX_VIEWPORT_AXIS_VELOCITY;
-				viewportMoved = true;
-			}
-			if (viewportMoved)
-				viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
-			*/
-
 			//// ----the problem of this implementation is that the viewport only moves 
 			//// when there is keyboard input. => solution is that makes a key input storage in the player sprite class.
 			
