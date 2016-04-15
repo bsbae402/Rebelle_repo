@@ -80,8 +80,9 @@ void RebelleTextGenerator::printHealth()
 	wstringstream wss;
 	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
 	healthlabel.append(L"Health: ");
-	wss << L"?";
-	wss << L" / 15";
+	wss << spriteManager->getPlayer()->getHealth();
+	wss << L" / ";
+	wss << spriteManager->getPlayer()->getMaxhealth();;
 
 
 	healthlabel.append(wss.str());
