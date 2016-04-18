@@ -31,6 +31,7 @@ const unsigned int F_KEY = (unsigned int)'F';
 const unsigned int U_KEY = (unsigned int)'U';
 const unsigned int V_KEY = (unsigned int)'V';
 const unsigned int G_KEY = (unsigned int)'G';
+const unsigned int H_KEY = (unsigned int)'H';
 //// -- for partial physics activation
 const unsigned int K_KEY = (unsigned int)'K';
 //// -------- 

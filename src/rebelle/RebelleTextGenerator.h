@@ -22,6 +22,7 @@ private:
 	wstring scorelabel;
 	wstring moneylabel;
 	wstring healthlabel;
+	wstring heallabel;
 	wstring safetywarning;
 	wstring safetykey;
 
@@ -37,6 +38,7 @@ private:
 	void printHealth();
 	void printScore();
 	void printMoney();
+	void printHeal();
 	
 
 public:
@@ -48,4 +50,5 @@ public:
 	void update();
 	void setdebug(wstring newdebug);
 	void setTime(int time);
+	void setHeal(wstring heal);
 };

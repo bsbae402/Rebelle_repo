@@ -136,7 +136,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 
 			if (playerPP->getY() >= viewport->getViewportY() + viewport->getViewportHeight() / 2 - 50 && playerPP->getY() <= viewport->getViewportY() + viewport->getViewportHeight() / 2 + 5)
 			{
-					
+				
 				viewportVy += playerPP->getVelocityY();
 				viewportMoved = true;
 			}
@@ -338,36 +338,63 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			else if (facing == 4 && player->getCurrentState().compare(L"SHOOT_RIGHT") != 0)
 				player->setCurrentState(L"SHOOT_RIGHT");
 
-			
+			if (input->isKeyDown(game->getGSM()->getIntKey()))
+			{
+				generator->setdebug(L"sdfsfdssd");
+				game->getGSM()->SafetyOn();
+			}
+			else 
+			{
+				generator->setdebug(L"");
+				game->getGSM()->SafetyOff();
+			}
 		}
 		if (input->isKeyDown(G_KEY))
 		{
-			if (facing == 1 && player->getCurrentState().compare(L"PUNCH_FRONT") != 0)
+			if (facing == 1 && player->getCurrentState().compare(L"PUNCH_FRONT") != 0 && player->getCanheal() == false)
 				player->setCurrentState(L"PUNCH_FRONT");
-			else if (facing == 2 && player->getCurrentState().compare(L"PUNCH_BACK") != 0)
+			else if (facing == 2 && player->getCurrentState().compare(L"PUNCH_BACK") != 0 && player->getCanheal() == false)
 				player->setCurrentState(L"PUNCH_BACK");
-			else if (facing == 3 && player->getCurrentState().compare(L"PUNCH_LEFT") != 0)
+			else if (facing == 3 && player->getCurrentState().compare(L"PUNCH_LEFT") != 0 && player->getCanheal() == false)
 				player->setCurrentState(L"PUNCH_LEFT");
-			else if (facing == 4 && player->getCurrentState().compare(L"PUNCH_RIGHT") != 0)
+			else if (facing == 4 && player->getCurrentState().compare(L"PUNCH_RIGHT") != 0 && player->getCanheal() == false)
 				player->setCurrentState(L"PUNCH_RIGHT");
 
-			//playerPP->setVelocity(0.0f, 0.0f);
+			if (input->isKeyDown(game->getGSM()->getIntKey()))
+			{
+				generator->setdebug(L"sdfsfdssd");
+				game->getGSM()->SafetyOn();
+			}
+			else
+			{
+				generator->setdebug(L"");
+				game->getGSM()->SafetyOff();
+			}
+		}
+		if (input->isKeyDown(H_KEY))
+		{
+			if (player->getCanheal() == true)
+			{
+				player->setIshealing(true);
+			}
 		}
 
 
 		//viewport->toggleDebugView();
 		//game->getGraphics()->toggleDebugTextShouldBeRendered();
-		if (game->getGSM()->getSafety() != NULL)
+		/*if (game->getGSM()->getSafety() != NULL)
 		{
 			if (input->isKeyDown(game->getGSM()->getIntKey()))
 			{
 				//generator->setdebug(L"sdfsfdssd");
+				game->getGSM()->SafetyOn();
 			}
 			else
 			{
 				//generator->setdebug(L"");
+				game->getGSM()->SafetyOff();
 			}
-		}
+		}*/
 		
 	}
 

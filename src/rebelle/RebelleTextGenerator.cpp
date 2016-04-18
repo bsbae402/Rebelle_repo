@@ -38,6 +38,7 @@ static const wstring	RECYCLABLE_BOTS_TEXT = L"-Recyclable Bots: ";
 
 wstring addedtext(L"");
 int timetoprint;
+wstring heal(L"");
 
 
 void RebelleTextGenerator::printTime()
@@ -95,11 +96,11 @@ void RebelleTextGenerator::printScore()
 	wstringstream wss;
 	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
 	scorelabel.append(L"Score: ");
-	//wss << L"?";
+	wss << game->getGSM()->getScore();
 	//wss << L" / 15";
 
 
-	//healthlabel.append(wss.str());
+	scorelabel.append(wss.str());
 }
 
 void RebelleTextGenerator::printMoney()
@@ -109,11 +110,18 @@ void RebelleTextGenerator::printMoney()
 	wstringstream wss;
 	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
 	moneylabel.append(L"Money: ");
-	//wss << L"?";
+	wss << game->getGSM()->getMoney();
 	//wss << L" / 15";
 
 
-	//healthlabel.append(wss.str());
+	moneylabel.append(wss.str());
+}
+
+void RebelleTextGenerator::printHeal()
+{
+
+	heallabel.append(heal);
+
 }
 
 /*
@@ -157,6 +165,7 @@ void RebelleTextGenerator::update()
 	healthlabel.clear();
 	safetywarning.clear();
 	safetykey.clear();
+	heallabel.clear();
 
 	Game *game = Game::getSingleton();
 	if (game->getGSM()->isGameInProgress())
@@ -172,6 +181,7 @@ void RebelleTextGenerator::update()
 		printHealth();
 		printMoney();
 		printScore();
+		printHeal();
 
 		additional.clear();
 
@@ -187,6 +197,8 @@ void RebelleTextGenerator::update()
 		text->addRenderText(&scorelabel, LEFT_TEXT_X, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 		text->addRenderText(&moneylabel, 200, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 		text->addRenderText(&healthlabel, LEFT_TEXT_X, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+		text->addRenderText(&heallabel, 300, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+
 
 		text->addRenderText(&safetywarning, RIGHT_TEXT_X, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 		text->addRenderText(&safetykey, RIGHT_TEXT_X, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
@@ -205,4 +217,10 @@ void RebelleTextGenerator::setTime(int newtime)
 {
 	timetoprint = newtime;
 	printTime();
+}
+
+void RebelleTextGenerator::setHeal(wstring newheal)
+{
+	heal = newheal;
+	printHeal();
 }
