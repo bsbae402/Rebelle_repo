@@ -94,7 +94,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			}
 			else
 				wStrState.assign(MG_PLAYER_ANIMATION_STATE_WALK_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_FRONT.end());
-			if (player->getCurrentState().compare(L"PUNCH_FRONT") != 0)
+			if (player->getCurrentState().compare(L"PUNCH_FRONT") != 0 && player->getCurrentState().compare(L"SHOOT_FRONT") != 0)
 				player->setCurrentState(wStrState);
 			player->setPlayerState(ENUM_PLAYER_MOVING);
 			player->setPlayerDirection(ENUM_PLAYER_DIRECTION_UP);
@@ -128,7 +128,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			}
 			else
 				wStrState.assign(MG_PLAYER_ANIMATION_STATE_WALK_BACK.begin(), MG_PLAYER_ANIMATION_STATE_WALK_BACK.end());
-			if (player->getCurrentState().compare(L"PUNCH_BACK") != 0)
+			if (player->getCurrentState().compare(L"PUNCH_BACK") != 0 && player->getCurrentState().compare(L"SHOOT_BACK") != 0)
 				player->setCurrentState(wStrState);
 			player->setPlayerState(ENUM_PLAYER_MOVING);
 			player->setPlayerDirection(ENUM_PLAYER_DIRECTION_DOWN);
@@ -163,7 +163,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			}
 			else
 				wStrState.assign(MG_PLAYER_ANIMATION_STATE_WALK_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_LEFT.end());
-			if (player->getCurrentState().compare(L"PUNCH_LEFT") != 0)
+			if (player->getCurrentState().compare(L"PUNCH_LEFT") != 0 && player->getCurrentState().compare(L"SHOOT_LEFT") != 0)
 				player->setCurrentState(wStrState);
 			player->setPlayerState(ENUM_PLAYER_MOVING);
 			player->setPlayerDirection(ENUM_PLAYER_DIRECTION_LEFT);
@@ -196,7 +196,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			}
 			else
 				wStrState.assign(MG_PLAYER_ANIMATION_STATE_WALK_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_RIGHT.end());
-			if(player->getCurrentState().compare(L"PUNCH_RIGHT") != 0)
+			if(player->getCurrentState().compare(L"PUNCH_RIGHT") != 0 && player->getCurrentState().compare(L"SHOOT_RIGHT") != 0)
 				player->setCurrentState(wStrState);
 			player->setPlayerState(ENUM_PLAYER_MOVING);
 			player->setPlayerDirection(ENUM_PLAYER_DIRECTION_RIGHT);
