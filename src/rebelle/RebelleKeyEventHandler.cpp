@@ -379,7 +379,6 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			}
 		}
 
-
 		//viewport->toggleDebugView();
 		//game->getGraphics()->toggleDebugTextShouldBeRendered();
 		/*if (game->getGSM()->getSafety() != NULL)
@@ -410,6 +409,11 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			id = 0;		
 		cursor->setActiveCursorID(id);
 	}
+
+	if (gsm->isGameInProgress() && input->isKeyDownForFirstTime(ESCAPE_KEY))
+		gsm->goToIngamePauseMenu();
+	else if (gsm->isGameInPauseMenu() && input->isKeyDownForFirstTime(ESCAPE_KEY))
+		gsm->goToGame();
 
 	// LET'S MESS WITH THE TARGET FRAME RATE IF THE USER PRESSES THE HOME OR END KEYS
 	GameClock *clock = game->getClock();

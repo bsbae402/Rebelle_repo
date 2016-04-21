@@ -21,6 +21,9 @@ static const wstring	SPLASH_SCREEN_PATH	= L"data/gui/overlays/rebelle_splash_scr
 static const wstring	MAIN_MENU_PATH		= L"data/gui/overlays/rebelle_main_menu_overlay.png";
 static const wstring	LOADING_LEVEL_PATH = L"data/gui/overlays/rebelle_loading_level_overlay.png";
 
+//// -- followings are screen artwork of ingame menu
+static const wstring	INGAME_PAUSE_MENU_PATH = L"data/gui/overlays/ingame_pause_menu.png";
+
 static const wstring	START_IMAGE_PATH	= L"data/gui/buttons/start_game.png";
 static const wstring	START_IMAGE_MO_PATH	= L"data/gui/buttons/start_game_mo.png";
 static const wstring	EXIT_IMAGE_PATH		= L"data/gui/buttons/exit_game.png";

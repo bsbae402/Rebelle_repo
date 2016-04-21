@@ -58,6 +58,9 @@ void initSplashScreen();
 void initLoadingLevel();
 void initViewport();
 
+///// declaration of custom functions in this file
+void initInGamePauseMenu();
+
 /*
 	WinMain - This is the application's starting point. In this method we will construct a Game object, 
 	then initialize all the platform-dependent technologies, then construct all the custom data for our 
@@ -85,6 +88,10 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	initMainMenu();
 	initInGameGUI();
 	initLoadingLevel();
+
+	////-- edit:bongsung --
+	initInGamePauseMenu();
+	///////-----
 
 	// SPECIFY WHO WILL HANDLE BUTTON EVENTS
 	RebelleButtonEventHandler *rebelleButtonHandler = new RebelleButtonEventHandler();
@@ -209,7 +216,7 @@ void initMainMenu()
 	ScreenGUI *mainMenuGUI = new ScreenGUI();
 	unsigned int imageID = guiTextureManager->loadTexture(MAIN_MENU_PATH);
 	OverlayImage *imageToAdd = new OverlayImage();
-	imageToAdd->alpha = 200;
+	imageToAdd->alpha = 255;
 	imageToAdd->width = 512;
 	imageToAdd->height = 512;
 	imageToAdd->x = (graphics->getScreenWidth()/2)-(imageToAdd->width/2);
@@ -384,4 +391,35 @@ void initViewport()
 	viewport->setViewportHeight(viewportHeight);
 	viewport->setToggleOffsetY(TOGGLE_OFFSET_Y);
 	
+}
+
+/*
+	Bongsung - gui setting function: in-game menu
+*/
+void initInGamePauseMenu()
+{
+	Game *game = Game::getSingleton();
+	GameGUI *gui = game->getGUI();
+	GameGraphics *graphics = game->getGraphics();
+	TextureManager *guiTextureManager = graphics->getGUITextureManager();
+
+	// In-game menu will be shown on another screen. 
+	// The ongoing game will be paused
+	ScreenGUI *inGameMenuScreenGUI = new ScreenGUI();
+
+	unsigned int ingameMenuScreenImageTextureID = guiTextureManager->loadTexture(INGAME_PAUSE_MENU_PATH);
+
+	OverlayImage *imageToAdd = new OverlayImage();
+	imageToAdd->alpha = 230;
+	imageToAdd->width = 1024;
+	imageToAdd->height = 768;
+	imageToAdd->x = 180;
+	imageToAdd->y = 0;
+	imageToAdd->z = 0;
+	imageToAdd->imageID = ingameMenuScreenImageTextureID;
+	inGameMenuScreenGUI->addOverlayImage(imageToAdd);
+
+	gui->addScreenGUI(GS_PAUSED, inGameMenuScreenGUI);
+
+	//// To Be Editted ...
 }

@@ -35,6 +35,9 @@ const unsigned int H_KEY = (unsigned int)'H';
 //// -- for partial physics activation
 const unsigned int K_KEY = (unsigned int)'K';
 //// -------- 
+//// -- for in-game menu screen
+const unsigned int ESCAPE_KEY = VK_ESCAPE;
+//// --------
 const unsigned int UP_KEY = VK_UP;
 const unsigned int DOWN_KEY = VK_DOWN;
 const unsigned int LEFT_KEY = VK_LEFT;
