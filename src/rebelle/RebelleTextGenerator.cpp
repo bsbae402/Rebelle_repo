@@ -203,7 +203,7 @@ void RebelleTextGenerator::update()
 		text->addRenderText(&safetywarning, RIGHT_TEXT_X, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 		text->addRenderText(&safetykey, RIGHT_TEXT_X, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 
-		text->addRenderText(&additional, 700, 10, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+		text->addRenderText(&additional, 700, 5, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 	}
 }
 

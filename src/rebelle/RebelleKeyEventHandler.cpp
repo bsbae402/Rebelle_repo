@@ -67,13 +67,13 @@ void RebelleKeyEventHandler::handleKeyEvents()
 		PhysicalProperties *playerPP = player->getPhysicalProperties();
 
 		if (player->getCurrentState().compare(L"IDLE_FRONT") == 0 || player->getCurrentState().compare(L"WALK_FRONT") == 0)
-			facing = 1;
+			player->setFacing(1);
 		if (player->getCurrentState().compare(L"IDLE_BACK") == 0 || player->getCurrentState().compare(L"WALK_BACK") == 0)
-			facing = 2;
+			player->setFacing(2);
 		if (player->getCurrentState().compare(L"IDLE_LEFT") == 0 || player->getCurrentState().compare(L"WALK_LEFT") == 0)
-			facing = 3;
+			player->setFacing(3);
 		if (player->getCurrentState().compare(L"IDLE_RIGHT") == 0 || player->getCurrentState().compare(L"WALK_RIGHT") == 0)
-			facing = 4;
+			player->setFacing(4);
 
 		
 		if (input->isKeyDown(VK_UP))
@@ -82,13 +82,13 @@ void RebelleKeyEventHandler::handleKeyEvents()
 
 			if (gsm->getPhysics()->isStrafing())
 			{
-				if(facing == 1)
+				if (player->getFacing() == 1)
 					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.end());
-				else if (facing == 2)
+				else if (player->getFacing() == 2)
 					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.end());
-				else if (facing == 3)
+				else if (player->getFacing() == 3)
 					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.end());
-				else if (facing == 4)
+				else if (player->getFacing() == 4)
 					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.end());
 
 			}
@@ -116,13 +116,13 @@ void RebelleKeyEventHandler::handleKeyEvents()
 
 			if (gsm->getPhysics()->isStrafing())
 			{
-				if (facing == 1)
+				if (player->getFacing() == 1)
 					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.end());
-				else if (facing == 2)
+				else if (player->getFacing() == 2)
 					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.end());
-				else if (facing == 3)
+				else if (player->getFacing() == 3)
 					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.end());
-				else if (facing == 4)
+				else if (player->getFacing() == 4)
 					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.end());
 
 			}
@@ -151,13 +151,13 @@ void RebelleKeyEventHandler::handleKeyEvents()
 
 			if (gsm->getPhysics()->isStrafing())
 			{
-				if (facing == 1)
+				if (player->getFacing() == 1)
 					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.end());
-				else if (facing == 2)
+				else if (player->getFacing() == 2)
 					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.end());
-				else if (facing == 3)
+				else if (player->getFacing() == 3)
 					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.end());
-				else if (facing == 4)
+				else if (player->getFacing() == 4)
 					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.end());
 
 			}
@@ -184,13 +184,13 @@ void RebelleKeyEventHandler::handleKeyEvents()
 
 			if (gsm->getPhysics()->isStrafing())
 			{
-				if (facing == 1)
+				if (player->getFacing() == 1)
 					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_FRONT.end());
-				else if (facing == 2)
+				else if (player->getFacing() == 2)
 					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_BACK.end());
-				else if (facing == 3)
+				else if (player->getFacing() == 3)
 					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_LEFT.end());
-				else if (facing == 4)
+				else if (player->getFacing() == 4)
 					wStrState.assign(MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_STRAFE_RIGHT.end());
 
 			}
@@ -329,38 +329,38 @@ void RebelleKeyEventHandler::handleKeyEvents()
 		if (input->isKeyDown(F_KEY))
 		{
 			//Shoot
-			if (facing == 1 && player->getCurrentState().compare(L"SHOOT_FRONT") != 0)
+			if (player->getFacing() == 1 && player->getCurrentState().compare(L"SHOOT_FRONT") != 0)
 				player->setCurrentState(L"SHOOT_FRONT");
-			else if (facing == 2 && player->getCurrentState().compare(L"SHOOT_BACK") != 0)
+			else if (player->getFacing() == 2 && player->getCurrentState().compare(L"SHOOT_BACK") != 0)
 				player->setCurrentState(L"SHOOT_BACK");
-			else if (facing == 3 && player->getCurrentState().compare(L"SHOOT_LEFT") != 0)
+			else if (player->getFacing() == 3 && player->getCurrentState().compare(L"SHOOT_LEFT") != 0)
 				player->setCurrentState(L"SHOOT_LEFT");
-			else if (facing == 4 && player->getCurrentState().compare(L"SHOOT_RIGHT") != 0)
+			else if (player->getFacing() == 4 && player->getCurrentState().compare(L"SHOOT_RIGHT") != 0)
 				player->setCurrentState(L"SHOOT_RIGHT");
 
-			if (input->isKeyDown(game->getGSM()->getIntKey()))
+			/*if (input->isKeyDown(game->getGSM()->getIntKey()))
 			{
-				generator->setdebug(L"sdfsfdssd");
+				//generator->setdebug(L"sdfsfdssd");
 				game->getGSM()->SafetyOn();
 			}
 			else 
 			{
 				generator->setdebug(L"");
 				game->getGSM()->SafetyOff();
-			}
+			}*/
 		}
 		if (input->isKeyDown(G_KEY))
 		{
-			if (facing == 1 && player->getCurrentState().compare(L"PUNCH_FRONT") != 0 && player->getCanheal() == false)
+			if (player->getFacing() == 1 && player->getCurrentState().compare(L"PUNCH_FRONT") != 0 && player->getCanheal() == false)
 				player->setCurrentState(L"PUNCH_FRONT");
-			else if (facing == 2 && player->getCurrentState().compare(L"PUNCH_BACK") != 0 && player->getCanheal() == false)
+			else if (player->getFacing() == 2 && player->getCurrentState().compare(L"PUNCH_BACK") != 0 && player->getCanheal() == false)
 				player->setCurrentState(L"PUNCH_BACK");
-			else if (facing == 3 && player->getCurrentState().compare(L"PUNCH_LEFT") != 0 && player->getCanheal() == false)
+			else if (player->getFacing() == 3 && player->getCurrentState().compare(L"PUNCH_LEFT") != 0 && player->getCanheal() == false)
 				player->setCurrentState(L"PUNCH_LEFT");
-			else if (facing == 4 && player->getCurrentState().compare(L"PUNCH_RIGHT") != 0 && player->getCanheal() == false)
+			else if (player->getFacing() == 4 && player->getCurrentState().compare(L"PUNCH_RIGHT") != 0 && player->getCanheal() == false)
 				player->setCurrentState(L"PUNCH_RIGHT");
 
-			if (input->isKeyDown(game->getGSM()->getIntKey()))
+			/*if (input->isKeyDown(game->getGSM()->getIntKey()))
 			{
 				generator->setdebug(L"sdfsfdssd");
 				game->getGSM()->SafetyOn();
@@ -369,7 +369,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			{
 				generator->setdebug(L"");
 				game->getGSM()->SafetyOff();
-			}
+			}*/
 		}
 		if (input->isKeyDown(H_KEY))
 		{
@@ -381,19 +381,19 @@ void RebelleKeyEventHandler::handleKeyEvents()
 
 		//viewport->toggleDebugView();
 		//game->getGraphics()->toggleDebugTextShouldBeRendered();
-		/*if (game->getGSM()->getSafety() != NULL)
+		if (game->getGSM()->getSafety() != NULL)
 		{
 			if (input->isKeyDown(game->getGSM()->getIntKey()))
 			{
-				//generator->setdebug(L"sdfsfdssd");
+				generator->setdebug(L"Safety On");
 				game->getGSM()->SafetyOn();
 			}
 			else
 			{
-				//generator->setdebug(L"");
+				generator->setdebug(L"");
 				game->getGSM()->SafetyOff();
 			}
-		}*/
+		}
 		
 	}
 
