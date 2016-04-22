@@ -26,6 +26,11 @@ const wstring	START_COMMAND = L"Start";
 const wstring	EXIT_COMMAND = L"Exit";
 const wstring	CONTROLS_COMMAND = L"Controls";
 
+//// pause game menu button commands
+const wstring	RESUME_COMMAND = L"Resume";
+const wstring	PAUSE_MENU_EXIT_COMMAND = L"Pause Then Exit";
+const wstring	SHOW_UPGRADE_COMMAND = L"Show Upgrade";
+
 class RebelleButtonEventHandler: public ButtonEventHandler
 {
 public:

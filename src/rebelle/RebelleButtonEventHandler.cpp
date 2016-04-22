@@ -39,17 +39,24 @@ void RebelleButtonEventHandler::handleButtonEvents(wstring command)
 	{
 		game->startGame();
 	}
-	// THE USER PRESSED THE Quit BUTTON ON THE IN-GAME MENU,
-	// SO LET'S UNLOAD THE LEVEL AND RETURN TO THE MAIN MENU
-	//// we don't have quit
-	/*else if (command.compare(QUIT_COMMAND) == 0)
+
+	else if (command.compare(RESUME_COMMAND) == 0)
+	{
+		GameStateManager *gsm = game->getGSM();
+		gsm->goToGame();
+	}
+
+	/// use pressed the exit button in the pause menu
+	else if (command.compare(PAUSE_MENU_EXIT_COMMAND) == 0)
 	{
 		game->quitGame();
-	}*/
+	}
 
+	
 	//// controls clicked
 	if (command.compare(CONTROLS_COMMAND) == 0)
 	{
 		//// TO BE added
 	}
+
 }

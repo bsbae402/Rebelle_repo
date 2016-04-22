@@ -408,16 +408,71 @@ void initInGamePauseMenu()
 	ScreenGUI *inGameMenuScreenGUI = new ScreenGUI();
 
 	unsigned int ingameMenuScreenImageTextureID = guiTextureManager->loadTexture(INGAME_PAUSE_MENU_PATH);
+	int pauseMenuX = 180;
 
 	OverlayImage *imageToAdd = new OverlayImage();
 	imageToAdd->alpha = 230;
 	imageToAdd->width = 1024;
 	imageToAdd->height = 768;
-	imageToAdd->x = 180;
+	imageToAdd->x = pauseMenuX;
 	imageToAdd->y = 0;
 	imageToAdd->z = 0;
 	imageToAdd->imageID = ingameMenuScreenImageTextureID;
 	inGameMenuScreenGUI->addOverlayImage(imageToAdd);
+
+	int resumeNstartButtonY = 600;
+
+	/// --- adding resume button
+	Button *resumeButton = new Button();
+	unsigned int resumeButtonTID = guiTextureManager->loadTexture(PAUSE_MENU_RESUME_PATH);
+	unsigned int moResumeButtonTID = guiTextureManager->loadTexture(PAUSE_MENU_RESUME_MO_PATH);
+	int resumeButtonWidth = 200;
+	int resumeButtonHeight = 100;
+	int resumeButtonPadding = 10;
+	int resumeButtonX = pauseMenuX + 100;
+
+	resumeButton->initButton(resumeButtonTID, moResumeButtonTID,
+		resumeButtonX, resumeNstartButtonY, 0, 255,
+		resumeButtonWidth, resumeButtonHeight, true, RESUME_COMMAND);
+	
+	inGameMenuScreenGUI->addButton(resumeButton);
+	/// --- complete resuem button
+
+	/// --- adding exit button
+	Button *exitButton = new Button();
+	unsigned int exitButtonTID = guiTextureManager->loadTexture(PAUSE_MENU_EXIT_PATH);
+	unsigned int moExitButtonTID = guiTextureManager->loadTexture(PAUSE_MENU_EXIT_MO_PATH);
+	int exitButtonWidth = 200;
+	int exitButtonHeight = 100;
+	int exitButtonPadding = 10;
+	int exitButtonX = pauseMenuX + 500;
+
+	exitButton->initButton(exitButtonTID, moExitButtonTID,
+		exitButtonX, resumeNstartButtonY, 0, 255,
+		exitButtonWidth, exitButtonHeight, true, PAUSE_MENU_EXIT_COMMAND);
+
+	inGameMenuScreenGUI->addButton(exitButton);
+	/// --- complete exit button
+
+	/// --- adding show upgrade button
+	int showUpgradeButtonY = 300;
+
+	Button *showUpgradeButton = new Button();
+	unsigned int showUpgradeButtonTID = guiTextureManager->loadTexture(PAUSE_MENU_SHOW_UPGRADE_PATH);
+	unsigned int moShowUpgradeButtonTID = guiTextureManager->loadTexture(PAUSE_MENU_SHOW_UPGRADE_MO_PATH);
+	int showUpgradeButtonWidth = 500;
+	int showUpgradeButtonHeight = 50;
+	int showUpgradeButtonPadding = 10;
+	int showUpgradeButtonX = pauseMenuX + 200;
+
+	showUpgradeButton->initButton(showUpgradeButtonTID, moShowUpgradeButtonTID,
+		showUpgradeButtonX, showUpgradeButtonY, 0, 255,
+		showUpgradeButtonWidth, showUpgradeButtonHeight, true, SHOW_UPGRADE_COMMAND);
+
+	inGameMenuScreenGUI->addButton(showUpgradeButton);
+	/// --- complete show upgrade button
+
+
 
 	gui->addScreenGUI(GS_PAUSED, inGameMenuScreenGUI);
 
