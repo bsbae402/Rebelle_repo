@@ -40,7 +40,6 @@ static const int		FPS_INC = 1;
 static const wstring	IDLE(L"IDLE");
 
 
-
 //// -- followings are screen artworks of ingame menu
 static const wstring	INGAME_PAUSE_MENU_PATH = L"data/gui/overlays/ingame_pause_menu.png";
 static const wstring	PAUSE_MENU_RESUME_PATH = L"data/gui/buttons/ingame_button_resume.png";
@@ -49,3 +48,9 @@ static const wstring	PAUSE_MENU_EXIT_PATH = L"data/gui/buttons/ingame_button_exi
 static const wstring	PAUSE_MENU_EXIT_MO_PATH = L"data/gui/buttons/ingame_button_exit_mouse_over.png";
 static const wstring	PAUSE_MENU_SHOW_UPGRADE_PATH = L"data/gui/buttons/show_upgrade_button.png";
 static const wstring	PAUSE_MENU_SHOW_UPGRADE_MO_PATH = L"data/gui/buttons/show_upgrade_button_mouse_over.png";
+
+
+//// -- followings are artworks of upgrade screen
+static const wstring	UPGRADE_SCREEN_LAYOUT_PATH = L"data/gui/overlays/upgrade_screen_layout.png";
+static const wstring	BACK_TO_MENU_PATH = L"data/gui/buttons/back_to_menu_button.png";
+static const wstring	BACK_TO_MENU_MO_PATH = L"data/gui/buttons/back_to_menu_button_mouse_over.png";

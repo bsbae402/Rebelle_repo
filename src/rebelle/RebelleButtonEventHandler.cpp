@@ -46,12 +46,26 @@ void RebelleButtonEventHandler::handleButtonEvents(wstring command)
 		gsm->goToGame();
 	}
 
-	/// use pressed the exit button in the pause menu
+	//// --- following button commands are for pause menu
+	/// user pressed the exit button in the pause menu
 	else if (command.compare(PAUSE_MENU_EXIT_COMMAND) == 0)
 	{
 		game->quitGame();
 	}
+	/// user pressed show_upgrade button
+	else if (command.compare(SHOW_UPGRADE_COMMAND) == 0)
+	{
+		GameStateManager *gsm = game->getGSM();
+		gsm->goToUpgradeScreen();
+	}
 
+	//// --- following button commands are for upgrade screen
+	/// user pressed back_to_menu button
+	else if (command.compare(BACK_TO_PAUSE_MENU_COMMAND) == 0)
+	{
+		GameStateManager *gsm = game->getGSM();
+		gsm->goToIngamePauseMenu();
+	}
 	
 	//// controls clicked
 	if (command.compare(CONTROLS_COMMAND) == 0)

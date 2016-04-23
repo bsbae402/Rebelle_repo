@@ -60,6 +60,7 @@ void initViewport();
 
 ///// declaration of custom functions in this file
 void initInGamePauseMenu();
+void initUpgradeScreen();
 
 /*
 	WinMain - This is the application's starting point. In this method we will construct a Game object, 
@@ -91,6 +92,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 	////-- edit:bongsung --
 	initInGamePauseMenu();
+	initUpgradeScreen();
 	///////-----
 
 	// SPECIFY WHO WILL HANDLE BUTTON EVENTS
@@ -477,4 +479,49 @@ void initInGamePauseMenu()
 	gui->addScreenGUI(GS_PAUSED, inGameMenuScreenGUI);
 
 	//// To Be Editted ...
+}
+
+void initUpgradeScreen() {
+	Game *game = Game::getSingleton();
+	GameGUI *gui = game->getGUI();
+	GameGraphics *graphics = game->getGraphics();
+	TextureManager *guiTextureManager = graphics->getGUITextureManager();
+
+	ScreenGUI *upgradeScreenGUI = new ScreenGUI();
+
+	unsigned int upgradeScreenLayoutTextureID = guiTextureManager->loadTexture(UPGRADE_SCREEN_LAYOUT_PATH);
+	int upgradeScreenMenuX = 100;
+
+	OverlayImage *imageToAdd = new OverlayImage();
+	imageToAdd->alpha = 230;
+	imageToAdd->width = 1024;
+	imageToAdd->height = 768;
+	imageToAdd->x = upgradeScreenMenuX;
+	imageToAdd->y = 0;
+	imageToAdd->z = 0;
+	imageToAdd->imageID = upgradeScreenLayoutTextureID;
+	upgradeScreenGUI->addOverlayImage(imageToAdd);
+
+	//// let's start adding buttons
+	int allButtonsPadding = 10;
+
+	/// --- adding back_to_pause_menu button
+	Button *backToPauseMenuButton = new Button();
+	unsigned int backToPauseMenuButtonTID = guiTextureManager->loadTexture(BACK_TO_MENU_PATH);
+	unsigned int moBackToPauseMenuButtonTID = guiTextureManager->loadTexture(BACK_TO_MENU_MO_PATH);
+	int backTPMButtonWidth = 300;
+	int backTPMButtonHeight = 60;
+	int backTPMButtonX = upgradeScreenMenuX + 50;
+	int backTPMButtonY = 700;
+
+	backToPauseMenuButton->initButton(backToPauseMenuButtonTID, moBackToPauseMenuButtonTID,
+		backTPMButtonX, backTPMButtonY, 0, 255,
+		backTPMButtonWidth, backTPMButtonHeight, true, BACK_TO_PAUSE_MENU_COMMAND);
+
+	upgradeScreenGUI->addButton(backToPauseMenuButton);
+	/// --- back_to_pause_menu button complete
+
+	//// game state: GS_UPGRADE_SCREEN
+	//// when game reached GS_UPGRADE_SCREEN state, upgradeScreenGUI should be shown up 
+	gui->addScreenGUI(GS_UPGRADE_SCREEN, upgradeScreenGUI);
 }
