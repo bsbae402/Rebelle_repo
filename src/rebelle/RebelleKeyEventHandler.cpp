@@ -429,6 +429,11 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			}
 		}
 
+		if (input->isKeyDown(I_KEY) && input->isKeyDown(VK_CONTROL))
+		{
+			player->toggleinvincible();
+		}
+
 		//viewport->toggleDebugView();
 		//game->getGraphics()->toggleDebugTextShouldBeRendered();
 		if (game->getGSM()->getSafety() != NULL)

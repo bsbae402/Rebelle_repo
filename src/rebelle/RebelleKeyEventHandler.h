@@ -32,11 +32,13 @@ const unsigned int U_KEY = (unsigned int)'U';
 const unsigned int V_KEY = (unsigned int)'V';
 const unsigned int G_KEY = (unsigned int)'G';
 const unsigned int H_KEY = (unsigned int)'H';
+const unsigned int I_KEY = (unsigned int)'I';
 //// -- for partial physics activation
 const unsigned int K_KEY = (unsigned int)'K';
 //// -------- 
 //// -- for in-game menu screen
 const unsigned int ESCAPE_KEY = VK_ESCAPE;
+const unsigned int CONTROL_KEY = VK_CONTROL;
 //// --------
 const unsigned int UP_KEY = VK_UP;
 const unsigned int DOWN_KEY = VK_DOWN;
