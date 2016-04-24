@@ -15,6 +15,8 @@
 #include "rebelle\RebelleButtonEventHandler.h"
 #include "mg\game\Game.h"
 #include "mg\gsm\state\GameStateManager.h"
+//// -- Bongsung
+#include "rebelle\RebelleUpgradeScreenGUI.h"
 
 void RebelleButtonEventHandler::handleButtonEvents(wstring command)
 {
@@ -57,14 +59,26 @@ void RebelleButtonEventHandler::handleButtonEvents(wstring command)
 	{
 		GameStateManager *gsm = game->getGSM();
 		gsm->goToUpgradeScreen();
+
+		//// --- I need to put codes that load upgrade icons here
+		GameGUI *gui = game->getGUI();
+		ScreenGUI* baseTypeUSGUI = gui->getScreen(GS_UPGRADE_SCREEN);
+		RebelleUpgradeScreenGUI *upgradeScreenGUI = static_cast<RebelleUpgradeScreenGUI*>(baseTypeUSGUI);
+		upgradeScreenGUI->loadPlayerStats();
 	}
 
 	//// --- following button commands are for upgrade screen
-	/// user pressed back_to_menu button
+	/// user pressed back_to_menu button in the upgrade screen
 	else if (command.compare(BACK_TO_PAUSE_MENU_COMMAND) == 0)
 	{
 		GameStateManager *gsm = game->getGSM();
 		gsm->goToIngamePauseMenu();
+		
+		//// --- I need to unload the upgrade icons here
+		GameGUI *gui = game->getGUI();
+		ScreenGUI* baseTypeUSGUI = gui->getScreen(GS_UPGRADE_SCREEN);
+		RebelleUpgradeScreenGUI *upgradeScreenGUI = static_cast<RebelleUpgradeScreenGUI*>(baseTypeUSGUI);
+		upgradeScreenGUI->unloadPlayerStats();
 	}
 	
 	//// controls clicked

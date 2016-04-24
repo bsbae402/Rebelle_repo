@@ -33,6 +33,9 @@ const wstring	SHOW_UPGRADE_COMMAND = L"Show Upgrade";
 
 //// upgrade screen button commands
 const wstring	BACK_TO_PAUSE_MENU_COMMAND = L"Back To Pause Menu";
+const wstring	SPEED_UPGRADE_COMMAND = L"Speed Upgrade";
+const wstring	ATTACK_UPGRADE_COMMAND = L"Attack Upgrade";
+const wstring	DEFENSE_UPGRADE_COMMAND = L"Defense Upgrade";
 
 class RebelleButtonEventHandler: public ButtonEventHandler
 {

@@ -54,3 +54,14 @@ static const wstring	PAUSE_MENU_SHOW_UPGRADE_MO_PATH = L"data/gui/buttons/show_u
 static const wstring	UPGRADE_SCREEN_LAYOUT_PATH = L"data/gui/overlays/upgrade_screen_layout.png";
 static const wstring	BACK_TO_MENU_PATH = L"data/gui/buttons/back_to_menu_button.png";
 static const wstring	BACK_TO_MENU_MO_PATH = L"data/gui/buttons/back_to_menu_button_mouse_over.png";
+
+static const wstring	UPGRADE_BUTTON_PATH = L"data/gui/buttons/upgrade_button.png";
+static const wstring	UPGRADE_BUTTON_MO_PATH = L"data/gui/buttons/upgrade_button_mouse_over.png";
+
+static const wstring	SPEED_UPGRADE_TITLE_PATH = L"data/gui/overlays/speed_upgrade_title.png";
+static const wstring	ATTACK_UPGRADE_TITLE_PATH = L"data/gui/overlays/attack_upgrade_title.png";
+static const wstring	DEFENSE_UPGRADE_TITLE_PATH = L"data/gui/overlays/defense_upgrade_title.png";
+
+static const wstring	SPEED_ICON_PATH = L"data/gui/overlays/small_butterfly_icon.png";
+static const wstring	ATTACK_ICON_PATH = L"data/gui/overlays/small_sword_icon.png";
+static const wstring	DEFENSE_ICON_PATH = L"data/gui/overlays/small_armor_icon.png";

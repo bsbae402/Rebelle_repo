@@ -29,6 +29,8 @@
 #include "rebelle\RebelleMouseEventHandler.h"
 #include "rebelle\RebelleTextGenerator.h"
 #include "rebelle\RebelleStateMachine.h"
+/// ---- Bongsung
+#include "rebelle\RebelleUpgradeScreenGUI.h"
 
 // GAME OBJECT INCLUDES
 #include "mg\game\Game.h"
@@ -487,22 +489,114 @@ void initUpgradeScreen() {
 	GameGraphics *graphics = game->getGraphics();
 	TextureManager *guiTextureManager = graphics->getGUITextureManager();
 
-	ScreenGUI *upgradeScreenGUI = new ScreenGUI();
+	RebelleUpgradeScreenGUI *upgradeScreenGUI = new RebelleUpgradeScreenGUI();
+	
+	unsigned int upgradeScreenLayoutTID = guiTextureManager->loadTexture(UPGRADE_SCREEN_LAYOUT_PATH);
 
-	unsigned int upgradeScreenLayoutTextureID = guiTextureManager->loadTexture(UPGRADE_SCREEN_LAYOUT_PATH);
-	int upgradeScreenMenuX = 100;
+	unsigned int speedUpgradeTitleTID = guiTextureManager->loadTexture(SPEED_UPGRADE_TITLE_PATH);
+	unsigned int attackUpgradeTitleTID = guiTextureManager->loadTexture(ATTACK_UPGRADE_TITLE_PATH);
+	unsigned int defenseUpgradeTitleTID = guiTextureManager->loadTexture(DEFENSE_UPGRADE_TITLE_PATH);
+	
+	unsigned int upgradeButtonTID = guiTextureManager->loadTexture(UPGRADE_BUTTON_PATH);
+	unsigned int moUpgradeButtonTID = guiTextureManager->loadTexture(UPGRADE_BUTTON_MO_PATH);
+	int upgradeButtonWidth = 40;
+	int upgradeButtonHeight = 40;
 
+	/*
+	void initialize(unsigned int initScreenX, unsigned int initScreenY,
+	unsigned int initStatListX, unsigned int initStatListY,
+	unsigned int initYdistBetweenStats,
+	unsigned int initStatLineHeight,
+	unsigned int initStatTitleWidth,
+	unsigned int initUpgradeButtonWidth);
+	*/
+	upgradeScreenGUI->initialize(100, 0, 200, 200, 30, 40, 250, upgradeButtonWidth);
+
+	/// --- the screen image for upgrade screen
+	///// the order of adding OverlayImage in the ScreenGUI object is important.
+	///// If I add this screen image later than other images, 
+	///// the other images will be rendered below this screen image.
 	OverlayImage *imageToAdd = new OverlayImage();
 	imageToAdd->alpha = 230;
 	imageToAdd->width = 1024;
 	imageToAdd->height = 768;
-	imageToAdd->x = upgradeScreenMenuX;
+	imageToAdd->x = upgradeScreenGUI->getScreenX();
 	imageToAdd->y = 0;
 	imageToAdd->z = 0;
-	imageToAdd->imageID = upgradeScreenLayoutTextureID;
+	imageToAdd->imageID = upgradeScreenLayoutTID;
 	upgradeScreenGUI->addOverlayImage(imageToAdd);
 
-	//// let's start adding buttons
+	/// --- followings are other small images that are drawn upon the screen image
+	// -- 1st component on list: speed
+	/// text
+	OverlayImage *speedUpgradeTitleImage = new OverlayImage();
+	speedUpgradeTitleImage->alpha = 255;
+	speedUpgradeTitleImage->width = upgradeScreenGUI->getStatTitleWidth();
+	speedUpgradeTitleImage->height = upgradeScreenGUI->getStatLineHeight();
+	speedUpgradeTitleImage->x = upgradeScreenGUI->getStatListX();
+	speedUpgradeTitleImage->y = upgradeScreenGUI->getStatListY();
+	speedUpgradeTitleImage->z = 0;
+	speedUpgradeTitleImage->imageID = speedUpgradeTitleTID;
+	upgradeScreenGUI->addOverlayImage(speedUpgradeTitleImage);
+
+	/// upgrade button
+	Button *speedUpButton = new Button();
+	int speedUpButtonX = upgradeScreenGUI->getStatListX() + upgradeScreenGUI->getStatTitleWidth();
+	int speedUpButtonY = upgradeScreenGUI->getStatListY();
+	speedUpButton->initButton(upgradeButtonTID, moUpgradeButtonTID,
+		speedUpButtonX, speedUpButtonY, 0, 255,
+		upgradeButtonWidth, upgradeButtonHeight, true, SPEED_UPGRADE_COMMAND);
+	upgradeScreenGUI->addButton(speedUpButton);
+	// -- speed component complete
+
+	// 2nd component on list: attack
+	int attackStatY = upgradeScreenGUI->getStatListY() 
+		+ upgradeScreenGUI->getStatLineHeight() + upgradeScreenGUI->getYDistBetweenStats();
+
+	OverlayImage *attackUpgradeTitleImage = new OverlayImage();
+	attackUpgradeTitleImage->alpha = 255;
+	attackUpgradeTitleImage->width = upgradeScreenGUI->getStatTitleWidth();
+	attackUpgradeTitleImage->height = upgradeScreenGUI->getStatLineHeight();
+	attackUpgradeTitleImage->x = upgradeScreenGUI->getStatListX();
+	attackUpgradeTitleImage->y = attackStatY;
+	attackUpgradeTitleImage->z = 0;
+	attackUpgradeTitleImage->imageID = attackUpgradeTitleTID;
+	upgradeScreenGUI->addOverlayImage(attackUpgradeTitleImage);
+
+	/// upgrade button
+	Button *attackUpButton = new Button();
+	int attackUpButtonX = speedUpButtonX;
+	int attackUpButtonY = attackStatY;
+	attackUpButton->initButton(upgradeButtonTID, moUpgradeButtonTID,
+		attackUpButtonX, attackUpButtonY, 0, 255,
+		upgradeButtonWidth, upgradeButtonHeight, true, ATTACK_UPGRADE_COMMAND);
+	upgradeScreenGUI->addButton(attackUpButton);
+	// -- attack component complete
+
+	// 3rd component on list: defense
+	int defenseStatY = attackStatY + upgradeScreenGUI->getStatLineHeight() + upgradeScreenGUI->getYDistBetweenStats();
+
+	OverlayImage *defenseUpgradeTitleImage = new OverlayImage();
+	defenseUpgradeTitleImage->alpha = 255;
+	defenseUpgradeTitleImage->width = upgradeScreenGUI->getStatTitleWidth();
+	defenseUpgradeTitleImage->height = upgradeScreenGUI->getStatLineHeight();
+	defenseUpgradeTitleImage->x = upgradeScreenGUI->getStatListX();
+	defenseUpgradeTitleImage->y = defenseStatY;
+	defenseUpgradeTitleImage->z = 0;
+	defenseUpgradeTitleImage->imageID = defenseUpgradeTitleTID;
+	upgradeScreenGUI->addOverlayImage(defenseUpgradeTitleImage);
+
+	/// upgrade button
+	Button *defenseUpButton = new Button();
+	int defenseUpButtonX = attackUpButtonX;
+	int defenseUpButtonY = defenseStatY;
+	defenseUpButton->initButton(upgradeButtonTID, moUpgradeButtonTID,
+		defenseUpButtonX, defenseUpButtonY, 0, 255,
+		upgradeButtonWidth, upgradeButtonHeight, true, DEFENSE_UPGRADE_COMMAND);
+	upgradeScreenGUI->addButton(defenseUpButton);
+	// -- defense component complete
+
+	//// let's start adding control buttons
 	int allButtonsPadding = 10;
 
 	/// --- adding back_to_pause_menu button
@@ -511,7 +605,7 @@ void initUpgradeScreen() {
 	unsigned int moBackToPauseMenuButtonTID = guiTextureManager->loadTexture(BACK_TO_MENU_MO_PATH);
 	int backTPMButtonWidth = 300;
 	int backTPMButtonHeight = 60;
-	int backTPMButtonX = upgradeScreenMenuX + 50;
+	int backTPMButtonX = upgradeScreenGUI->getScreenX() + 50;
 	int backTPMButtonY = 700;
 
 	backToPauseMenuButton->initButton(backToPauseMenuButtonTID, moBackToPauseMenuButtonTID,
