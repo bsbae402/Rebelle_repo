@@ -52,6 +52,8 @@
 #include "mg\platforms\DirectX\DirectXGraphics.h"
 #include "mg\platforms\DirectX\DirectXTextureManager.h"
 
+#include "mg\platforms\DirectX\GameAudio.h"
+
 // FORWARD DECLARATIONS
 void initCursor();
 void initInGameGUI();
@@ -115,6 +117,10 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	RebelleStateMachine *rsm = new RebelleStateMachine();
 	GameStateManager *gsm = rebelleGame->getGSM();
 	gsm->setGameStateMachine(rsm);
+
+	//// here, we are going to set game audios
+	GameAudio *audio = rebelleGame->getAudio();
+	audio->registerShootSoundEffect(SHOOT_SOUND_EFFECT_PATH);
 
 	// START THE GAME LOOP
 	rebelleGame->runGameLoop();

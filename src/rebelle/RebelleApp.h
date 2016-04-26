@@ -65,3 +65,7 @@ static const wstring	DEFENSE_UPGRADE_TITLE_PATH = L"data/gui/overlays/defense_up
 static const wstring	SPEED_ICON_PATH = L"data/gui/overlays/small_butterfly_icon.png";
 static const wstring	ATTACK_ICON_PATH = L"data/gui/overlays/small_sword_icon.png";
 static const wstring	DEFENSE_ICON_PATH = L"data/gui/overlays/small_armor_icon.png";
+
+
+/// -- sound effect paths
+static const LPWSTR		SHOOT_SOUND_EFFECT_PATH = L"data/sounds/shoot.wav";
