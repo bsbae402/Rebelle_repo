@@ -14,32 +14,45 @@
 
 #pragma once
 #include "mg\text\TextGenerator.h"
+#include "mg\text\GameText.h"
+
+static const int IDX_TEXT_NOT_REGISTERED = -1;
 
 class RebelleTextGenerator : public TextGenerator
 {
 private:
+	bool toolbarTextRegistrationDone = false;
+
 	// THIS IS THE TEXT THIS OBJECT WILL UPDATE EACH FRAME
 	wstring scorelabel;
+	RenderText *scorelabelRT;
+
 	wstring moneylabel;
+	RenderText *moneylabelRT;
+
 	wstring healthlabel;
+	RenderText *healthlabelRT;
+
 	wstring heallabel;
+	RenderText *heallabelRT;
+
 	wstring safetywarning;
+	RenderText *safetywarningRT;
+
 	wstring safetykey;
+	RenderText *safetykeyRT;
 
 	wstring additional;
+	RenderText *additionalRT;
 
 	// THESE ARE HELPER METHODS FOR GENERATING THE TEXT, CALLED
 	// EACH FRAME BY updateText
-
-	
-
 	void printTime();
 	void printSafety();
 	void printHealth();
 	void printScore();
 	void printMoney();
 	void printHeal();
-	
 
 public:
 	// NOTHING TO INITIALIZE OR DESTROY

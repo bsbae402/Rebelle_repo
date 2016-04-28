@@ -170,13 +170,63 @@ void RebelleTextGenerator::update()
 	Game *game = Game::getSingleton();
 	if (game->getGSM()->isGameInProgress())
 	{
+		GameText *text = game->getText();
 
+		if (toolbarTextRegistrationDone == false)
+		{
+			scorelabel = L"scorelabel";
+			moneylabel = L"moneylabel";
+			healthlabel = L"healthlabel";
+			heallabel = L"heallabel";
+			safetywarning = L"safetywarning";
+			safetykey = L"safetykey";
+			additional = L"additional";
 
+			text->addRenderText(&scorelabel, LEFT_TEXT_X, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+			text->addRenderText(&moneylabel, 200, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+			text->addRenderText(&healthlabel, LEFT_TEXT_X, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+			text->addRenderText(&heallabel, 300, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+
+			text->addRenderText(&safetywarning, RIGHT_TEXT_X, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+			text->addRenderText(&safetykey, RIGHT_TEXT_X, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+
+			text->addRenderText(&additional, 700, 5, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+
+			for (int i = 0; i < text->getRenderTextSize(); i++)
+			{
+				RenderText* rt = text->getRenderTextAtIndex(i);
+				wstring* wStrPtrText = rt->getText();
+				wstring wStrText = *wStrPtrText;
+
+				if (scorelabel.compare(wStrText) == 0)
+					scorelabelRT = rt;
+
+				else if (moneylabel.compare(wStrText) == 0)
+					moneylabelRT = rt;
+					
+				else if (healthlabel.compare(wStrText) == 0)
+					healthlabelRT = rt;
+
+				else if (heallabel.compare(wStrText) == 0)
+					heallabelRT = rt;
+
+				else if (safetywarning.compare(wStrText) == 0)
+					safetywarningRT = rt;
+
+				else if (safetykey.compare(wStrText) == 0)
+					safetykeyRT = rt;
+
+				else if (additional.compare(wStrText) == 0)
+					additionalRT = rt;
+			}
+			toolbarTextRegistrationDone = true;
+			/// now this if block should not be enterred anymore
+		}
 		//appendMouseCoords();
 		//appendClock();
 		//appendBotCount();
 		//appendBotRecycler();
-		printTime();
+		printTime();		//// <- set safety key update remaining time in [safetywarning] wstring
 		printSafety();
 		printHealth();
 		printMoney();
@@ -185,25 +235,34 @@ void RebelleTextGenerator::update()
 
 		additional.clear();
 
-		Game *game = Game::getSingleton();
-		GameText *text = game->getText();
-
 		wstringstream wss2;
 		wss2 << addedtext;
 
 		//wss << L"fff\n";
 		additional.append(wss2.str());
+		
+		int vectorIndex;
 
-		text->addRenderText(&scorelabel, LEFT_TEXT_X, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
-		text->addRenderText(&moneylabel, 200, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
-		text->addRenderText(&healthlabel, LEFT_TEXT_X, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
-		text->addRenderText(&heallabel, 300, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+		vectorIndex = text->getVectorIndexByRenderText(scorelabelRT);
+		text->updateRenderText(&scorelabel, vectorIndex);
+		
+		vectorIndex = text->getVectorIndexByRenderText(moneylabelRT);
+		text->updateRenderText(&moneylabel, vectorIndex);
 
+		vectorIndex = text->getVectorIndexByRenderText(healthlabelRT);
+		text->updateRenderText(&healthlabel, vectorIndex);
 
-		text->addRenderText(&safetywarning, RIGHT_TEXT_X, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
-		text->addRenderText(&safetykey, RIGHT_TEXT_X, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+		vectorIndex = text->getVectorIndexByRenderText(heallabelRT);
+		text->updateRenderText(&heallabel, vectorIndex);
 
-		text->addRenderText(&additional, 700, 5, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+		vectorIndex = text->getVectorIndexByRenderText(safetywarningRT);
+		text->updateRenderText(&safetywarning, vectorIndex);
+
+		vectorIndex = text->getVectorIndexByRenderText(safetykeyRT);
+		text->updateRenderText(&safetykey, vectorIndex);
+
+		vectorIndex = text->getVectorIndexByRenderText(additionalRT);
+		text->updateRenderText(&additional, vectorIndex);
 	}
 }
 
