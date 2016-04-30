@@ -69,3 +69,7 @@ static const wstring	DEFENSE_ICON_PATH = L"data/gui/overlays/small_armor_icon.pn
 
 /// -- sound effect paths
 static const LPWSTR		SHOOT_SOUND_EFFECT_PATH = L"data/sounds/shoot.wav";
+static const LPWSTR		MONEY_SOUND_EFFECT_PATH = L"data/sounds/money.wav";
+static const LPWSTR		DAMAGE_SOUND_EFFECT_PATH = L"data/sounds/damage.wav";
+static const LPWSTR		HEAL_SOUND_EFFECT_PATH = L"data/sounds/heal.wav";
+static const LPWSTR		PUNCH_SOUND_EFFECT_PATH = L"data/sounds/punch.wav";
