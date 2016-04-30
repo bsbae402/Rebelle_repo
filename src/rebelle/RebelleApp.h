@@ -73,3 +73,8 @@ static const LPWSTR		MONEY_SOUND_EFFECT_PATH = L"data/sounds/money.wav";
 static const LPWSTR		DAMAGE_SOUND_EFFECT_PATH = L"data/sounds/damage.wav";
 static const LPWSTR		HEAL_SOUND_EFFECT_PATH = L"data/sounds/heal.wav";
 static const LPWSTR		PUNCH_SOUND_EFFECT_PATH = L"data/sounds/punch.wav";
+
+/// -- music paths
+static const LPWSTR		MAIN_THEME_MUSIC_PATH = L"data/music/RebelleGameMusic.wav";
+static const LPWSTR		COMPLETE_MUSIC_PATH = L"data/music/RebelleComplete.wav";
+static const LPWSTR		GAMEOVER_MUSIC_PATH = L"data/music/RebelleGameOver.wav";
