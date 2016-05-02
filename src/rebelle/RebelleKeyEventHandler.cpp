@@ -76,7 +76,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			player->setFacing(4);
 
 		
-		if (input->isKeyDown(VK_UP))
+		if (input->isKeyDown(VK_UP) && !moveviewport)
 		{
 			wstring wStrState;
 
@@ -116,7 +116,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 
 		}
 			// down key
-		if (input->isKeyDown(VK_DOWN))
+		if (input->isKeyDown(VK_DOWN) && !moveviewport)
 		{
 			wstring wStrState;
 
@@ -158,7 +158,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 				
 		}
 		// left key
-		if (input->isKeyDown(VK_LEFT))
+		if (input->isKeyDown(VK_LEFT) && !moveviewport)
 		{
 			wstring wStrState;
 
@@ -197,7 +197,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			//playerPP->setX(playerPP->getX() - playerPP->getVelocityX());
 		}
 		// right key
-		if (input->isKeyDown(VK_RIGHT))
+		if (input->isKeyDown(VK_RIGHT) && !moveviewport)
 		{
 			wstring wStrState;
 
@@ -264,7 +264,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			//// decided depending on the player sprite's location
 			
 			
-			/*if (input->isKeyDown(UP_KEY))
+			if (input->isKeyDown(UP_KEY))
 			{
 				viewportVy -= MAX_VIEWPORT_AXIS_VELOCITY;
 				viewportMoved = true;
@@ -286,64 +286,66 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			}
 			if (viewportMoved)
 				viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
-			*/
+			
 
 			//// ----the problem of this implementation is that the viewport only moves 
 			//// when there is keyboard input. => solution is that makes a key input storage in the player sprite class.
 			
-			int playerSpriteWidth = player->getSpriteType()->getTextureWidth();
-			int playerSpriteHeight = player->getSpriteType()->getTextureHeight();
-			int playerCenterX = playerPP->getX() + playerSpriteWidth / 2;
-			int playerCenterY = playerPP->getY() + playerSpriteHeight / 2;
-
-			int futureViewportLeft = playerCenterX - viewport->getViewportWidth() / 2;
-			int futureViewportTop = playerCenterY - viewport->getViewportHeight() / 2;
 			
-			int futureViewportRight = playerCenterX + viewport->getViewportWidth() / 2;
-			int futureViewportBottom = playerCenterY + viewport->getViewportHeight() / 2;
-
-			World *world = game->getGSM()->getWorld();
-
-			//// viewport x axis reached world edge
-			if (futureViewportLeft <= 0 || futureViewportRight >= world->getWorldWidth())
-			{
-				//// no viewport move on x axis
-			}
-			//// if x axis is okay to move
-			else
-			{
-				//// move viewport x,y = future x,y to the center location 
-				viewport->setViewportX(futureViewportLeft);
-			}
-
-			//// viewport y axis reached world edge
-			if (futureViewportTop <= 0 || futureViewportBottom >= world->getWorldHeight())
-			{
-				//// no viewport move on x axis
-			}
-			//// if y axis is okay to move
-			else
-			{
-				//// move viewport x,y = future x,y to the center location 
-				viewport->setViewportY(futureViewportTop);
-			}
 		}
 
+		int playerSpriteWidth = player->getSpriteType()->getTextureWidth();
+		int playerSpriteHeight = player->getSpriteType()->getTextureHeight();
+		int playerCenterX = playerPP->getX() + playerSpriteWidth / 2;
+		int playerCenterY = playerPP->getY() + playerSpriteHeight / 2;
+
+		int futureViewportLeft = playerCenterX - viewport->getViewportWidth() / 2;
+		int futureViewportTop = playerCenterY - viewport->getViewportHeight() / 2;
+
+		int futureViewportRight = playerCenterX + viewport->getViewportWidth() / 2;
+		int futureViewportBottom = playerCenterY + viewport->getViewportHeight() / 2;
+
+		World *world = game->getGSM()->getWorld();
+
+		//// viewport x axis reached world edge
+		if (futureViewportLeft <= 0 || futureViewportRight >= world->getWorldWidth())
+		{
+			//// no viewport move on x axis
+		}
+		//// if x axis is okay to move
+		else
+		{
+			//// move viewport x,y = future x,y to the center location 
+			viewport->setViewportX(futureViewportLeft);
+		}
+
+		//// viewport y axis reached world edge
+		if (futureViewportTop <= 0 || futureViewportBottom >= world->getWorldHeight())
+		{
+			//// no viewport move on x axis
+		}
+		//// if y axis is okay to move
+		else
+		{
+			//// move viewport x,y = future x,y to the center location 
+			viewport->setViewportY(futureViewportTop);
+		}
+		
 		if (input->isKeyDownForFirstTime(K_KEY))
 		{
-			gsm->getPhysics()->toggleBotPhysics();
+			//gsm->getPhysics()->toggleBotPhysics();
 		}
 
 		if (input->isKeyDownForFirstTime(L_KEY))
 		{
-			gsm->getPhysics()->togglePlayerPhysics();
+			//gsm->getPhysics()->togglePlayerPhysics();
 		}
 
 		if (input->isKeyDownForFirstTime(U_KEY))
 		{
 			moveviewport = !moveviewport;
 		}
-		if (input->isKeyDownForFirstTime(V_KEY))
+		if (input->isKeyDownForFirstTime(V_KEY) && !moveviewport)
 		{
 			//Strafe
 			//player->setCurrentState(player->getCurrentState());
@@ -352,7 +354,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 		}
 
 
-		if (input->isKeyDown(F_KEY))
+		if (input->isKeyDown(F_KEY) && !moveviewport)
 		{
 			//Shoot
 			if (player->getFacing() == 1 && player->getCurrentState().compare(L"SHOOT_FRONT") != 0)
@@ -387,7 +389,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 				game->getGSM()->SafetyOff();
 			}*/
 		}
-		if (input->isKeyDown(G_KEY))
+		if (input->isKeyDown(G_KEY) && !moveviewport)
 		{
 			if (player->getFacing() == 1 && player->getCurrentState().compare(L"PUNCH_FRONT") != 0 && player->getCanheal() == false)
 			{
@@ -429,7 +431,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			}
 		}
 
-		if (input->isKeyDown(I_KEY) && input->isKeyDown(VK_CONTROL))
+		if (input->isKeyDownForFirstTime(I_KEY) && input->isKeyDown(VK_CONTROL))
 		{
 			player->toggleinvincible();
 		}
