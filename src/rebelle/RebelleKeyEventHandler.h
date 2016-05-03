@@ -49,12 +49,14 @@ const unsigned int SPACE_KEY = VK_SPACE;
 // THIS IS JUST FOR SHOWING HOW THE CURSOR CAN BE CHANGED
 const unsigned int C_KEY = (unsigned int)'C';
 
+
+
 class RebelleKeyEventHandler : public KeyEventHandler
 {
-
+	bool alterview = false;
 public:
 	RebelleKeyEventHandler()		{}
 	~RebelleKeyEventHandler()		{}
 	void handleKeyEvents();
-	bool moveviewport = false;
+	
 };

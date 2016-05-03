@@ -120,11 +120,12 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 	//// here, we are going to set game audios
 	GameAudio *audio = rebelleGame->getAudio();
-	audio->registerSoundEffect(ENUM_SOUND_EFFECT_SHOOT, SHOOT_SOUND_EFFECT_PATH);
+/*	audio->registerSoundEffect(ENUM_SOUND_EFFECT_SHOOT, SHOOT_SOUND_EFFECT_PATH);
 	audio->registerSoundEffect(ENUM_SOUND_EFFECT_MONEY, MONEY_SOUND_EFFECT_PATH);
 	audio->registerSoundEffect(ENUM_SOUND_EFFECT_PUNCH, PUNCH_SOUND_EFFECT_PATH);
 	audio->registerSoundEffect(ENUM_SOUND_EFFECT_HEAL, HEAL_SOUND_EFFECT_PATH);
 	audio->registerMusic(ENUM_MUSIC_MAIN_THEME, MAIN_THEME_MUSIC_PATH);
+	*/
 	//// ------ MORE AUDIO AND MUSIC NEEDED
 
 	// START THE GAME LOOP
