@@ -507,6 +507,11 @@ void initUpgradeScreen() {
 	unsigned int speedUpgradeTitleTID = guiTextureManager->loadTexture(SPEED_UPGRADE_TITLE_PATH);
 	unsigned int attackUpgradeTitleTID = guiTextureManager->loadTexture(ATTACK_UPGRADE_TITLE_PATH);
 	unsigned int defenseUpgradeTitleTID = guiTextureManager->loadTexture(DEFENSE_UPGRADE_TITLE_PATH);
+	unsigned int upgradeUpgradeTitleTID = guiTextureManager->loadTexture(UPGRADE_UPGRADE_TITLE_PATH);
+	unsigned int priceUpgradeTitleTID = guiTextureManager->loadTexture(PRICE_UPGRADE_TITLE_PATH);
+	unsigned int purchaseUpgradeTitleTID = guiTextureManager->loadTexture(PURCHASE_UPGRADE_TITLE_PATH);
+	unsigned int moneyUpgradeTitleTID = guiTextureManager->loadTexture(MONEY_UPGRADE_TITLE_PATH);
+
 	
 	unsigned int upgradeButtonTID = guiTextureManager->loadTexture(UPGRADE_BUTTON_PATH);
 	unsigned int moUpgradeButtonTID = guiTextureManager->loadTexture(UPGRADE_BUTTON_MO_PATH);
@@ -537,23 +542,75 @@ void initUpgradeScreen() {
 	imageToAdd->imageID = upgradeScreenLayoutTID;
 	upgradeScreenGUI->addOverlayImage(imageToAdd);
 
+
+
+	//first add the title for the upgrade table
+
+	//upgrade
+	OverlayImage *upgradeUpgradeTitleImage = new OverlayImage();
+	upgradeUpgradeTitleImage->alpha = 255;
+	upgradeUpgradeTitleImage->width = upgradeScreenGUI->getStatTitleWidth();
+	upgradeUpgradeTitleImage->height = upgradeScreenGUI->getStatLineHeight();
+	upgradeUpgradeTitleImage->x = upgradeScreenGUI->getStatListX();
+	upgradeUpgradeTitleImage->y = upgradeScreenGUI->getStatListY();
+	upgradeUpgradeTitleImage->z = 0;
+	upgradeUpgradeTitleImage->imageID = upgradeUpgradeTitleTID;
+	upgradeScreenGUI->addOverlayImage(upgradeUpgradeTitleImage);
+	
+	//price
+	OverlayImage *priceUpgradeTitleImage = new OverlayImage();
+	priceUpgradeTitleImage->alpha = 255;
+	priceUpgradeTitleImage->width = upgradeScreenGUI->getStatTitleWidth();
+	priceUpgradeTitleImage->height = upgradeScreenGUI->getStatLineHeight();
+	priceUpgradeTitleImage->x = upgradeScreenGUI->getStatListX() + upgradeScreenGUI->getStatTitleWidth();
+	priceUpgradeTitleImage->y = upgradeScreenGUI->getStatListY();
+	priceUpgradeTitleImage->z = 0;
+	priceUpgradeTitleImage->imageID = priceUpgradeTitleTID;
+	upgradeScreenGUI->addOverlayImage(priceUpgradeTitleImage);
+
+	//purchase
+	OverlayImage *purchaseUpgradeTitleImage = new OverlayImage();
+	purchaseUpgradeTitleImage->alpha = 255;
+	purchaseUpgradeTitleImage->width = upgradeScreenGUI->getStatTitleWidth();
+	purchaseUpgradeTitleImage->height = upgradeScreenGUI->getStatLineHeight();
+	purchaseUpgradeTitleImage->x = upgradeScreenGUI->getStatListX() + (2*upgradeScreenGUI->getStatTitleWidth());
+	purchaseUpgradeTitleImage->y = upgradeScreenGUI->getStatListY();
+	purchaseUpgradeTitleImage->z = 0;
+	purchaseUpgradeTitleImage->imageID = purchaseUpgradeTitleTID;
+	upgradeScreenGUI->addOverlayImage(purchaseUpgradeTitleImage);
+
+
 	/// --- followings are other small images that are drawn upon the screen image
 	// -- 1st component on list: speed
 	/// text
+	int speedStatY = upgradeScreenGUI->getStatListY()
+		+ upgradeScreenGUI->getStatLineHeight() + upgradeScreenGUI->getYDistBetweenStats();
+
 	OverlayImage *speedUpgradeTitleImage = new OverlayImage();
 	speedUpgradeTitleImage->alpha = 255;
 	speedUpgradeTitleImage->width = upgradeScreenGUI->getStatTitleWidth();
 	speedUpgradeTitleImage->height = upgradeScreenGUI->getStatLineHeight();
 	speedUpgradeTitleImage->x = upgradeScreenGUI->getStatListX();
-	speedUpgradeTitleImage->y = upgradeScreenGUI->getStatListY();
+	speedUpgradeTitleImage->y = speedStatY;
 	speedUpgradeTitleImage->z = 0;
 	speedUpgradeTitleImage->imageID = speedUpgradeTitleTID;
 	upgradeScreenGUI->addOverlayImage(speedUpgradeTitleImage);
 
+	/// text money
+	OverlayImage *moneyUpgradeTitleImage = new OverlayImage();
+	moneyUpgradeTitleImage->alpha = 255;
+	moneyUpgradeTitleImage->width = upgradeScreenGUI->getStatTitleWidth();
+	moneyUpgradeTitleImage->height = upgradeScreenGUI->getStatLineHeight();
+	moneyUpgradeTitleImage->x = upgradeScreenGUI->getStatListX() + upgradeScreenGUI->getStatTitleWidth();
+	moneyUpgradeTitleImage->y = speedStatY;
+	moneyUpgradeTitleImage->z = 0;
+	moneyUpgradeTitleImage->imageID = moneyUpgradeTitleTID;
+	upgradeScreenGUI->addOverlayImage(moneyUpgradeTitleImage);
+
 	/// upgrade button
 	Button *speedUpButton = new Button();
-	int speedUpButtonX = upgradeScreenGUI->getStatListX() + upgradeScreenGUI->getStatTitleWidth();
-	int speedUpButtonY = upgradeScreenGUI->getStatListY();
+	int speedUpButtonX = upgradeScreenGUI->getStatListX() + (2*upgradeScreenGUI->getStatTitleWidth());
+	int speedUpButtonY = speedStatY;
 	speedUpButton->initButton(upgradeButtonTID, moUpgradeButtonTID,
 		speedUpButtonX, speedUpButtonY, 0, 255,
 		upgradeButtonWidth, upgradeButtonHeight, true, SPEED_UPGRADE_COMMAND);
@@ -561,7 +618,7 @@ void initUpgradeScreen() {
 	// -- speed component complete
 
 	// 2nd component on list: attack
-	int attackStatY = upgradeScreenGUI->getStatListY() 
+	int attackStatY = speedStatY
 		+ upgradeScreenGUI->getStatLineHeight() + upgradeScreenGUI->getYDistBetweenStats();
 
 	OverlayImage *attackUpgradeTitleImage = new OverlayImage();
@@ -573,6 +630,17 @@ void initUpgradeScreen() {
 	attackUpgradeTitleImage->z = 0;
 	attackUpgradeTitleImage->imageID = attackUpgradeTitleTID;
 	upgradeScreenGUI->addOverlayImage(attackUpgradeTitleImage);
+
+	/// text money
+	OverlayImage *moneyUpgradeTitleImage2 = new OverlayImage();
+	moneyUpgradeTitleImage2->alpha = 255;
+	moneyUpgradeTitleImage2->width = upgradeScreenGUI->getStatTitleWidth();
+	moneyUpgradeTitleImage2->height = upgradeScreenGUI->getStatLineHeight();
+	moneyUpgradeTitleImage2->x = upgradeScreenGUI->getStatListX() + upgradeScreenGUI->getStatTitleWidth();
+	moneyUpgradeTitleImage2->y = attackStatY;
+	moneyUpgradeTitleImage2->z = 0;
+	moneyUpgradeTitleImage2->imageID = moneyUpgradeTitleTID;
+	upgradeScreenGUI->addOverlayImage(moneyUpgradeTitleImage2);
 
 	/// upgrade button
 	Button *attackUpButton = new Button();
@@ -596,6 +664,17 @@ void initUpgradeScreen() {
 	defenseUpgradeTitleImage->z = 0;
 	defenseUpgradeTitleImage->imageID = defenseUpgradeTitleTID;
 	upgradeScreenGUI->addOverlayImage(defenseUpgradeTitleImage);
+
+	/// text money
+	OverlayImage *moneyUpgradeTitleImage3 = new OverlayImage();
+	moneyUpgradeTitleImage3->alpha = 255;
+	moneyUpgradeTitleImage3->width = upgradeScreenGUI->getStatTitleWidth();
+	moneyUpgradeTitleImage3->height = upgradeScreenGUI->getStatLineHeight();
+	moneyUpgradeTitleImage3->x = upgradeScreenGUI->getStatListX() + upgradeScreenGUI->getStatTitleWidth();
+	moneyUpgradeTitleImage3->y = defenseStatY;
+	moneyUpgradeTitleImage3->z = 0;
+	moneyUpgradeTitleImage3->imageID = moneyUpgradeTitleTID;
+	upgradeScreenGUI->addOverlayImage(moneyUpgradeTitleImage3);
 
 	/// upgrade button
 	Button *defenseUpButton = new Button();

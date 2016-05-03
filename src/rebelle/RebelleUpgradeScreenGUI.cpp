@@ -58,8 +58,8 @@ void RebelleUpgradeScreenGUI::loadPlayerStats()
 	unsigned int defenseIconTID = guiTextureManager->loadTexture(DEFENSE_ICON_PATH);
 
 	//// - first speed icon will be rendered at 20px right to upgrade button
-	int speedIconY = statListY;
-	int nextSpeedIconX = statListX + statTitleWidth + upgradeButtonWidth + 20;
+	int speedIconY = statListY + statLineHeight + ydistBetweenStats;
+	int nextSpeedIconX = statListX + statTitleWidth + statTitleWidth + upgradeButtonWidth + 20;
 	for (int i = 0; i < speed; i++)
 	{
 		OverlayImage *speedIcon = new OverlayImage();
@@ -77,7 +77,7 @@ void RebelleUpgradeScreenGUI::loadPlayerStats()
 
 	//// attack icons should be next to Attack stat title and the button.
 	int attackIconY = speedIconY + statLineHeight + ydistBetweenStats;
-	int nextAttackIconX = statListX + statTitleWidth + upgradeButtonWidth + 20;		
+	int nextAttackIconX = statListX + statTitleWidth + statTitleWidth + upgradeButtonWidth + 20;
 	for (int i = 0; i < attack; i++)
 	{
 		OverlayImage *attackIcon = new OverlayImage();
@@ -95,7 +95,7 @@ void RebelleUpgradeScreenGUI::loadPlayerStats()
 
 	//// defense icons
 	int defenseIconY = attackIconY + statLineHeight + ydistBetweenStats;
-	int nextDefenseIconX = statListX + statTitleWidth + upgradeButtonWidth + 20;
+	int nextDefenseIconX = statListX + statTitleWidth + statTitleWidth + upgradeButtonWidth + 20;
 	for (int i = 0; i < attack; i++)
 	{
 		OverlayImage *defenseIcon = new OverlayImage();

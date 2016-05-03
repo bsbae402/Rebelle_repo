@@ -61,6 +61,10 @@ static const wstring	UPGRADE_BUTTON_MO_PATH = L"data/gui/buttons/upgrade_button_
 static const wstring	SPEED_UPGRADE_TITLE_PATH = L"data/gui/overlays/speed_upgrade_title.png";
 static const wstring	ATTACK_UPGRADE_TITLE_PATH = L"data/gui/overlays/attack_upgrade_title.png";
 static const wstring	DEFENSE_UPGRADE_TITLE_PATH = L"data/gui/overlays/defense_upgrade_title.png";
+static const wstring	UPGRADE_UPGRADE_TITLE_PATH = L"data/gui/overlays/upgrade_upgrade_title.png";
+static const wstring	PRICE_UPGRADE_TITLE_PATH = L"data/gui/overlays/price_upgrade_title.png";
+static const wstring	PURCHASE_UPGRADE_TITLE_PATH = L"data/gui/overlays/purchase_upgrade_title.png";
+static const wstring	MONEY_UPGRADE_TITLE_PATH = L"data/gui/overlays/200_upgrade_title.png";
 
 static const wstring	SPEED_ICON_PATH = L"data/gui/overlays/small_butterfly_icon.png";
 static const wstring	ATTACK_ICON_PATH = L"data/gui/overlays/small_sword_icon.png";
