@@ -39,6 +39,7 @@ static const wstring	RECYCLABLE_BOTS_TEXT = L"-Recyclable Bots: ";
 wstring addedtext(L"");
 int timetoprint;
 wstring heal(L"");
+//wstring upgradelabels(L"");
 
 
 void RebelleTextGenerator::printTime()
@@ -124,6 +125,31 @@ void RebelleTextGenerator::printHeal()
 
 }
 
+void RebelleTextGenerator::printUpgrades()
+{
+	Game *game = Game::getSingleton();
+
+	wstringstream wss;
+	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
+	upgrades.append(L"Attack:  x ");
+	wss << game->getGSM()->getAttackupgrades();
+	upgrades.append(wss.str());
+	upgrades.append(L"    ");
+
+	upgrades.append(L"Defense:  x ");
+	wstringstream wss2;
+	wss2 << game->getGSM()->getDefenseupgrades();
+	upgrades.append(wss2.str());
+	upgrades.append(L"    ");
+
+	upgrades.append(L"Speed:  x ");
+	wstringstream wss3;
+	wss3 << game->getGSM()->getSpeedupgrades();
+	upgrades.append(wss3.str());
+
+	//upgradelabels.append(wss.str());
+}
+
 /*
 	startUp - Provides an example of how to render text to our screen every frame,
 	allowing for the text to continually change. This method adds a text object
@@ -166,6 +192,7 @@ void RebelleTextGenerator::update()
 	safetywarning.clear();
 	safetykey.clear();
 	heallabel.clear();
+	upgrades.clear();
 
 	Game *game = Game::getSingleton();
 	if (game->getGSM()->isGameInProgress())
@@ -181,6 +208,7 @@ void RebelleTextGenerator::update()
 			safetywarning = L"safetywarning";
 			safetykey = L"safetykey";
 			additional = L"additional";
+			upgrades = L"upgrades";
 
 			text->addRenderText(&scorelabel, LEFT_TEXT_X, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 			text->addRenderText(&moneylabel, 200, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
@@ -191,6 +219,8 @@ void RebelleTextGenerator::update()
 			text->addRenderText(&safetykey, RIGHT_TEXT_X, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 
 			text->addRenderText(&additional, 700, 5, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+			text->addRenderText(&upgrades, 330, 60, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+
 
 			for (int i = 0; i < text->getRenderTextSize(); i++)
 			{
@@ -218,6 +248,9 @@ void RebelleTextGenerator::update()
 
 				else if (additional.compare(wStrText) == 0)
 					additionalRT = rt;
+
+				else if (upgrades.compare(wStrText) == 0)
+					upgradesRT = rt;
 			}
 			toolbarTextRegistrationDone = true;
 			/// now this if block should not be enterred anymore
@@ -232,6 +265,7 @@ void RebelleTextGenerator::update()
 		printMoney();
 		printScore();
 		printHeal();
+		printUpgrades();
 
 		additional.clear();
 
@@ -263,6 +297,9 @@ void RebelleTextGenerator::update()
 
 		vectorIndex = text->getVectorIndexByRenderText(additionalRT);
 		text->updateRenderText(&additional, vectorIndex);
+
+		vectorIndex = text->getVectorIndexByRenderText(upgradesRT);
+		text->updateRenderText(&upgrades, vectorIndex);
 	}
 }
 

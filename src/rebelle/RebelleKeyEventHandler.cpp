@@ -481,6 +481,18 @@ void RebelleKeyEventHandler::handleKeyEvents()
 		gsm->goToIngamePauseMenu();
 	else if (gsm->isGameInPauseMenu() && input->isKeyDownForFirstTime(ESCAPE_KEY))
 		gsm->goToGame();
+	else if (gsm->isGameInProgress() && input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(W_KEY))
+		gsm->addUpgrade(L"ATTACK");
+	else if (gsm->isGameInProgress() && input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(A_KEY))
+		gsm->addUpgrade(L"DEFENSE");
+	else if (gsm->isGameInProgress() && input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(S_KEY))
+		gsm->addUpgrade(L"SPEED");
+	else if (gsm->isGameInProgress() && input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(D_KEY))
+		gsm->useUpgrade(L"ATTACK");
+	else if (gsm->isGameInProgress() && input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(P_KEY))
+		gsm->useUpgrade(L"DEFENSE");
+	else if (gsm->isGameInProgress() && input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(T_KEY))
+		gsm->useUpgrade(L"SPEED");
 
 	// LET'S MESS WITH THE TARGET FRAME RATE IF THE USER PRESSES THE HOME OR END KEYS
 	GameClock *clock = game->getClock();

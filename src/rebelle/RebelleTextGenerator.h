@@ -45,6 +45,9 @@ private:
 	wstring additional;
 	RenderText *additionalRT;
 
+	wstring upgrades;
+	RenderText *upgradesRT;
+
 	// THESE ARE HELPER METHODS FOR GENERATING THE TEXT, CALLED
 	// EACH FRAME BY updateText
 	void printTime();
@@ -53,6 +56,7 @@ private:
 	void printScore();
 	void printMoney();
 	void printHeal();
+	void printUpgrades();
 
 public:
 	// NOTHING TO INITIALIZE OR DESTROY
