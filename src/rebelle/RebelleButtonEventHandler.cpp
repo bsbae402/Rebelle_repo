@@ -80,9 +80,22 @@ void RebelleButtonEventHandler::handleButtonEvents(wstring command)
 		RebelleUpgradeScreenGUI *upgradeScreenGUI = static_cast<RebelleUpgradeScreenGUI*>(baseTypeUSGUI);
 		upgradeScreenGUI->unloadPlayerStats();
 	}
+
+	//// GO_TO_NEXT_LEVEL_COMMAND will be triggered when player
+	//// click the resume button on the level complete screen
+	else if (command.compare(GO_TO_NEXT_LEVEL_COMMAND) == 0)
+	{
+		GameStateManager *gsm = game->getGSM();
+		gsm->unloadCurrentLevel();
+
+		GameGraphics *graphics = game->getGraphics();
+		graphics->clearWorldTextures();
+
+		gsm->goToLoadLevel();
+	}
 	
 	//// controls clicked
-	if (command.compare(CONTROLS_COMMAND) == 0)
+	else if (command.compare(CONTROLS_COMMAND) == 0)
 	{
 		//// TO BE added
 	}

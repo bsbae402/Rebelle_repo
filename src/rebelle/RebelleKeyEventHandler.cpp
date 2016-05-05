@@ -53,8 +53,6 @@ void RebelleKeyEventHandler::handleKeyEvents()
 	Viewport *viewport = game->getGUI()->getViewport();
 	TextGenerator *generator = game->getText()->getTextGenerator();
 
-	
-	
 	// IF THE GAME IS IN PROGRESS
 	if (gsm->isGameInProgress())
 	{
@@ -485,4 +483,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 	// THIS SLOWS DOWN OUR GAME LOOP, BUT WILL NOT GO BELOW 5 FRAMES PER SECOND
 	else if (input->isKeyDown(VK_END) && (fps > MIN_FPS))
 		clock->setTargetFPS(fps - FPS_INC);
+
+	if (input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(B_KEY))
+		gsm->goToLevelComplete();
 }

@@ -70,6 +70,10 @@ static const wstring	SPEED_ICON_PATH = L"data/gui/overlays/small_butterfly_icon.
 static const wstring	ATTACK_ICON_PATH = L"data/gui/overlays/small_sword_icon.png";
 static const wstring	DEFENSE_ICON_PATH = L"data/gui/overlays/small_armor_icon.png";
 
+//// --- just for level-complete screen
+static const wstring	LEVEL_COMPLETE_SCREEN_PATH = L"data/gui/overlays/level_complete_screen.png";
+static const wstring	LEVEL_COMPLETE_BUTTON_RESUME_PATH = L"data/gui/buttons/level_complete_button_resume.png";
+static const wstring	LEVEL_COMPLETE_BUTTON_RESUME_MO_PATH = L"data/gui/buttons/level_complete_button_resume_mouse_over.png";
 
 /// -- sound effect paths
 static const LPWSTR		SHOOT_SOUND_EFFECT_PATH = L"data/sounds/shoot.wav";
@@ -80,5 +84,5 @@ static const LPWSTR		PUNCH_SOUND_EFFECT_PATH = L"data/sounds/punch.wav";
 
 /// -- music paths
 static const LPWSTR		MAIN_THEME_MUSIC_PATH = L"data/music/RebelleGameMusic.wav";
-static const LPWSTR		COMPLETE_MUSIC_PATH = L"data/music/RebelleComplete.wav";
+static const LPWSTR		LEVEL_COMPLETE_MUSIC_PATH = L"data/music/RebelleComplete.wav";
 static const LPWSTR		GAMEOVER_MUSIC_PATH = L"data/music/RebelleGameOver.wav";

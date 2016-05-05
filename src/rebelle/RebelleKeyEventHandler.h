@@ -49,6 +49,10 @@ const unsigned int SPACE_KEY = VK_SPACE;
 // THIS IS JUST FOR SHOWING HOW THE CURSOR CAN BE CHANGED
 const unsigned int C_KEY = (unsigned int)'C';
 
+//// Note: Bongsung 
+//// please delete this instant-level-end key when you release the game
+const unsigned int B_KEY = (unsigned int)'B';
+
 class RebelleKeyEventHandler : public KeyEventHandler
 {
 
