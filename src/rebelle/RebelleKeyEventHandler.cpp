@@ -34,10 +34,10 @@
 int facing = 0;
 
 /*
-	handleKeyEvent - this method handles all keyboard interactions. Note that every frame this method
-	gets called and it can respond to key interactions in any custom way. Ask the GameInput class for
-	key states since the last frame, which can allow us to respond to key presses, including when keys
-	are held down for multiple frames.
+handleKeyEvent - this method handles all keyboard interactions. Note that every frame this method
+gets called and it can respond to key interactions in any custom way. Ask the GameInput class for
+key states since the last frame, which can allow us to respond to key presses, including when keys
+are held down for multiple frames.
 */
 void RebelleKeyEventHandler::handleKeyEvents()
 {
@@ -53,19 +53,21 @@ void RebelleKeyEventHandler::handleKeyEvents()
 	Viewport *viewport = game->getGUI()->getViewport();
 	TextGenerator *generator = game->getText()->getTextGenerator();
 
+
+
 	// IF THE GAME IS IN PROGRESS
 	//if (gsm->isGameInProgress() && (gsm->getSpriteManager()->getPlayer()->getCurrentState().compare(L"DEAD") != 0 &&
 	//	gsm->getSpriteManager()->getPlayer()->getCurrentState().compare(L"DYING") != 0))
 	if (gsm->isGameInProgress() && gsm->getPhysics()->getGameOver() == false)
 	{
-		
+
 		//// --- PLAYER MOVEMENTS
 		//// set player sprite's state according to the key input types
 		// up key
 		bool viewportMoved = false;
 		float viewportVx = 0.0f;
 		float viewportVy = 0.0f;
-		
+
 		PhysicalProperties *playerPP = player->getPhysicalProperties();
 
 		if (player->getCurrentState().compare(L"IDLE_FRONT") == 0 || player->getCurrentState().compare(L"WALK_FRONT") == 0)
@@ -77,7 +79,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 		if (player->getCurrentState().compare(L"IDLE_RIGHT") == 0 || player->getCurrentState().compare(L"WALK_RIGHT") == 0)
 			player->setFacing(4);
 
-		
+
 		if (input->isKeyDown(VK_UP) && !gsm->getMoveviewport())
 		{
 			wstring wStrState;
@@ -114,10 +116,10 @@ void RebelleKeyEventHandler::handleKeyEvents()
 				viewportMoved = true;
 			}
 			//playerPP->setY(playerPP->getY() - playerPP->getVelocityY());
-				
+
 
 		}
-			// down key
+		// down key
 		if (input->isKeyDown(VK_DOWN) && !gsm->getMoveviewport())
 		{
 			wstring wStrState;
@@ -151,13 +153,13 @@ void RebelleKeyEventHandler::handleKeyEvents()
 
 			if (playerPP->getY() >= viewport->getViewportY() + viewport->getViewportHeight() / 2 - 50 && playerPP->getY() <= viewport->getViewportY() + viewport->getViewportHeight() / 2 + 5)
 			{
-				
+
 				viewportVy += playerPP->getVelocityY();
 				viewportMoved = true;
 			}
-				
+
 			//playerPP->setY(playerPP->getY() + playerPP->getVelocityY());
-				
+
 		}
 		// left key
 		if (input->isKeyDown(VK_LEFT) && !gsm->getMoveviewport())
@@ -186,7 +188,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 				player->setPreviousState(player->getCurrentState());
 				player->setCurrentState(wStrState);
 			}
-			
+
 			player->setPlayerState(ENUM_PLAYER_MOVING);
 			player->setPlayerDirection(ENUM_PLAYER_DIRECTION_LEFT);
 			player->setPlayerInputStorage(VK_LEFT);
@@ -195,7 +197,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			{
 				viewportVx -= playerPP->getVelocityX();
 				viewportMoved = true;
-				
+
 			}
 			//playerPP->setX(playerPP->getX() - playerPP->getVelocityX());
 		}
@@ -218,7 +220,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			}
 			else
 				wStrState.assign(MG_PLAYER_ANIMATION_STATE_WALK_RIGHT.begin(), MG_PLAYER_ANIMATION_STATE_WALK_RIGHT.end());
-			if (player->getCurrentState().compare(L"PUNCH_RIGHT") != 0 && player->getCurrentState().compare(L"SHOOT_RIGHT") != 0 
+			if (player->getCurrentState().compare(L"PUNCH_RIGHT") != 0 && player->getCurrentState().compare(L"SHOOT_RIGHT") != 0
 				&& player->getCurrentState().compare(L"SHOOT_LEFT") != 0
 				&& player->getCurrentState().compare(L"SHOOT_FRONT") != 0
 				&& player->getCurrentState().compare(L"SHOOT_BACK") != 0)
@@ -234,22 +236,22 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			{
 				viewportVx += playerPP->getVelocityX();
 				viewportMoved = true;
-				
+
 			}
 			//playerPP->setX(playerPP->getX() + playerPP->getVelocityX());
 		}
-			//if (viewportMoved)
-			//	viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
+		//if (viewportMoved)
+		//	viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
 
-		
-		
-			
-				//playerPP->setX(playerPP->getX() + playerPP->getVelocityX());
-			
-			//if (viewportMoved)
-			//	viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
 
-		
+
+
+		//playerPP->setX(playerPP->getX() + playerPP->getVelocityX());
+
+		//if (viewportMoved)
+		//	viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
+
+
 		//// --- end ---
 
 		if (input->isKeyDownForFirstTime(P_KEY))
@@ -260,13 +262,13 @@ void RebelleKeyEventHandler::handleKeyEvents()
 		{
 			gsm->getPhysics()->activateForSingleUpdate();
 		}
-		
+
 		if (gsm->getMoveviewport())
 		{
 			//// I'm changing this code because I want that the viewport location is
 			//// decided depending on the player sprite's location
 			alterview = true;
-			
+
 			if (input->isKeyDown(UP_KEY))
 			{
 				viewportVy -= MAX_VIEWPORT_AXIS_VELOCITY;
@@ -289,12 +291,12 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			}
 			if (viewportMoved)
 				viewport->moveViewport((int)floor(viewportVx + 0.5f), (int)floor(viewportVy + 0.5f), game->getGSM()->getWorld()->getWorldWidth(), game->getGSM()->getWorld()->getWorldHeight());
-			
-			
+
+
 			//// ----the problem of this implementation is that the viewport only moves 
 			//// when there is keyboard input. => solution is that makes a key input storage in the player sprite class.
-			
-			
+
+
 		}
 		else
 		{
@@ -338,15 +340,15 @@ void RebelleKeyEventHandler::handleKeyEvents()
 				viewport->setViewportY(futureViewportTop);
 			}
 		}
-		
+
 		if (input->isKeyDownForFirstTime(K_KEY))
 		{
-			gsm->getPhysics()->toggleBotPhysics();
+			//gsm->getPhysics()->toggleBotPhysics();
 		}
 
 		if (input->isKeyDownForFirstTime(L_KEY))
 		{
-			gsm->getPhysics()->togglePlayerPhysics();
+			//gsm->getPhysics()->togglePlayerPhysics();
 		}
 
 		if (input->isKeyDownForFirstTime(U_KEY))
@@ -358,7 +360,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 			//Strafe
 			//player->setCurrentState(player->getCurrentState());
 			player->togglestrafe();
-			
+
 		}
 
 
@@ -388,13 +390,13 @@ void RebelleKeyEventHandler::handleKeyEvents()
 
 			/*if (input->isKeyDown(game->getGSM()->getIntKey()))
 			{
-				//generator->setdebug(L"sdfsfdssd");
-				game->getGSM()->SafetyOn();
+			//generator->setdebug(L"sdfsfdssd");
+			game->getGSM()->SafetyOn();
 			}
-			else 
+			else
 			{
-				generator->setdebug(L"");
-				game->getGSM()->SafetyOff();
+			generator->setdebug(L"");
+			game->getGSM()->SafetyOff();
 			}*/
 		}
 		if (input->isKeyDown(G_KEY) && !gsm->getMoveviewport())
@@ -422,13 +424,13 @@ void RebelleKeyEventHandler::handleKeyEvents()
 
 			/*if (input->isKeyDown(game->getGSM()->getIntKey()))
 			{
-				generator->setdebug(L"sdfsfdssd");
-				game->getGSM()->SafetyOn();
+			generator->setdebug(L"sdfsfdssd");
+			game->getGSM()->SafetyOn();
 			}
 			else
 			{
-				generator->setdebug(L"");
-				game->getGSM()->SafetyOff();
+			generator->setdebug(L"");
+			game->getGSM()->SafetyOff();
 			}*/
 		}
 		if (input->isKeyDown(H_KEY))
@@ -459,7 +461,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 				game->getGSM()->SafetyOff();
 			}
 		}
-		
+
 	}
 
 	// 0X43 is HEX FOR THE 'C' VIRTUAL KEY
@@ -471,7 +473,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 		unsigned int id = cursor->getActiveCursorID();
 		id++;
 		if (id == cursor->getNumCursorIDs())
-			id = 0;		
+			id = 0;
 		cursor->setActiveCursorID(id);
 	}
 
@@ -479,17 +481,17 @@ void RebelleKeyEventHandler::handleKeyEvents()
 		gsm->goToIngamePauseMenu();
 	else if (gsm->isGameInPauseMenu() && input->isKeyDownForFirstTime(ESCAPE_KEY))
 		gsm->goToGame();
-	else if (gsm->isGameInProgress() && input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(W_KEY))
-		gsm->addUpgrade(L"ATTACK");
+	/*else if (gsm->isGameInProgress() && input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(W_KEY))
+	gsm->addUpgrade(L"ATTACK");
 	else if (gsm->isGameInProgress() && input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(A_KEY))
-		gsm->addUpgrade(L"DEFENSE");
+	gsm->addUpgrade(L"DEFENSE");
 	else if (gsm->isGameInProgress() && input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(S_KEY))
-		gsm->addUpgrade(L"SPEED");
-	else if (gsm->isGameInProgress() && input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(D_KEY))
+	gsm->addUpgrade(L"SPEED");*/
+	else if (gsm->isGameInProgress() && input->isKeyDown(VK_SHIFT) && input->isKeyDownForFirstTime(A_KEY))
 		gsm->useUpgrade(L"ATTACK");
-	else if (gsm->isGameInProgress() && input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(P_KEY))
+	else if (gsm->isGameInProgress() && input->isKeyDown(VK_SHIFT) && input->isKeyDownForFirstTime(D_KEY))
 		gsm->useUpgrade(L"DEFENSE");
-	else if (gsm->isGameInProgress() && input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(T_KEY))
+	else if (gsm->isGameInProgress() && input->isKeyDown(VK_SHIFT) && input->isKeyDownForFirstTime(S_KEY))
 		gsm->useUpgrade(L"SPEED");
 
 	// LET'S MESS WITH THE TARGET FRAME RATE IF THE USER PRESSES THE HOME OR END KEYS
