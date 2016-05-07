@@ -63,6 +63,7 @@ void initLoadingLevel();
 void initViewport();
 
 ///// declaration of custom functions in this file
+void initLevelCompleteScreen();
 void initInGamePauseMenu();
 void initUpgradeScreen();
 
@@ -97,6 +98,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	////-- edit:bongsung --
 	initInGamePauseMenu();
 	initUpgradeScreen();
+	initLevelCompleteScreen();
 	///////-----
 
 	// SPECIFY WHO WILL HANDLE BUTTON EVENTS
@@ -120,12 +122,14 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 	//// here, we are going to set game audios
 	GameAudio *audio = rebelleGame->getAudio();
-/*	audio->registerSoundEffect(ENUM_SOUND_EFFECT_SHOOT, SHOOT_SOUND_EFFECT_PATH);
+	audio->registerSoundEffect(ENUM_SOUND_EFFECT_SHOOT, SHOOT_SOUND_EFFECT_PATH);
 	audio->registerSoundEffect(ENUM_SOUND_EFFECT_MONEY, MONEY_SOUND_EFFECT_PATH);
 	audio->registerSoundEffect(ENUM_SOUND_EFFECT_PUNCH, PUNCH_SOUND_EFFECT_PATH);
 	audio->registerSoundEffect(ENUM_SOUND_EFFECT_HEAL, HEAL_SOUND_EFFECT_PATH);
 	audio->registerMusic(ENUM_MUSIC_MAIN_THEME, MAIN_THEME_MUSIC_PATH);
-	*/
+
+	audio->registerMusic(ENUM_MUSIC_LEVEL_COMPLETE, LEVEL_COMPLETE_MUSIC_PATH);
+
 	//// ------ MORE AUDIO AND MUSIC NEEDED
 
 	// START THE GAME LOOP
@@ -407,6 +411,52 @@ void initViewport()
 	viewport->setViewportHeight(viewportHeight);
 	viewport->setToggleOffsetY(TOGGLE_OFFSET_Y);
 	
+}
+
+void initLevelCompleteScreen()
+{
+	Game *game = Game::getSingleton();
+	GameGUI *gui = game->getGUI();
+	GameGraphics *graphics = game->getGraphics();
+	TextureManager *guiTextureManager = graphics->getGUITextureManager();
+
+	// In-game menu will be shown on another screen. 
+	// The ongoing game will be paused
+	ScreenGUI *levelCompleteScreenGUI = new ScreenGUI();
+
+	unsigned int levelCompleteScreenImageTextureID = guiTextureManager->loadTexture(LEVEL_COMPLETE_SCREEN_PATH);
+	int levelCompleteScreenX = 380;
+	int levelCompleteScreenY = 250;
+
+	OverlayImage *imageToAdd = new OverlayImage();
+	imageToAdd->alpha = 230;
+	imageToAdd->width = 512;
+	imageToAdd->height = 192;
+	imageToAdd->x = levelCompleteScreenX;
+	imageToAdd->y = levelCompleteScreenY;
+	imageToAdd->z = 0;
+	imageToAdd->imageID = levelCompleteScreenImageTextureID;
+	levelCompleteScreenGUI->addOverlayImage(imageToAdd);
+
+
+	/// -- adding resume button OF level complete screen
+	Button *resumeButton = new Button();
+	unsigned int resumeButtonTID = guiTextureManager->loadTexture(LEVEL_COMPLETE_BUTTON_RESUME_PATH);
+	unsigned int moResumeButtonTID = guiTextureManager->loadTexture(LEVEL_COMPLETE_BUTTON_RESUME_MO_PATH);
+	int resumeButtonWidth = 200;
+	int resumeButtonHeight = 100;
+	int resumeButtonPadding = 10;
+	int resumeButtonX = levelCompleteScreenX + 150;
+	int resumeButtonY = levelCompleteScreenY + 90;
+
+	resumeButton->initButton(resumeButtonTID, moResumeButtonTID,
+		resumeButtonX, resumeButtonY, 0, 255,
+		resumeButtonWidth, resumeButtonHeight, true, GO_TO_NEXT_LEVEL_COMMAND);
+
+	levelCompleteScreenGUI->addButton(resumeButton);
+	/// --- complete resuem button
+
+	gui->addScreenGUI(GS_LEVEL_COMPLETE, levelCompleteScreenGUI);
 }
 
 /*

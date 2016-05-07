@@ -37,6 +37,9 @@ const wstring	SPEED_UPGRADE_COMMAND = L"Speed Upgrade";
 const wstring	ATTACK_UPGRADE_COMMAND = L"Attack Upgrade";
 const wstring	DEFENSE_UPGRADE_COMMAND = L"Defense Upgrade";
 
+//// LEVEL COMPLETE screen button command
+const wstring	GO_TO_NEXT_LEVEL_COMMAND = L"Go To Next Level";
+
 class RebelleButtonEventHandler: public ButtonEventHandler
 {
 public:
