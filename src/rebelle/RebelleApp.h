@@ -20,6 +20,7 @@ static const wstring	RED_CURSOR_PATH = L"data/gui/cursors/red_cursor.png";
 static const wstring	SPLASH_SCREEN_PATH	= L"data/gui/overlays/rebelle_splash_screen_overlay.png";
 static const wstring	MAIN_MENU_PATH		= L"data/gui/overlays/rebelle_main_menu_overlay.png";
 static const wstring	LOADING_LEVEL_PATH = L"data/gui/overlays/rebelle_loading_level_overlay.png";
+static const wstring	CONTROLS_SCREEN_PATH = L"data/gui/overlays/controls.png";
 
 static const wstring	START_IMAGE_PATH	= L"data/gui/buttons/start_game.png";
 static const wstring	START_IMAGE_MO_PATH	= L"data/gui/buttons/start_game_mo.png";
@@ -54,6 +55,8 @@ static const wstring	PAUSE_MENU_SHOW_UPGRADE_MO_PATH = L"data/gui/buttons/show_u
 static const wstring	UPGRADE_SCREEN_LAYOUT_PATH = L"data/gui/overlays/upgrade_screen_layout.png";
 static const wstring	BACK_TO_MENU_PATH = L"data/gui/buttons/back_to_menu_button.png";
 static const wstring	BACK_TO_MENU_MO_PATH = L"data/gui/buttons/back_to_menu_button_mouse_over.png";
+static const wstring	BACK_PATH = L"data/gui/buttons/back.png";
+static const wstring	BACK_MO_PATH = L"data/gui/buttons/back_mo.png";
 
 static const wstring	UPGRADE_BUTTON_PATH = L"data/gui/buttons/upgrade_button.png";
 static const wstring	UPGRADE_BUTTON_MO_PATH = L"data/gui/buttons/upgrade_button_mouse_over.png";

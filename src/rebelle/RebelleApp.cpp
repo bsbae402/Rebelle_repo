@@ -66,6 +66,7 @@ void initViewport();
 void initLevelCompleteScreen();
 void initInGamePauseMenu();
 void initUpgradeScreen();
+void initControlsScreen();
 
 /*
 	WinMain - This is the application's starting point. In this method we will construct a Game object, 
@@ -100,6 +101,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	initUpgradeScreen();
 	initLevelCompleteScreen();
 	///////-----
+	initControlsScreen();
 
 	// SPECIFY WHO WILL HANDLE BUTTON EVENTS
 	RebelleButtonEventHandler *rebelleButtonHandler = new RebelleButtonEventHandler();
@@ -759,4 +761,45 @@ void initUpgradeScreen() {
 	//// game state: GS_UPGRADE_SCREEN
 	//// when game reached GS_UPGRADE_SCREEN state, upgradeScreenGUI should be shown up 
 	gui->addScreenGUI(GS_UPGRADE_SCREEN, upgradeScreenGUI);
+}
+
+void initControlsScreen() {
+	Game *game = Game::getSingleton();
+	GameGUI *gui = game->getGUI();
+	GameGraphics *graphics = game->getGraphics();
+	TextureManager *guiTextureManager = graphics->getGUITextureManager();
+
+	//controls screen
+	ScreenGUI *controlsScreenGUI = new ScreenGUI();
+
+	unsigned int controlsScreenImageTextureID = guiTextureManager->loadTexture(CONTROLS_SCREEN_PATH);
+
+	OverlayImage *imageToAdd = new OverlayImage();
+	imageToAdd->alpha = 230;
+	imageToAdd->width = 800;
+	imageToAdd->height = 530;
+	imageToAdd->x = (graphics->getScreenWidth() / 2) - (imageToAdd->width / 2);
+	imageToAdd->y = (graphics->getScreenHeight() / 2) - (imageToAdd->height / 2);
+	imageToAdd->z = 0;
+	imageToAdd->imageID = controlsScreenImageTextureID;
+	controlsScreenGUI->addOverlayImage(imageToAdd);
+
+
+	/// -- adding back button
+	Button *backButton = new Button();
+	unsigned int backButtonTID = guiTextureManager->loadTexture(BACK_PATH);
+	unsigned int moBackButtonTID = guiTextureManager->loadTexture(BACK_MO_PATH);
+	int backButtonWidth = 200;
+	int backButtonHeight = 100;
+	int backButtonPadding = 10;
+	int backButtonX = imageToAdd->x + 5;
+	int backButtonY = imageToAdd->y + 5;
+
+	backButton->initButton(backButtonTID, moBackButtonTID,
+		backButtonX, backButtonY, 0, 255,
+		backButtonWidth, backButtonHeight, true, GO_TO_MM_COMMAND);
+
+	controlsScreenGUI->addButton(backButton);
+	
+	gui->addScreenGUI(GS_MENU_CONTROLS_MENU, controlsScreenGUI);
 }

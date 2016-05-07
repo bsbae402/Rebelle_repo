@@ -97,7 +97,8 @@ void RebelleButtonEventHandler::handleButtonEvents(wstring command)
 	//// controls clicked
 	else if (command.compare(CONTROLS_COMMAND) == 0)
 	{
-		//// TO BE added
+		GameStateManager *gsm = game->getGSM();
+		gsm->goToControlsMenu();
 	}
 
 }
