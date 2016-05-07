@@ -10,7 +10,7 @@
 
 // HERE ARE THE GAME PROPERTIES WE ARE LOADING FROM FROM THE SETUP FILE
 static const int		VIEWPORT_OFFSET_X		= 0;
-static const int		VIEWPORT_OFFSET_Y		= 210;
+static const int		VIEWPORT_OFFSET_Y		= 265;
 static const int		TOGGLE_OFFSET_Y			= 160;
 
 // CONSTANTS FOR ARTWORK - NOTE, THIS SHOULD REALLY BE LOADED FROM A FILE
@@ -49,6 +49,20 @@ static const wstring	PAUSE_MENU_EXIT_PATH = L"data/gui/buttons/ingame_button_exi
 static const wstring	PAUSE_MENU_EXIT_MO_PATH = L"data/gui/buttons/ingame_button_exit_mouse_over.png";
 static const wstring	PAUSE_MENU_SHOW_UPGRADE_PATH = L"data/gui/buttons/show_upgrade_button.png";
 static const wstring	PAUSE_MENU_SHOW_UPGRADE_MO_PATH = L"data/gui/buttons/show_upgrade_button_mouse_over.png";
+static const wstring	PAUSE_MENU_DONATE_MONEY_PATH = L"data/gui/buttons/donate_money.png";
+static const wstring	PAUSE_MENU_DONATE_MONEY_MO_PATH = L"data/gui/buttons/donate_money_mouse_over.png";
+
+// artworks of donate screen
+static const wstring	DONATE_SCREEN_LAYOUT_PATH = L"data/gui/overlays/donate_screen_layout.png";
+static const wstring	DONATE_BUTTON_PATH = L"data/gui/buttons/donate_button.png";
+static const wstring	DONATE_BUTTON_MO_PATH = L"data/gui/buttons/donate_button_mouse_over.png";
+static const wstring	INCREASE_MONEY_PATH = L"data/gui/buttons/upgrade_button.png";
+static const wstring	INCREASE_MONEY_MO_PATH = L"data/gui/buttons/upgrade_button_mouse_over.png";
+static const wstring	DECREASE_MONEY_PATH = L"data/gui/buttons/upgrade_button_down.png";
+static const wstring	DECREASE_MONEY_MO_PATH = L"data/gui/buttons/upgrade_button_mouse_over_down.png";
+static const wstring	MONEY_TEXT_PATH = L"data/gui/buttons/money_text_box.png";
+static const wstring	MONEY_LABEL_PATH = L"data/gui/overlays/money_label.png";
+static const wstring	SCORE_LABEL_PATH = L"data/gui/overlays/score_label.png";
 
 
 //// -- followings are artworks of upgrade screen

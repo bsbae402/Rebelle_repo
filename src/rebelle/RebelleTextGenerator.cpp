@@ -46,14 +46,14 @@ void RebelleTextGenerator::printTime()
 {
 	Game *game = Game::getSingleton();
 	GameClock *clock = game->getClock();
-	if (timetoprint/40 <= 5 && timetoprint != NULL)
+	if (timetoprint / 40 <= 5 && timetoprint != NULL)
 	{
 		Game *game = Game::getSingleton();
 
 		wstringstream wss;
 		SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
 		safetywarning.append(L"Safety Key Changing in: ");
-		wss << timetoprint/40;
+		wss << timetoprint / 40;
 		wss << NEW_LINE_TEXT;
 		safetywarning.append(wss.str());
 	}
@@ -71,7 +71,7 @@ void RebelleTextGenerator::printSafety()
 	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
 	safetykey.append(L"Safety Key: ");
 	wss << game->getGSM()->getKey();
-		
+
 	safetykey.append(wss.str());
 }
 
@@ -98,7 +98,6 @@ void RebelleTextGenerator::printScore()
 	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
 	scorelabel.append(L"Score: ");
 	wss << game->getGSM()->getScore();
-	//wss << L" / 15";
 
 
 	scorelabel.append(wss.str());
@@ -150,11 +149,49 @@ void RebelleTextGenerator::printUpgrades()
 	//upgradelabels.append(wss.str());
 }
 
+void RebelleTextGenerator::printUpgrademoney()
+{
+	Game *game = Game::getSingleton();
+
+	wstringstream wss;
+	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
+	wss << game->getGSM()->getMoney();
+	upgrademoney.append(wss.str());
+
+
+
+}
+
+void RebelleTextGenerator::printDonatemoney()
+{
+	Game *game = Game::getSingleton();
+
+	wstringstream wss;
+	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
+	wss << game->getGSM()->getDonateMoney();
+	donatemoney.append(wss.str());
+
+
+
+}
+
+void RebelleTextGenerator::printDonateScore()
+{
+	Game *game = Game::getSingleton();
+
+	wstringstream wss;
+	SpriteManager *spriteManager = game->getGSM()->getSpriteManager();
+	wss << game->getGSM()->getScore();
+
+
+	donatescore.append(wss.str());
+}
+
 /*
-	startUp - Provides an example of how to render text to our screen every frame,
-	allowing for the text to continually change. This method adds a text object
-	to the text manager (GameText), which allows it to be updated each frame. This
-	method should be called only once for each object.
+startUp - Provides an example of how to render text to our screen every frame,
+allowing for the text to continually change. This method adds a text object
+to the text manager (GameText), which allows it to be updated each frame. This
+method should be called only once for each object.
 */
 void RebelleTextGenerator::startUp()
 {
@@ -169,7 +206,7 @@ void RebelleTextGenerator::startUp()
 	//appendBotCount();
 	//appendBotRecycler();
 	//printTime();
-	
+
 
 	// AND THEN ADD IT TO THE TEXT MANAGER, SPECIFYING WHERE IT SHOULD BE RENDERED
 	//text->addRenderText(&leftTextToGenerate, LEFT_TEXT_X, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
@@ -177,9 +214,9 @@ void RebelleTextGenerator::startUp()
 }
 
 /*
-	updateText - updates the text. Note that the text must already have been added
-	to the text manager via the initText method. Also not that there should be a
-	separate TextGenerator for each line of text we wish to render.
+updateText - updates the text. Note that the text must already have been added
+to the text manager via the initText method. Also not that there should be a
+separate TextGenerator for each line of text we wish to render.
 */
 void RebelleTextGenerator::update()
 {
@@ -193,11 +230,15 @@ void RebelleTextGenerator::update()
 	safetykey.clear();
 	heallabel.clear();
 	upgrades.clear();
+	upgrademoney.clear();
+	donatemoney.clear();
+	donatescore.clear();
 
 	Game *game = Game::getSingleton();
+	GameText *text = game->getText();
 	if (game->getGSM()->isGameInProgress())
 	{
-		GameText *text = game->getText();
+
 
 		if (toolbarTextRegistrationDone == false)
 		{
@@ -210,16 +251,18 @@ void RebelleTextGenerator::update()
 			additional = L"additional";
 			upgrades = L"upgrades";
 
+
+
 			text->addRenderText(&scorelabel, LEFT_TEXT_X, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 			text->addRenderText(&moneylabel, 200, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 			text->addRenderText(&healthlabel, LEFT_TEXT_X, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 			text->addRenderText(&heallabel, 300, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 
-			text->addRenderText(&safetywarning, RIGHT_TEXT_X, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
-			text->addRenderText(&safetykey, RIGHT_TEXT_X, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+			text->addRenderText(&safetywarning, 850, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+			text->addRenderText(&safetykey, 850, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 
-			text->addRenderText(&additional, 700, 5, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
-			text->addRenderText(&upgrades, 330, 60, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+			text->addRenderText(&additional, 800, 5, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+			text->addRenderText(&upgrades, 280, 60, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 
 
 			for (int i = 0; i < text->getRenderTextSize(); i++)
@@ -233,7 +276,7 @@ void RebelleTextGenerator::update()
 
 				else if (moneylabel.compare(wStrText) == 0)
 					moneylabelRT = rt;
-					
+
 				else if (healthlabel.compare(wStrText) == 0)
 					healthlabelRT = rt;
 
@@ -251,6 +294,8 @@ void RebelleTextGenerator::update()
 
 				else if (upgrades.compare(wStrText) == 0)
 					upgradesRT = rt;
+
+
 			}
 			toolbarTextRegistrationDone = true;
 			/// now this if block should not be enterred anymore
@@ -267,6 +312,7 @@ void RebelleTextGenerator::update()
 		printHeal();
 		printUpgrades();
 
+
 		additional.clear();
 
 		wstringstream wss2;
@@ -274,12 +320,12 @@ void RebelleTextGenerator::update()
 
 		//wss << L"fff\n";
 		additional.append(wss2.str());
-		
+
 		int vectorIndex;
 
 		vectorIndex = text->getVectorIndexByRenderText(scorelabelRT);
 		text->updateRenderText(&scorelabel, vectorIndex);
-		
+
 		vectorIndex = text->getVectorIndexByRenderText(moneylabelRT);
 		text->updateRenderText(&moneylabel, vectorIndex);
 
@@ -300,6 +346,95 @@ void RebelleTextGenerator::update()
 
 		vectorIndex = text->getVectorIndexByRenderText(upgradesRT);
 		text->updateRenderText(&upgrades, vectorIndex);
+
+
+	}
+	else if (game->getGSM()->isGameAtUpgradeScreen())
+	{
+
+		if (upgradeTextRegistrationDone == false)
+		{
+			upgrademoney = L"upgrademoney";
+
+			text->addRenderText(&upgrademoney, 390, 600, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+
+			for (int i = 0; i < text->getRenderTextSize(); i++)
+			{
+				RenderText* rt = text->getRenderTextAtIndex(i);
+				wstring* wStrPtrText = rt->getText();
+				wstring wStrText = *wStrPtrText;
+
+				if (upgrademoney.compare(wStrText) == 0)
+					upgrademoneyRT = rt;
+
+
+			}
+
+			upgradeTextRegistrationDone = true;
+		}
+
+		printUpgrademoney();
+
+		additional.clear();
+
+		wstringstream wss2;
+		wss2 << addedtext;
+
+		//wss << L"fff\n";
+		additional.append(wss2.str());
+
+		int vectorIndex;
+
+		vectorIndex = text->getVectorIndexByRenderText(upgrademoneyRT);
+		text->updateRenderText(&upgrademoney, vectorIndex);
+
+
+	}
+	else if (game->getGSM()->isGameAtDonateScreen())
+	{
+
+		if (donateTextRegistrationDone == false)
+		{
+			donatemoney = L"donatemoney";
+			donatescore = L"donatescore";
+
+			text->addRenderText(&donatemoney, 520, 190, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+			text->addRenderText(&donatescore, 520, 390, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+
+
+			for (int i = 0; i < text->getRenderTextSize(); i++)
+			{
+				RenderText* rt = text->getRenderTextAtIndex(i);
+				wstring* wStrPtrText = rt->getText();
+				wstring wStrText = *wStrPtrText;
+
+				if (donatemoney.compare(wStrText) == 0)
+					donatemoneyRT = rt;
+				else if (donatescore.compare(wStrText) == 0)
+					donatescoreRT = rt;
+			}
+
+			donateTextRegistrationDone = true;
+		}
+
+		printDonatemoney();
+		printDonateScore();
+
+		additional.clear();
+
+		wstringstream wss2;
+		wss2 << addedtext;
+
+		//wss << L"fff\n";
+		additional.append(wss2.str());
+
+		int vectorIndex;
+
+		vectorIndex = text->getVectorIndexByRenderText(donatemoneyRT);
+		text->updateRenderText(&donatemoney, vectorIndex);
+
+		vectorIndex = text->getVectorIndexByRenderText(scorelabelRT);
+		text->updateRenderText(&scorelabel, vectorIndex);
 	}
 }
 

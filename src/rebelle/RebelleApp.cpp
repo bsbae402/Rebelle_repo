@@ -67,6 +67,7 @@ void initLevelCompleteScreen();
 void initInGamePauseMenu();
 void initUpgradeScreen();
 void initControlsScreen();
+void initDonateScreen();
 
 /*
 	WinMain - This is the application's starting point. In this method we will construct a Game object, 
@@ -100,6 +101,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	initInGamePauseMenu();
 	initUpgradeScreen();
 	initLevelCompleteScreen();
+	initDonateScreen();
 	///////-----
 	initControlsScreen();
 
@@ -129,8 +131,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	audio->registerSoundEffect(ENUM_SOUND_EFFECT_PUNCH, PUNCH_SOUND_EFFECT_PATH);
 	audio->registerSoundEffect(ENUM_SOUND_EFFECT_HEAL, HEAL_SOUND_EFFECT_PATH);
 	audio->registerMusic(ENUM_MUSIC_MAIN_THEME, MAIN_THEME_MUSIC_PATH);
-
 	audio->registerMusic(ENUM_MUSIC_LEVEL_COMPLETE, LEVEL_COMPLETE_MUSIC_PATH);
+	audio->registerMusic(ENUM_MUSIC_GAMEOVER, GAMEOVER_MUSIC_PATH);
 
 	//// ------ MORE AUDIO AND MUSIC NEEDED
 
@@ -406,7 +408,7 @@ void initViewport()
 	// THAT TOOLBAR HAS A HEIGHT OF 64 PIXELS, SO WE'LL MAKE THAT THE OFFSET FOR
 	// THE VIEWPORT IN THE Y AXIS
 	Viewport *viewport = gui->getViewport();
-	viewport->setViewportOffsetY(100);
+	viewport->setViewportOffsetY(140);
 	int viewportWidth = graphics->getScreenWidth() - VIEWPORT_OFFSET_X;
 	int viewportHeight = graphics->getScreenHeight() - VIEWPORT_OFFSET_Y;
 	viewport->setViewportWidth(viewportWidth);
@@ -502,7 +504,7 @@ void initInGamePauseMenu()
 	resumeButton->initButton(resumeButtonTID, moResumeButtonTID,
 		resumeButtonX, resumeNstartButtonY, 0, 255,
 		resumeButtonWidth, resumeButtonHeight, true, RESUME_COMMAND);
-	
+
 	inGameMenuScreenGUI->addButton(resumeButton);
 	/// --- complete resuem button
 
@@ -540,11 +542,151 @@ void initInGamePauseMenu()
 	inGameMenuScreenGUI->addButton(showUpgradeButton);
 	/// --- complete show upgrade button
 
+	//Add Donate button
+
+	int donateButtonY = 380;
+
+	Button *donateButton = new Button();
+	unsigned int donateButtonTID = guiTextureManager->loadTexture(PAUSE_MENU_DONATE_MONEY_PATH);
+	unsigned int moDonateButtonTID = guiTextureManager->loadTexture(PAUSE_MENU_DONATE_MONEY_MO_PATH);
+	int donateButtonWidth = 500;
+	int donateButtonHeight = 50;
+	int donateButtonPadding = 10;
+	int donateButtonX = pauseMenuX + 200;
+
+	donateButton->initButton(donateButtonTID, moDonateButtonTID,
+		donateButtonX, donateButtonY, 0, 255,
+		donateButtonWidth, donateButtonHeight, true, DONATE_MONEY_COMMAND);
+
+	inGameMenuScreenGUI->addButton(donateButton);
 
 
 	gui->addScreenGUI(GS_PAUSED, inGameMenuScreenGUI);
 
 	//// To Be Editted ...
+}
+
+void initDonateScreen()
+{
+	Game *game = Game::getSingleton();
+	GameGUI *gui = game->getGUI();
+	GameGraphics *graphics = game->getGraphics();
+	TextureManager *guiTextureManager = graphics->getGUITextureManager();
+
+	unsigned int moneyUpgradeTitleTID = guiTextureManager->loadTexture(MONEY_UPGRADE_TITLE_PATH);
+	unsigned int moneytextTID = guiTextureManager->loadTexture(MONEY_TEXT_PATH);
+	unsigned int moneylabelTID = guiTextureManager->loadTexture(MONEY_LABEL_PATH);
+	unsigned int upTID = guiTextureManager->loadTexture(INCREASE_MONEY_PATH);
+	unsigned int moupTID = guiTextureManager->loadTexture(INCREASE_MONEY_MO_PATH);
+	unsigned int downTID = guiTextureManager->loadTexture(DECREASE_MONEY_PATH);
+	unsigned int modownTID = guiTextureManager->loadTexture(DECREASE_MONEY_MO_PATH);
+	unsigned int scorelabelTID = guiTextureManager->loadTexture(SCORE_LABEL_PATH);
+	unsigned int donateTID = guiTextureManager->loadTexture(DONATE_BUTTON_PATH);
+	unsigned int modonateTID = guiTextureManager->loadTexture(DONATE_BUTTON_MO_PATH);
+
+	// In-game menu will be shown on another screen. 
+	// The ongoing game will be paused
+	RebelleUpgradeScreenGUI *donateScreenGUI = new RebelleUpgradeScreenGUI();
+
+	unsigned int donateScreenImageTextureID = guiTextureManager->loadTexture(DONATE_SCREEN_LAYOUT_PATH);
+	int pauseMenuX = 180;
+
+	OverlayImage *imageToAdd = new OverlayImage();
+	imageToAdd->alpha = 230;
+	imageToAdd->width = 1024;
+	imageToAdd->height = 768;
+	imageToAdd->x = pauseMenuX;
+	imageToAdd->y = 0;
+	imageToAdd->z = 0;
+	imageToAdd->imageID = donateScreenImageTextureID;
+	donateScreenGUI->addOverlayImage(imageToAdd);
+
+
+	Button *backToPauseMenuButton = new Button();
+	unsigned int backToPauseMenuButtonTID = guiTextureManager->loadTexture(BACK_TO_MENU_PATH);
+	unsigned int moBackToPauseMenuButtonTID = guiTextureManager->loadTexture(BACK_TO_MENU_MO_PATH);
+	int backTPMButtonWidth = 300;
+	int backTPMButtonHeight = 60;
+	int backTPMButtonX = 200;
+	int backTPMButtonY = 700;
+
+	backToPauseMenuButton->initButton(backToPauseMenuButtonTID, moBackToPauseMenuButtonTID,
+		backTPMButtonX, backTPMButtonY, 0, 255,
+		backTPMButtonWidth, backTPMButtonHeight, true, BACK_TO_PAUSE_MENU_COMMAND);
+
+	donateScreenGUI->addButton(backToPauseMenuButton);
+
+
+	OverlayImage *moneylabel = new OverlayImage();
+	moneylabel->alpha = 255;
+	moneylabel->width = donateScreenGUI->getStatTitleWidth();
+	moneylabel->height = donateScreenGUI->getStatLineHeight();
+	moneylabel->x = 300;
+	moneylabel->y = 170;
+	moneylabel->z = 0;
+	moneylabel->imageID = moneylabelTID;
+	donateScreenGUI->addOverlayImage(moneylabel);
+
+	OverlayImage *scorelabel = new OverlayImage();
+	scorelabel->alpha = 255;
+	scorelabel->width = donateScreenGUI->getStatTitleWidth();
+	scorelabel->height = donateScreenGUI->getStatLineHeight();
+	scorelabel->x = 300;
+	scorelabel->y = 370;
+	scorelabel->z = 0;
+	scorelabel->imageID = scorelabelTID;
+	donateScreenGUI->addOverlayImage(scorelabel);
+
+	Button *money = new Button();
+	int moneyButtonX = 480;
+	int moneyButtonY = 170;
+	money->initButton(moneytextTID, moneytextTID,
+		moneyButtonX, moneyButtonY, 0, 255,
+		100, 60, true, L"no command");
+	donateScreenGUI->addButton(money);
+
+
+	Button *donateButton = new Button();
+	int donateWidth = 300;
+	int donateHeight = 60;
+	int donateX = 800;
+	int donateY = 150;
+
+	donateButton->initButton(donateTID, modonateTID,
+		donateX, donateY, 0, 255,
+		donateWidth, donateHeight, true, L"donate");
+
+	donateScreenGUI->addButton(donateButton);
+
+
+
+	Button *score = new Button();
+	int scoreButtonX = 450;
+	int scoreButtonY = 370;
+	score->initButton(moneytextTID, moneytextTID,
+		scoreButtonX, scoreButtonY, 0, 255,
+		100, 60, true, L"no command");
+	donateScreenGUI->addButton(score);
+
+	Button *up = new Button();
+	int upX = 730;
+	int upY = 130;
+	up->initButton(upTID, moupTID,
+		upX, upY, 0, 255,
+		50, 50, true, L"increase donate");
+	donateScreenGUI->addButton(up);
+
+	Button *down = new Button();
+	int downX = 730;
+	int downY = 190;
+	down->initButton(downTID, modownTID,
+		downX, downY, 0, 255,
+		50, 50, true, L"decrease donate");
+	donateScreenGUI->addButton(down);
+
+
+	gui->addScreenGUI(GS_DONATE_SCREEN, donateScreenGUI);
+
 }
 
 void initUpgradeScreen() {
@@ -554,7 +696,7 @@ void initUpgradeScreen() {
 	TextureManager *guiTextureManager = graphics->getGUITextureManager();
 
 	RebelleUpgradeScreenGUI *upgradeScreenGUI = new RebelleUpgradeScreenGUI();
-	
+
 	unsigned int upgradeScreenLayoutTID = guiTextureManager->loadTexture(UPGRADE_SCREEN_LAYOUT_PATH);
 
 	unsigned int speedUpgradeTitleTID = guiTextureManager->loadTexture(SPEED_UPGRADE_TITLE_PATH);
@@ -564,10 +706,13 @@ void initUpgradeScreen() {
 	unsigned int priceUpgradeTitleTID = guiTextureManager->loadTexture(PRICE_UPGRADE_TITLE_PATH);
 	unsigned int purchaseUpgradeTitleTID = guiTextureManager->loadTexture(PURCHASE_UPGRADE_TITLE_PATH);
 	unsigned int moneyUpgradeTitleTID = guiTextureManager->loadTexture(MONEY_UPGRADE_TITLE_PATH);
+	unsigned int moneytextTID = guiTextureManager->loadTexture(MONEY_TEXT_PATH);
+	unsigned int moneylabelTID = guiTextureManager->loadTexture(MONEY_LABEL_PATH);
 
-	
+
 	unsigned int upgradeButtonTID = guiTextureManager->loadTexture(UPGRADE_BUTTON_PATH);
 	unsigned int moUpgradeButtonTID = guiTextureManager->loadTexture(UPGRADE_BUTTON_MO_PATH);
+
 	int upgradeButtonWidth = 40;
 	int upgradeButtonHeight = 40;
 
@@ -609,7 +754,7 @@ void initUpgradeScreen() {
 	upgradeUpgradeTitleImage->z = 0;
 	upgradeUpgradeTitleImage->imageID = upgradeUpgradeTitleTID;
 	upgradeScreenGUI->addOverlayImage(upgradeUpgradeTitleImage);
-	
+
 	//price
 	OverlayImage *priceUpgradeTitleImage = new OverlayImage();
 	priceUpgradeTitleImage->alpha = 255;
@@ -626,7 +771,7 @@ void initUpgradeScreen() {
 	purchaseUpgradeTitleImage->alpha = 255;
 	purchaseUpgradeTitleImage->width = upgradeScreenGUI->getStatTitleWidth();
 	purchaseUpgradeTitleImage->height = upgradeScreenGUI->getStatLineHeight();
-	purchaseUpgradeTitleImage->x = upgradeScreenGUI->getStatListX() + (2*upgradeScreenGUI->getStatTitleWidth());
+	purchaseUpgradeTitleImage->x = upgradeScreenGUI->getStatListX() + (2 * upgradeScreenGUI->getStatTitleWidth());
 	purchaseUpgradeTitleImage->y = upgradeScreenGUI->getStatListY();
 	purchaseUpgradeTitleImage->z = 0;
 	purchaseUpgradeTitleImage->imageID = purchaseUpgradeTitleTID;
@@ -662,7 +807,7 @@ void initUpgradeScreen() {
 
 	/// upgrade button
 	Button *speedUpButton = new Button();
-	int speedUpButtonX = upgradeScreenGUI->getStatListX() + (2*upgradeScreenGUI->getStatTitleWidth());
+	int speedUpButtonX = upgradeScreenGUI->getStatListX() + (2 * upgradeScreenGUI->getStatTitleWidth());
 	int speedUpButtonY = speedStatY;
 	speedUpButton->initButton(upgradeButtonTID, moUpgradeButtonTID,
 		speedUpButtonX, speedUpButtonY, 0, 255,
@@ -718,6 +863,35 @@ void initUpgradeScreen() {
 	defenseUpgradeTitleImage->imageID = defenseUpgradeTitleTID;
 	upgradeScreenGUI->addOverlayImage(defenseUpgradeTitleImage);
 
+	/*int defenseStatY = attackStatY + upgradeScreenGUI->getStatLineHeight() + upgradeScreenGUI->getYDistBetweenStats();
+
+	Button *moneylabel = new Button();
+	moneylabel->alpha = 255;
+	moneylabel->width = upgradeScreenGUI->getStatTitleWidth();
+	defenseUpgradeTitleImage->height = upgradeScreenGUI->getStatLineHeight();
+	defenseUpgradeTitleImage->x = upgradeScreenGUI->getStatListX();
+	defenseUpgradeTitleImage->y = defenseStatY;
+	defenseUpgradeTitleImage->z = 0;
+	defenseUpgradeTitleImage->imageID = defenseUpgradeTitleTID;
+	upgradeScreenGUI->addOverlayImage(defenseUpgradeTitleImage);*/
+	OverlayImage *moneylabel = new OverlayImage();
+	moneylabel->alpha = 255;
+	moneylabel->width = upgradeScreenGUI->getStatTitleWidth();
+	moneylabel->height = upgradeScreenGUI->getStatLineHeight();
+	moneylabel->x = upgradeScreenGUI->getStatListX();
+	moneylabel->y = defenseStatY + 170;
+	moneylabel->z = 0;
+	moneylabel->imageID = moneylabelTID;
+	upgradeScreenGUI->addOverlayImage(moneylabel);
+
+	Button *money = new Button();
+	int moneyButtonX = upgradeScreenGUI->getStatListX() + 160;
+	int moneyButtonY = defenseStatY + 170;
+	money->initButton(moneytextTID, moneytextTID,
+		moneyButtonX, moneyButtonY, 0, 255,
+		100, 60, true, L"no command");
+	upgradeScreenGUI->addButton(money);
+
 	/// text money
 	OverlayImage *moneyUpgradeTitleImage3 = new OverlayImage();
 	moneyUpgradeTitleImage3->alpha = 255;
@@ -762,7 +936,6 @@ void initUpgradeScreen() {
 	//// when game reached GS_UPGRADE_SCREEN state, upgradeScreenGUI should be shown up 
 	gui->addScreenGUI(GS_UPGRADE_SCREEN, upgradeScreenGUI);
 }
-
 void initControlsScreen() {
 	Game *game = Game::getSingleton();
 	GameGUI *gui = game->getGUI();

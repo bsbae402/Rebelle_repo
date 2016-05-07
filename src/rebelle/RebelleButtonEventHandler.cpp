@@ -93,6 +93,72 @@ void RebelleButtonEventHandler::handleButtonEvents(wstring command)
 
 		gsm->goToLoadLevel();
 	}
+
+	else if (command.compare(DONATE_MONEY_COMMAND) == 0)
+	{
+		GameStateManager *gsm = game->getGSM();
+		gsm->goToDonateScreen();
+
+		//// --- I need to unload the upgrade icons here
+		/*GameGUI *gui = game->getGUI();
+		ScreenGUI* baseTypeUSGUI = gui->getScreen(GS_DONATE_SCREEN);
+		RebelleUpgradeScreenGUI *upgradeScreenGUI = static_cast<RebelleUpgradeScreenGUI*>(baseTypeUSGUI);
+		upgradeScreenGUI->unloadPlayerStats();*/
+	}
+	else if (command.compare(L"increase donate") == 0)
+	{
+		GameStateManager *gsm = game->getGSM();
+		gsm->setDonateMoney(gsm->getDonateMoney() + 100);
+		if (gsm->getDonateMoney() > gsm->getMoney())
+			gsm->setDonateMoney(gsm->getMoney());
+		gsm->getDonateMoney();
+
+	}
+	else if (command.compare(L"decrease donate") == 0)
+	{
+		GameStateManager *gsm = game->getGSM();
+		gsm->setDonateMoney(gsm->getDonateMoney() - 100);
+		if (gsm->getDonateMoney() < 0)
+			gsm->setDonateMoney(0);
+	}
+	else if (command.compare(L"donate") == 0)
+	{
+		GameStateManager *gsm = game->getGSM();
+		gsm->setScore(gsm->getScore() + gsm->getDonateMoney() * 10);
+		gsm->setMoney(gsm->getMoney() - gsm->getDonateMoney());
+		gsm->setDonateMoney(0);
+	}
+
+	else if (command.compare(SPEED_UPGRADE_COMMAND) == 0)
+	{
+		GameStateManager *gsm = game->getGSM();
+		
+		if (gsm->getMoney() >= 200)
+		{
+			gsm->setMoney(gsm->getMoney() - 200);
+			gsm->addUpgrade(L"SPEED");
+		}
+		
+
+	}
+	else if (command.compare(ATTACK_UPGRADE_COMMAND) == 0)
+	{
+		GameStateManager *gsm = game->getGSM();
+		if (gsm->getMoney() >= 200)
+		{
+			gsm->setMoney(gsm->getMoney() - 200);
+			gsm->addUpgrade(L"ATTACK");
+		}
+	}
+	else if (command.compare(DEFENSE_UPGRADE_COMMAND) == 0)
+	{
+		GameStateManager *gsm = game->getGSM();
+		if (gsm->getMoney() >= 200)
+		{
+			gsm->setMoney(gsm->getMoney() - 200);
+			gsm->addUpgrade(L"DEFENSE");
+		}
+	}
 	
 	//// controls clicked
 	else if (command.compare(CONTROLS_COMMAND) == 0)

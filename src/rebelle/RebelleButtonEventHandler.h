@@ -30,6 +30,7 @@ const wstring	CONTROLS_COMMAND = L"Controls";
 const wstring	RESUME_COMMAND = L"Resume";
 const wstring	PAUSE_MENU_EXIT_COMMAND = L"Exit in Pause Menu";
 const wstring	SHOW_UPGRADE_COMMAND = L"Show Upgrade";
+const wstring	DONATE_MONEY_COMMAND = L"Donate Money";
 
 //// upgrade screen button commands
 const wstring	BACK_TO_PAUSE_MENU_COMMAND = L"Back To Pause Menu";

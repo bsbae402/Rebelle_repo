@@ -22,6 +22,8 @@ class RebelleTextGenerator : public TextGenerator
 {
 private:
 	bool toolbarTextRegistrationDone = false;
+	bool upgradeTextRegistrationDone = false;
+	bool donateTextRegistrationDone = false;
 
 	// THIS IS THE TEXT THIS OBJECT WILL UPDATE EACH FRAME
 	wstring scorelabel;
@@ -48,6 +50,15 @@ private:
 	wstring upgrades;
 	RenderText *upgradesRT;
 
+	wstring upgrademoney;
+	RenderText *upgrademoneyRT;
+
+	wstring donatemoney;
+	RenderText *donatemoneyRT;
+
+	wstring donatescore;
+	RenderText *donatescoreRT;
+
 	// THESE ARE HELPER METHODS FOR GENERATING THE TEXT, CALLED
 	// EACH FRAME BY updateText
 	void printTime();
@@ -57,6 +68,9 @@ private:
 	void printMoney();
 	void printHeal();
 	void printUpgrades();
+	void printUpgrademoney();
+	void printDonatemoney();
+	void printDonateScore();
 
 public:
 	// NOTHING TO INITIALIZE OR DESTROY
