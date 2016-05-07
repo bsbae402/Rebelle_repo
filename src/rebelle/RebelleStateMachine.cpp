@@ -26,6 +26,7 @@ void RebelleStateMachine::update()
 	}
 	else if (gsm->isGameLevelLoading())
 	{
+		/*
 		// NOW WE NEED TO TRANSITION TO THE NEXT LEVEL
 		// BUT NOTE WE'RE HARD CODING THIS IN THAT WE
 		// KNOW HOW MANY LEVELS THERE ARE, WHICH ISN'T IDEAL
@@ -42,5 +43,22 @@ void RebelleStateMachine::update()
 			// THE SECOND ONE JUST GO BACK TO THE MAIN MENU
 			gsm->goToMainMenu();
 		}
+		*/
+		////// the original Bugs code above
+		////// supposes that the game has only two levels.
+		//// Rebelle will have three or more levels.
+		int numOfGameLevels = gsm->getNumLevels();
+		if (numOfGameLevels <= 0)
+		{
+			gsm->goToMainMenu();
+		}
+		else {
+			int currentLevelIndex = gsm->getCurrentLevelIndex();
+			if (currentLevelIndex == NO_LEVEL_LOADED || currentLevelIndex < numOfGameLevels)
+			{
+				gsm->loadNextLevel();
+				gsm->goToGame();
+			}
+		}	
 	}
 }

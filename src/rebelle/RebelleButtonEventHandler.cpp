@@ -91,7 +91,7 @@ void RebelleButtonEventHandler::handleButtonEvents(wstring command)
 		GameGraphics *graphics = game->getGraphics();
 		graphics->clearWorldTextures();
 
-		gsm->goToLoadLevel();
+		gsm->goToPreGame();
 	}
 
 	else if (command.compare(DONATE_MONEY_COMMAND) == 0)
