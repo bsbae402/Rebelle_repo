@@ -194,38 +194,6 @@ void initInGameGUI()
 
 	// NOW ADD THE IN-GAME GUI
 	ScreenGUI *inGameGUI = new ScreenGUI();
-	
-	//// in-game guis are all disabled currently
-	//// unsigned int imageID = guiTextureManager->loadTexture(IN_GAME_TOOLBAR_PATH);
-	////  we don't have in-game toolbar
-	/*
-	OverlayImage *imageToAdd = new OverlayImage();
-	imageToAdd->alpha = 255;
-	imageToAdd->width = 1366;
-	imageToAdd->height = 64;
-	imageToAdd->x = 0;
-	imageToAdd->y = 0;
-	imageToAdd->z = 0;
-	imageToAdd->imageID = imageID;
-	inGameGUI->addOverlayImage(imageToAdd);
-
-	unsigned int normalTextureID = guiTextureManager->loadTexture(QUIT_IMAGE_PATH);
-	unsigned int mouseOverTextureID = guiTextureManager->loadTexture(QUIT_IMAGE_MO_PATH);
-	
-	// INIT THE QUIT BUTTON
-	Button *buttonToAdd = new Button();
-	buttonToAdd->initButton(normalTextureID,
-		mouseOverTextureID,
-		0,
-		0,
-		0,
-		255,
-		200,
-		100,
-		false,
-		QUIT_COMMAND);
-	inGameGUI->addButton(buttonToAdd);
-	*/
 
 	// AND LET'S ADD OUR SCREENS
 	GameGUI *gui = game->getGUI();
