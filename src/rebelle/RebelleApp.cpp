@@ -68,6 +68,7 @@ void initInGamePauseMenu();
 void initUpgradeScreen();
 void initControlsScreen();
 void initDonateScreen();
+void initCreditsScreen();
 
 /*
 	WinMain - This is the application's starting point. In this method we will construct a Game object, 
@@ -104,6 +105,8 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	initDonateScreen();
 	///////-----
 	initControlsScreen();
+
+	initCreditsScreen();
 
 	// SPECIFY WHO WILL HANDLE BUTTON EVENTS
 	RebelleButtonEventHandler *rebelleButtonHandler = new RebelleButtonEventHandler();
@@ -977,4 +980,40 @@ void initControlsScreen() {
 	controlsScreenGUI->addButton(backButton);
 	
 	gui->addScreenGUI(GS_MENU_CONTROLS_MENU, controlsScreenGUI);
+}
+
+
+void initCreditsScreen()
+{
+	Game *game = Game::getSingleton();
+	GameGraphics *graphics = game->getGraphics();
+	TextureManager *guiTextureManager = graphics->getGUITextureManager();
+
+	ScreenGUI *gameCreditsScreenGUI = new ScreenGUI();
+
+	// WE'LL ONLY HAVE ONE IMAGE FOR OUR GIANT BUTTON
+	unsigned int normalTextureID = guiTextureManager->loadTexture(CREDITS_SCREEN_PATH);
+	unsigned int mouseOverTextureID = normalTextureID;
+
+	// check image file -> 1200 X 768
+	int imageWidth = 1200;
+	int imageHeight = 768;
+
+	// INIT THE QUIT BUTTON
+	Button *buttonToAdd = new Button();
+	buttonToAdd->initButton(normalTextureID,
+		mouseOverTextureID,
+		(game->getGraphics()->getScreenWidth() / 2) - (imageWidth / 2),
+		(game->getGraphics()->getScreenHeight() / 2) - (imageHeight / 2),
+		0,
+		255,
+		imageWidth,
+		imageHeight,
+		false,
+		CREDITS_TO_MM_COMMAND);
+	gameCreditsScreenGUI->addButton(buttonToAdd);
+
+	// AND REGISTER IT WITH THE GUI
+	GameGUI *gui = game->getGUI();
+	gui->addScreenGUI(GS_CREDITS_SCREEN, gameCreditsScreenGUI);
 }

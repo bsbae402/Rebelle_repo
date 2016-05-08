@@ -92,6 +92,9 @@ static const wstring	LEVEL_COMPLETE_SCREEN_PATH = L"data/gui/overlays/level_comp
 static const wstring	LEVEL_COMPLETE_BUTTON_RESUME_PATH = L"data/gui/buttons/level_complete_button_resume.png";
 static const wstring	LEVEL_COMPLETE_BUTTON_RESUME_MO_PATH = L"data/gui/buttons/level_complete_button_resume_mouse_over.png";
 
+/// -- game end credits screen
+static const wstring	CREDITS_SCREEN_PATH = L"data/gui/overlays/rebelle_credits_screen.png";
+
 /// -- sound effect paths
 static const LPWSTR		SHOOT_SOUND_EFFECT_PATH = L"data/sounds/shoot.wav";
 static const LPWSTR		MONEY_SOUND_EFFECT_PATH = L"data/sounds/money.wav";
@@ -103,3 +106,4 @@ static const LPWSTR		PUNCH_SOUND_EFFECT_PATH = L"data/sounds/punch.wav";
 static const LPWSTR		MAIN_THEME_MUSIC_PATH = L"data/music/RebelleGameMusic.wav";
 static const LPWSTR		LEVEL_COMPLETE_MUSIC_PATH = L"data/music/RebelleComplete.wav";
 static const LPWSTR		GAMEOVER_MUSIC_PATH = L"data/music/RebelleGameOver.wav";
+

@@ -86,12 +86,21 @@ void RebelleButtonEventHandler::handleButtonEvents(wstring command)
 	else if (command.compare(GO_TO_NEXT_LEVEL_COMMAND) == 0)
 	{
 		GameStateManager *gsm = game->getGSM();
-		gsm->unloadCurrentLevel();
+		gsm->unloadCurrentLevel();		//// be care full. this will clear the player's score
 
 		GameGraphics *graphics = game->getGraphics();
-		graphics->clearWorldTextures();
+		graphics->clearWorldTextures();		//// this function makes worldRenderList.size = 0
 
-		gsm->goToPreGame();
+		int numOfLevels = gsm->getNumLevels();
+		if (gsm->getCurrentLevelIndex() == (numOfLevels - 1))
+		{
+			gsm->goToCreditsScreen();
+		}
+		else
+		{
+			int ff = 1000;
+			gsm->goToPreGame();
+		}
 	}
 
 	else if (command.compare(DONATE_MONEY_COMMAND) == 0)
@@ -167,4 +176,10 @@ void RebelleButtonEventHandler::handleButtonEvents(wstring command)
 		gsm->goToControlsMenu();
 	}
 
+	//// Credits screen clicked
+	else if (command.compare(CREDITS_TO_MM_COMMAND) == 0)
+	{
+		GameStateManager *gsm = game->getGSM();
+		gsm->goToMainMenu();
+	}
 }

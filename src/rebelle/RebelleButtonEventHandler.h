@@ -41,6 +41,9 @@ const wstring	DEFENSE_UPGRADE_COMMAND = L"Defense Upgrade";
 //// LEVEL COMPLETE screen button command
 const wstring	GO_TO_NEXT_LEVEL_COMMAND = L"Go To Next Level";
 
+//// [credits screen -> main menu] command
+const wstring	CREDITS_TO_MM_COMMAND = L"From Credits Screen To Main Menu";
+
 class RebelleButtonEventHandler: public ButtonEventHandler
 {
 public:
