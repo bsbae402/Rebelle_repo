@@ -448,7 +448,7 @@ void RebelleKeyEventHandler::handleKeyEvents()
 
 		//viewport->toggleDebugView();
 		//game->getGraphics()->toggleDebugTextShouldBeRendered();
-		if (game->getGSM()->getSafety() != NULL)
+		//if (game->getGSM()->getSafety() != NULL)
 		{
 			if (input->isKeyDown(game->getGSM()->getIntKey()))
 			{

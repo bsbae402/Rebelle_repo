@@ -69,6 +69,7 @@ void initUpgradeScreen();
 void initControlsScreen();
 void initDonateScreen();
 void initCreditsScreen();
+void initGameOverScreen();
 
 /*
 	WinMain - This is the application's starting point. In this method we will construct a Game object, 
@@ -107,6 +108,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	initControlsScreen();
 
 	initCreditsScreen();
+	initGameOverScreen();
 
 	// SPECIFY WHO WILL HANDLE BUTTON EVENTS
 	RebelleButtonEventHandler *rebelleButtonHandler = new RebelleButtonEventHandler();
@@ -984,4 +986,49 @@ void initCreditsScreen()
 	// AND REGISTER IT WITH THE GUI
 	GameGUI *gui = game->getGUI();
 	gui->addScreenGUI(GS_CREDITS_SCREEN, gameCreditsScreenGUI);
+}
+
+void initGameOverScreen()
+{
+	Game *game = Game::getSingleton();
+	GameGUI *gui = game->getGUI();
+	GameGraphics *graphics = game->getGraphics();
+	TextureManager *guiTextureManager = graphics->getGUITextureManager();
+
+	// In-game menu will be shown on another screen. 
+	// The ongoing game will be paused
+	ScreenGUI *gameOverScreenGUI = new ScreenGUI();
+
+	unsigned int gameOverScreenImageTextureID = guiTextureManager->loadTexture(GAME_OVER_SCREEN_PATH);
+	int gameOverScreenX = 300;
+	int gameOverScreenY = 200;
+
+	OverlayImage *imageToAdd = new OverlayImage();
+	imageToAdd->alpha = 230;
+	imageToAdd->width = 900;
+	imageToAdd->height = 400;
+	imageToAdd->x = gameOverScreenX;
+	imageToAdd->y = gameOverScreenY;
+	imageToAdd->z = 0;
+	imageToAdd->imageID = gameOverScreenImageTextureID;
+	gameOverScreenGUI->addOverlayImage(imageToAdd);
+
+	/// -- adding resume button OF level complete screen
+	Button *backToMMGameoverButton = new Button();
+	unsigned int backToMMGameoverButtonTID = guiTextureManager->loadTexture(BACK_TO_MM_GAMEOVER_PATH);
+	unsigned int moBackToMMGameoverButtonTID = guiTextureManager->loadTexture(BACK_TO_MM_GAMEOVER_MO_PATH);
+	int mmbuttonWidth = 400;
+	int mmbuttonHeight = 100;
+	int mmbuttonPadding = 10;
+	int mmbuttonX = gameOverScreenX + 250;
+	int mmbuttonY = gameOverScreenY + 250;
+
+	backToMMGameoverButton->initButton(backToMMGameoverButtonTID, moBackToMMGameoverButtonTID,
+		mmbuttonX, mmbuttonY, 0, 255,
+		mmbuttonWidth, mmbuttonHeight, true, GO_TO_MM_COMMAND);
+
+	gameOverScreenGUI->addButton(backToMMGameoverButton);
+	/// --- complete resuem button
+
+	gui->addScreenGUI(GS_GAME_OVER, gameOverScreenGUI);
 }
