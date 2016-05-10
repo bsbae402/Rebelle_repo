@@ -353,6 +353,41 @@ void RebelleKeyEventHandler::handleKeyEvents()
 
 		if (input->isKeyDownForFirstTime(U_KEY))
 		{
+			if (gsm->getMoveviewport() == true)
+			{
+				SpriteManager *sprMgr = gsm->getSpriteManager();
+				PlayerSprite *player = sprMgr->getPlayer();
+
+				PhysicalProperties *playerPP = player->getPhysicalProperties();
+				int playerSpriteWidth = player->getSpriteType()->getTextureWidth();
+				int playerSpriteHeight = player->getSpriteType()->getTextureHeight();
+				int playerCenterX = playerPP->getX() + playerSpriteWidth / 2;
+				int playerCenterY = playerPP->getY() + playerSpriteHeight / 2;
+
+				int viewportLeft = playerCenterX - viewport->getViewportWidth() / 2;
+				int viewportTop = playerCenterY - viewport->getViewportHeight() / 2;
+
+				int viewportRight = playerCenterX + viewport->getViewportWidth() / 2;
+				int viewportBottom = playerCenterY + viewport->getViewportHeight() / 2;
+
+				int viewportX = 0;
+				int viewportY = 0;
+
+				World *world = game->getGSM()->getWorld();
+
+				if (viewportLeft < 0)
+					viewportX = 0;
+				if (viewportRight > world->getWorldWidth())
+					viewportX = world->getWorldWidth() - viewport->getViewportWidth();
+				if (viewportTop < 0)
+					viewportY = 0;
+				if (viewportBottom > world->getWorldHeight())
+					viewportY = world->getWorldHeight() - viewport->getViewportHeight();
+
+				/// now, set the viewport to the new level's initial location
+				viewport->setViewportX(viewportX);
+				viewport->setViewportY(viewportY);
+			}
 			gsm->toggleMoveviewport();
 		}
 		if (input->isKeyDownForFirstTime(V_KEY) && !gsm->getMoveviewport())
