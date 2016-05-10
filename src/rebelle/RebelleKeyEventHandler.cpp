@@ -258,11 +258,11 @@ void RebelleKeyEventHandler::handleKeyEvents()
 
 		if (input->isKeyDownForFirstTime(P_KEY))
 		{
-			gsm->getPhysics()->togglePhysics();
+			//gsm->getPhysics()->togglePhysics();
 		}
 		if (input->isKeyDownForFirstTime(T_KEY))
 		{
-			gsm->getPhysics()->activateForSingleUpdate();
+			//gsm->getPhysics()->activateForSingleUpdate();
 		}
 
 		if (gsm->getMoveviewport())

@@ -132,6 +132,11 @@ void RebelleTextGenerator::printDialogue()
 	wss << game->getGSM()->getDialoguetext();
 
 	dialogue.append(wss.str());
+	if (game->getGSM()->getDialoguestart() == true || game->getGSM()->getDialogueenemy() == true
+		|| game->getGSM()->getDialoguemoney() == true || game->getGSM()->getDialogueheal() == true)
+		heallabel.append(L"Press ESC to move through dialogue");
+	
+	heallabel.append(L"");
 }
 
 void RebelleTextGenerator::printUpgrades()
