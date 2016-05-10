@@ -256,7 +256,7 @@ void RebelleTextGenerator::update()
 			text->addRenderText(&scorelabel, LEFT_TEXT_X, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 			text->addRenderText(&moneylabel, 200, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 			text->addRenderText(&healthlabel, LEFT_TEXT_X, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
-			text->addRenderText(&heallabel, 300, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+			text->addRenderText(&heallabel, 500, 5, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 
 			text->addRenderText(&safetywarning, 850, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 			text->addRenderText(&safetykey, 850, 50, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());

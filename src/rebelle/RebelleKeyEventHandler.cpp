@@ -487,9 +487,9 @@ void RebelleKeyEventHandler::handleKeyEvents()
 	gsm->addUpgrade(L"DEFENSE");
 	else if (gsm->isGameInProgress() && input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(S_KEY))
 	gsm->addUpgrade(L"SPEED");*/
-	else if (gsm->isGameInProgress() && input->isKeyDown(VK_SHIFT) && input->isKeyDownForFirstTime(A_KEY))
+	else if (gsm->isGameInProgress() && input->isKeyDown(VK_SHIFT) && input->isKeyDownForFirstTime(W_KEY))
 		gsm->useUpgrade(L"ATTACK");
-	else if (gsm->isGameInProgress() && input->isKeyDown(VK_SHIFT) && input->isKeyDownForFirstTime(D_KEY))
+	else if (gsm->isGameInProgress() && input->isKeyDown(VK_SHIFT) && input->isKeyDownForFirstTime(A_KEY))
 		gsm->useUpgrade(L"DEFENSE");
 	else if (gsm->isGameInProgress() && input->isKeyDown(VK_SHIFT) && input->isKeyDownForFirstTime(S_KEY))
 		gsm->useUpgrade(L"SPEED");
