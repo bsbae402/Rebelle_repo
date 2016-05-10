@@ -59,6 +59,9 @@ private:
 	wstring donatescore;
 	RenderText *donatescoreRT;
 
+	wstring dialogue;
+	RenderText *dialogueRT;
+
 	// THESE ARE HELPER METHODS FOR GENERATING THE TEXT, CALLED
 	// EACH FRAME BY updateText
 	void printTime();
@@ -71,6 +74,7 @@ private:
 	void printUpgrademoney();
 	void printDonatemoney();
 	void printDonateScore();
+	void printDialogue();
 
 public:
 	// NOTHING TO INITIALIZE OR DESTROY

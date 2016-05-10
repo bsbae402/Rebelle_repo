@@ -58,7 +58,9 @@ void RebelleKeyEventHandler::handleKeyEvents()
 	// IF THE GAME IS IN PROGRESS
 	//if (gsm->isGameInProgress() && (gsm->getSpriteManager()->getPlayer()->getCurrentState().compare(L"DEAD") != 0 &&
 	//	gsm->getSpriteManager()->getPlayer()->getCurrentState().compare(L"DYING") != 0))
-	if (gsm->isGameInProgress() && gsm->getPhysics()->getGameOver() == false)
+	if (gsm->isGameInProgress() && gsm->getPhysics()->getGameOver() == false 
+		&& gsm->getDialoguestart() == false && gsm->getDialogueenemy() == false
+		&& gsm->getDialoguemoney() == false && gsm->getDialogueheal() == false)
 	{
 
 		//// --- PLAYER MOVEMENTS
@@ -477,10 +479,34 @@ void RebelleKeyEventHandler::handleKeyEvents()
 		cursor->setActiveCursorID(id);
 	}
 
-	if (gsm->isGameInProgress() && input->isKeyDownForFirstTime(ESCAPE_KEY))
+	if (gsm->isGameInProgress() && input->isKeyDownForFirstTime(ESCAPE_KEY) 
+		&& gsm->getDialoguestart() == false && gsm->getDialogueenemy() == false
+		&& gsm->getDialoguemoney() == false && gsm->getDialogueheal() == false)
 		gsm->goToIngamePauseMenu();
-	else if (gsm->isGameInPauseMenu() && input->isKeyDownForFirstTime(ESCAPE_KEY))
+	else if (gsm->isGameInPauseMenu() && input->isKeyDownForFirstTime(ESCAPE_KEY)
+		&& gsm->getDialoguestart() == false && gsm->getDialogueenemy() == false
+		&& gsm->getDialoguemoney() == false && gsm->getDialogueheal() == false)
 		gsm->goToGame();
+	else if (gsm->isGameInProgress() && input->isKeyDownForFirstTime(ESCAPE_KEY)
+		&& gsm->getDialoguestart() == true)
+	{
+		gsm->setDialoguestartindex(gsm->getDialoguestartindex() + 1);
+	}
+	else if (gsm->isGameInProgress() && input->isKeyDownForFirstTime(ESCAPE_KEY)
+		&& gsm->getDialogueenemy() == true)
+	{
+		gsm->setDialogueenemyindex(gsm->getDialogueenemyindex() + 1);
+	}
+	else if (gsm->isGameInProgress() && input->isKeyDownForFirstTime(ESCAPE_KEY)
+		&& gsm->getDialoguemoney() == true)
+	{
+		gsm->setDialoguemoneyindex(gsm->getDialoguemoneyindex() + 1);
+	}
+	else if (gsm->isGameInProgress() && input->isKeyDownForFirstTime(ESCAPE_KEY)
+		&& gsm->getDialogueheal() == true)
+	{
+		gsm->setDialoguehealindex(gsm->getDialoguehealindex() + 1);
+	}
 	/*else if (gsm->isGameInProgress() && input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(W_KEY))
 	gsm->addUpgrade(L"ATTACK");
 	else if (gsm->isGameInProgress() && input->isKeyDown(VK_CONTROL) && input->isKeyDownForFirstTime(A_KEY))

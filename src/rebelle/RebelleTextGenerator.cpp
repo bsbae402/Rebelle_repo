@@ -124,6 +124,16 @@ void RebelleTextGenerator::printHeal()
 
 }
 
+void RebelleTextGenerator::printDialogue()
+{
+	Game *game = Game::getSingleton();
+
+	wstringstream wss;
+	wss << game->getGSM()->getDialoguetext();
+
+	dialogue.append(wss.str());
+}
+
 void RebelleTextGenerator::printUpgrades()
 {
 	Game *game = Game::getSingleton();
@@ -233,6 +243,7 @@ void RebelleTextGenerator::update()
 	upgrademoney.clear();
 	donatemoney.clear();
 	donatescore.clear();
+	dialogue.clear();
 
 	Game *game = Game::getSingleton();
 	GameText *text = game->getText();
@@ -250,7 +261,7 @@ void RebelleTextGenerator::update()
 			safetykey = L"safetykey";
 			additional = L"additional";
 			upgrades = L"upgrades";
-
+			dialogue = L"dialogue";
 
 
 			text->addRenderText(&scorelabel, LEFT_TEXT_X, TEXT_Y, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
@@ -263,6 +274,7 @@ void RebelleTextGenerator::update()
 
 			text->addRenderText(&additional, 800, 5, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 			text->addRenderText(&upgrades, 280, 60, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
+			text->addRenderText(&dialogue, 10, game->getGraphics()->getScreenHeight() - 60, game->getGraphics()->getScreenWidth(), game->getGraphics()->getScreenHeight());
 
 
 			for (int i = 0; i < text->getRenderTextSize(); i++)
@@ -295,6 +307,8 @@ void RebelleTextGenerator::update()
 				else if (upgrades.compare(wStrText) == 0)
 					upgradesRT = rt;
 
+				else if (dialogue.compare(wStrText) == 0)
+					dialogueRT = rt;
 
 			}
 			toolbarTextRegistrationDone = true;
@@ -311,6 +325,7 @@ void RebelleTextGenerator::update()
 		printScore();
 		printHeal();
 		printUpgrades();
+		printDialogue();
 
 
 		additional.clear();
@@ -347,6 +362,8 @@ void RebelleTextGenerator::update()
 		vectorIndex = text->getVectorIndexByRenderText(upgradesRT);
 		text->updateRenderText(&upgrades, vectorIndex);
 
+		vectorIndex = text->getVectorIndexByRenderText(dialogueRT);
+		text->updateRenderText(&dialogue, vectorIndex);
 
 	}
 	else if (game->getGSM()->isGameAtUpgradeScreen())
